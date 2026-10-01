@@ -404,6 +404,24 @@
   .ex-res .net.neg b{background:none;color:var(--warn);-webkit-text-fill-color:currentColor}
   .ex-card .btn{margin-top:auto;width:100%}
   @media (max-width:980px){ .ex-grid{grid-template-columns:minmax(0,1fr);max-width:560px;margin:0 auto} }
+  /* ---------- Bloque final de conversión ---------- */
+  .final-wrap{max-width:1240px;margin:0 auto;padding:30px 24px 80px}
+  .final{position:relative;overflow:hidden;border-radius:32px;background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff}
+  .final::before{content:"";position:absolute;inset:0;background:url("https://pub-3e391b23958e4e1b93d08a1ebeb9c70d.r2.dev/brain_resources/images/texture.png") center/cover;opacity:.25;mix-blend-mode:soft-light;pointer-events:none}
+  .final-in{position:relative;max-width:860px;margin:0 auto;padding:88px 28px;text-align:center}
+  .final-tag{margin:0 0 18px;font-family:var(--font-head);font-weight:600;font-size:13px;letter-spacing:.16em}
+  .final h2{font-family:var(--font-head);font-weight:700;font-size:clamp(30px,4.6vw,52px);letter-spacing:-.025em;line-height:1.08;margin:0 0 18px}
+  .final-sub{margin:0 auto 30px;max-width:640px;font-size:18px;line-height:1.55}
+  .final-list{list-style:none;padding:0;margin:0 auto 38px;display:grid;gap:12px;max-width:520px;text-align:left;font-size:16.5px;line-height:1.45}
+  .final-list li{display:flex;gap:12px;align-items:flex-start}
+  .final-list li::before{content:"✓";font-weight:700;flex:none}
+  .final-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 38px;border-radius:999px;background:#fff;color:#0b1020;font-family:var(--font-head);font-weight:600;font-size:18px;text-decoration:none;box-shadow:0 10px 30px rgba(8,20,60,.28);transition:transform .15s,box-shadow .15s}
+  .final-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(8,20,60,.34)}
+  .final-btn svg{width:20px;height:20px;flex:none}
+  .final-alt{margin:24px 0 0;font-size:14.5px}
+  .final-alt a{color:#fff;opacity:.95;text-underline-offset:3px}
+  @media (max-width:560px){ .final-wrap{padding:20px 14px 60px} .final-in{padding:56px 20px} .final-btn{width:100%;padding:0 22px} }
+  @media (prefers-reduced-motion: reduce){ .final-btn{transition:none} .final-btn:hover{transform:none} }
   .est-note{font-size:12px;color:var(--ph);margin:16px 6px 0;text-align:center;line-height:1.5}
   footer{background:#000;color:var(--muted);border-top:1px solid var(--line)}
   .foot{max-width:1240px;margin:0 auto;padding:28px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
@@ -464,7 +482,7 @@
   @media print{
     :root{--bg:#fff;--card:#fff;--line:#d8dde6;--ink:#0C1A33;--muted:#4a5568;--label:#2d3748;--ph:#5b6b86}
     body{background:#fff;color:#0C1A33}
-    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,footer,.seg,.tune,.steps,#leadCard,.faq,.tst,.ex,.vid-sec,.closebox{display:none!important}
+    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,footer,.seg,.tune,.steps,#leadCard,.faq,.tst,.ex,.final-wrap,.vid-sec,.closebox{display:none!important}
     .wrap{padding:0}
     .card,.tile{background:#fff;border-color:#d8dde6}
     .tile b,.sumstrip b{-webkit-text-fill-color:#296BDC;color:#296BDC;background:none}
@@ -763,7 +781,19 @@
 <div class="ex-grid" id="exGrid"></div>
 </div>
 </section>
-<section aria-labelledby="t-faq" class="section faq"><h2 data-i18n="n006" id="t-faq">Preguntas frecuentes</h2><div class="faq-list"><details><summary data-i18n="n007">¿Cómo se calcula mi beneficio neto?</summary><p data-i18n="n008">Sumamos lo que te ahorrarías (herramientas, análisis externo y tiempo que recupera tu equipo) y lo que ganarías más (mejora de ventas), y restamos lo que pagas por Fivo. El desglose muestra cada línea.</p></details><details><summary data-i18n="n009">¿Qué parte son mis datos y cuáles son estimaciones?</summary><p data-i18n="n010">Tu gasto en herramientas y tu tramo de consultores son tus datos. El tiempo recuperado, las ventas extra y el análisis externo de referencia son estimaciones: cada una va marcada como tal y puedes bajarla o desactivarla en «Pon a prueba los supuestos».</p></details><details><summary data-i18n="n011">¿Cuánto cuesta Fivo?</summary><p data-i18n="n012">El plan Business, el más vendido, cuesta 39,99 € por usuario y mes. Con facturación anual hay un 25 % de ahorro (el importe exacto puede variar). También existe un plan Free y un plan Enterprise personalizado.</p></details><details><summary data-i18n="n013">¿Puedo probar Fivo antes de pagar?</summary><p data-i18n="n014">Sí. Puedes probarlo 7 días gratis, y también existe el plan Free.</p></details><details><summary data-i18n="n015">¿Qué es Fivo exactamente?</summary><p data-i18n="n016">Fivo captura cómo trabajan realmente los equipos —reuniones, grabaciones de pantalla, decisiones— y lo transforma en memoria organizacional: el activo más valioso que una empresa acumula con el tiempo.</p></details><details><summary data-i18n="n017">¿Qué pasa con los datos que introduzco?</summary><p data-i18n="n018">El cálculo se hace en tu navegador. Solo compartimos tus cifras si reservas una demo.</p></details></div></section><footer>
+<section aria-labelledby="t-faq" class="section faq"><h2 data-i18n="n006" id="t-faq">Preguntas frecuentes</h2><div class="faq-list"><details><summary data-i18n="n007">¿Cómo se calcula mi beneficio neto?</summary><p data-i18n="n008">Sumamos lo que te ahorrarías (herramientas, análisis externo y tiempo que recupera tu equipo) y lo que ganarías más (mejora de ventas), y restamos lo que pagas por Fivo. El desglose muestra cada línea.</p></details><details><summary data-i18n="n009">¿Qué parte son mis datos y cuáles son estimaciones?</summary><p data-i18n="n010">Tu gasto en herramientas y tu tramo de consultores son tus datos. El tiempo recuperado, las ventas extra y el análisis externo de referencia son estimaciones: cada una va marcada como tal y puedes bajarla o desactivarla en «Pon a prueba los supuestos».</p></details><details><summary data-i18n="n011">¿Cuánto cuesta Fivo?</summary><p data-i18n="n012">El plan Business, el más vendido, cuesta 39,99 € por usuario y mes. Con facturación anual hay un 25 % de ahorro (el importe exacto puede variar). También existe un plan Free y un plan Enterprise personalizado.</p></details><details><summary data-i18n="n013">¿Puedo probar Fivo antes de pagar?</summary><p data-i18n="n014">Sí. Puedes probarlo 7 días gratis, y también existe el plan Free.</p></details><details><summary data-i18n="n015">¿Qué es Fivo exactamente?</summary><p data-i18n="n016">Fivo captura cómo trabajan realmente los equipos —reuniones, grabaciones de pantalla, decisiones— y lo transforma en memoria organizacional: el activo más valioso que una empresa acumula con el tiempo.</p></details><details><summary data-i18n="n017">¿Qué pasa con los datos que introduzco?</summary><p data-i18n="n018">El cálculo se hace en tu navegador. Solo compartimos tus cifras si reservas una demo.</p></details></div></section><div class="final-wrap">
+<section aria-labelledby="fcTitle" class="final" id="finalCta">
+<div class="final-in">
+<p class="final-tag" id="fcTag"></p>
+<h2 id="fcTitle"></h2>
+<p class="final-sub" id="fcSub"></p>
+<ul class="final-list" id="fcList"></ul>
+<a class="final-btn" href="#" id="fcBtn"><span id="fcBtnText"></span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<p class="final-alt" hidden="" id="fcAlt"><span id="fcAltQ"></span> <a href="#" id="fcAltLink"></a></p>
+</div>
+</section>
+</div>
+<footer>
 <div class="foot">
 <span data-i18n="s084">Copyright 2026 Fivo AI. Todos los derechos reservados</span>
 <nav aria-label="Legal" data-i18n-aria="s105">
@@ -823,6 +853,7 @@
       {label:{es:"Inmobiliaria",         en:"Real estate agency"}, sector:"realestate", comerciales:4, resto:2,  gastoAnual:210000,  ingresos:900000,  revisaLlamadas:"no",   consultores:null, gastoApps:500,  gastoGrabacion:200},
       {label:{es:"Consultora",           en:"Consulting firm"},  sector:"services",   comerciales:8, resto:22, gastoAnual:1500000, ingresos:4500000, revisaLlamadas:"yes",  consultores:1,    gastoApps:3000, gastoGrabacion:1200}
     ],
+    callDuration: null,   // minutos de la llamada (número). Solo si tiene valor se muestra en el botón de la variante A; no prometemos duración mientras sea null.
     defaultLang: "es",
     storageKey: "fivo-calc-lang",
     /* Banda de logos superior. Para cambiar un logo, edita su url o su nombre. Confirma que cada empresa autoriza mostrar su logo. */
@@ -862,6 +893,13 @@
       closeTextA:"Reserva una llamada y revisamos juntos tus números: cómo implantar Fivo, qué procesos mejorar primero y cuánto de este cálculo es realista en tu caso.",
       closeBtnA:"Reservar llamada",
       closeTitleB:"Empieza a usar Fivo ahora",
+      fcTagA:"IMPLANTACIÓN CON NUESTRO EQUIPO", fcTitleA:"¿Quieres que lo implementemos en tu empresa?",
+      fcSubA:"Reserva una llamada con nuestro equipo y convierte tu cálculo en un plan de acción.",
+      fcA1:"Revisamos tus números contigo", fcA2:"Te enseñamos Fivo con tus propios casos", fcA3:"Definimos por dónde empezar y qué esperar",
+      fcBtnA:"Reservar mi llamada", fcDuration:" · {n} min", fcAltQ:"¿Prefieres probarlo tú primero?", fcAltLink:"Prueba 7 días gratis",
+      fcTagB:"EMPIEZA HOY", fcTitleB:"Empieza a usar Fivo hoy mismo",
+      fcSubB:"Prueba 7 días gratis con tu equipo y comprueba tus propios números.",
+      fcB1:"7 días de prueba gratis", fcB2:"Plan Business: {price} por persona y mes", fcB3:"También tienes el plan Free", fcBtnB:"Prueba 7 días gratis",
       exTag:"EJEMPLO ILUSTRATIVO", exPeople:"Personas", exSpend:"Gasto anual", exRevenue:"Ingresos anuales",
       exSave:"Te ahorrarías", exEarn:"Ganarías más", exNet:"Beneficio neto", exPerYear:"al año", exLoad:"Cargar este ejemplo",
       tstLabel:"Testimonios de usuarios", tstCarousel:"carrusel", tstSlide:"diapositiva", tstSlideOf:"{n} de {total}",
@@ -938,6 +976,13 @@
       closeTextA:"Book a call and we'll review your numbers together: how to roll out Fivo, which processes to improve first, and how much of this estimate is realistic for you.",
       closeBtnA:"Book a call",
       closeTitleB:"Start using Fivo now",
+      fcTagA:"SET UP WITH OUR TEAM", fcTitleA:"Want us to set it up in your company?",
+      fcSubA:"Book a call with our team and turn your calculation into an action plan.",
+      fcA1:"We go through your numbers with you", fcA2:"We show you Fivo using your own use cases", fcA3:"We agree where to start and what to expect",
+      fcBtnA:"Book my call", fcDuration:" · {n} min", fcAltQ:"Prefer to try it yourself first?", fcAltLink:"Try free for 7 days",
+      fcTagB:"START TODAY", fcTitleB:"Start using Fivo today",
+      fcSubB:"Try it free for 7 days with your team and check your own numbers.",
+      fcB1:"7-day free trial", fcB2:"Business plan: {price} per person per month", fcB3:"There is also a Free plan", fcBtnB:"Try free for 7 days",
       exTag:"ILLUSTRATIVE EXAMPLE", exPeople:"People", exSpend:"Annual cost", exRevenue:"Annual revenue",
       exSave:"You'd save", exEarn:"You'd earn more", exNet:"Net profit", exPerYear:"per year", exLoad:"Load this example",
       tstLabel:"User testimonials", tstCarousel:"carousel", tstSlide:"slide", tstSlideOf:"{n} of {total}",
@@ -1115,8 +1160,9 @@
   /* Con 1 o 2 miembros no hay test: siempre la versión de conversión */
   function variant(){ return members()>2 ? AB : "conversion"; }
   function sizeBucket(n){ return n<=2 ? "1-2" : (n<=10 ? "3-10" : "11+"); }
-  function track(name, minimal){
+  function track(name, minimal, placement){
     var e = {event:name, variant:variant(), step:state.step};
+    if(placement) e.placement = placement;
     if(!minimal){ e.sector = state.sector; e.team_size = sizeBucket(members()); }
     window.dataLayer.push(e);
   }
@@ -1140,9 +1186,32 @@
     $("stickyBar").setAttribute("href", $("closeBtn").getAttribute("href"));
     if(!closeObs && "IntersectionObserver" in window){
       closeObs = new IntersectionObserver(function(es){
-        es.forEach(function(en){ if(en.isIntersecting && viewedVariant!==variant()){ viewedVariant = variant(); track("calc_cta_view"); } });
+        es.forEach(function(en){ if(en.isIntersecting && viewedVariant!==variant()){ viewedVariant = variant(); track("calc_cta_view", false, "result"); } });
       }, {threshold:0.5});
       closeObs.observe(box);
+    }
+  }
+  /* Bloque final de conversión: misma variante del test A/B; con 1-2 miembros, siempre la de conversión */
+  var finalViewed = "", finalObs = null;
+  function renderFinal(){
+    var v = variant(), call = v==="A", c = "cta-final-" + (v==="A" ? "A" : v==="B" ? "B" : "conversion");
+    $("fcTag").textContent = tr(call ? "fcTagA" : "fcTagB");
+    $("fcTitle").textContent = tr(call ? "fcTitleA" : "fcTitleB");
+    $("fcSub").textContent = tr(call ? "fcSubA" : "fcSubB");
+    var keys = call ? ["fcA1","fcA2","fcA3"] : ["fcB1","fcB2","fcB3"], ul = $("fcList");
+    ul.textContent = "";
+    keys.forEach(function(k){ var li = document.createElement("li"); li.textContent = tr(k, {price:eur2(CFG.priceMonthly)}); ul.appendChild(li); });
+    var dur = (call && typeof CFG.callDuration==="number" && CFG.callDuration>0) ? tr("fcDuration",{n:group(CFG.callDuration)}) : "";
+    $("fcBtnText").textContent = tr(call ? "fcBtnA" : "fcBtnB") + dur;
+    var reg = withUtm(CFG.registerUrl.replace("{lang}", LANG), c);
+    $("fcBtn").setAttribute("href", call ? withUtm(CFG.callUrl + "#" + encode(), c) : reg);
+    $("fcAlt").hidden = !call;
+    if(call){ $("fcAltQ").textContent = tr("fcAltQ"); $("fcAltLink").textContent = tr("fcAltLink"); $("fcAltLink").setAttribute("href", reg); }
+    if(!finalObs && "IntersectionObserver" in window){
+      finalObs = new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting && finalViewed!==variant()){ finalViewed = variant(); track("calc_cta_view", false, "final"); } });
+      }, {threshold:0.4});
+      finalObs.observe($("finalCta"));
     }
   }
   /* Vídeo: YouTube (se convierte a youtube-nocookie.com), Vimeo, Loom o un archivo .mp4. Devuelve {kind, src} o null. */
@@ -1275,6 +1344,7 @@
     $("upRow").hidden = !state.revOn;
 
     renderSeg();
+    renderFinal();
 
     if(state.step!==LAST || !r.ready){ renderTable(r, null); return r; }
 
@@ -1530,13 +1600,15 @@
     } else window.prompt(tr("copyPrompt"), url);
   });
   $("pdfBtn").addEventListener("click", function(){ window.print(); });
-  $("closeBtn").addEventListener("click", function(){ track("calc_cta_click"); });
+  $("closeBtn").addEventListener("click", function(){ track("calc_cta_click", false, "result"); });
   /* "Ir a mi cálculo": baja suavemente hasta el resultado (sin ensuciar la barra de direcciones con un #) */
   $("videoSkip").addEventListener("click", function(e){
     e.preventDefault(); track("calc_video_skip");
     $("resultTop").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
   });
-  $("stickyBar").addEventListener("click", function(){ track("calc_cta_click"); });
+  $("stickyBar").addEventListener("click", function(){ track("calc_cta_click", false, "sticky"); });
+  $("fcBtn").addEventListener("click", function(){ track("calc_cta_click", false, "final"); });
+  $("fcAltLink").addEventListener("click", function(){ track("calc_cta_click", false, "final"); });
 
   $("leadForm").addEventListener("submit", function(e){
     e.preventDefault();
