@@ -18,7 +18,7 @@ Calculadora web (ES/EN) que estima cuánto se ahorraría y cuánto más ganaría
 1. En la carpeta del proyecto: `node dev/server.js`
 2. Abrir http://localhost:5050
 3. El formulario está simulado en local: `dev/server.js` responde `{"ok":true}` a `POST /lead.php`. No se envía ningún email.
-4. Para ver cada variante del cierre: `http://localhost:5050/?ab=A` o `?ab=B` (con 3 o más miembros). Para el idioma: `?lang=en`. En localhost (o con `?preview=1` en cualquier dirección) el apartado del vídeo enseña un marco "Aquí irá el vídeo" si no hay vídeo configurado.
+4. Para ver cada variante del cierre: `http://localhost:5050/?ab=A` o `?ab=B` (con 3 o más miembros). Para el idioma: `?lang=en`. En localhost (o con `?preview=1` en cualquier dirección) se ven los marcos de relleno: el del vídeo ("Aquí irá el vídeo") y las 5 tarjetas "VISTA PREVIA – NO REAL" del carrusel de testimonios. Con `?public=1` se simula la web publicada: no se ve ningún relleno.
 
 ## Cómo está hecho `index.html`
 - `CFG`: todas las constantes del modelo, precios, logos, `videoUrl`, `callUrl`, `registerUrl`.
@@ -29,7 +29,8 @@ Calculadora web (ES/EN) que estima cuánto se ahorraría y cuánto más ganaría
 - Formato por idioma: `eur()`, `eur2()`, `pct()`, `dec()` (ES `17.301 €` / EN `€17,301`).
 - Pasos: 1 Tu empresa · 2 Tus ventas · 3 Tus herramientas · 4 Tu resultado (`LAST = 4`).
 - No hay aviso de gasto por persona ni garantías bajo el título del hero (se eliminaron a propósito; no volver a añadirlos). Bajo "Gasto anual" solo hay una ayuda fija.
-- **Estructura del paso 4 "Tu resultado", de arriba abajo:** navegación · hero con la banda de logos (el título y el subtítulo grandes se ocultan en este paso) · barra de pasos · VÍDEO ("Por qué y cómo puedes ahorrar dinero con Fivo" + botón "Ir a mi cálculo ↓") · resultado (tarjetas "Te ahorrarías" y "Ganarías más", mensaje de precio, gráfica, tarjeta de pérdida, compartir, supuestos) · cierre A/B · desglose · cómo se calcula · FAQ · CTA final.
+- **Estructura del paso 4 "Tu resultado", de arriba abajo:** navegación · hero con la banda de logos (el título y el subtítulo grandes se ocultan en este paso) · barra de pasos · VÍDEO ("Por qué y cómo puedes ahorrar dinero con Fivo" + botón "Ir a mi cálculo ↓") · resultado (tarjetas "Te ahorrarías" y "Ganarías más", mensaje de precio, gráfica, tarjeta de pérdida, compartir, supuestos) · cierre A/B · desglose · línea pequeña de estimación y fuentes.
+- **Orden de la página completa (de arriba abajo):** navegación · hero (título y subtítulo; en el paso 4 solo la banda de logos) · barra de pasos · paso activo (1 a 4) · [paso 4: desglose + línea de estimación] · **carrusel de testimonios** (solo si hay testimonios reales o en vista previa) · **ejemplos de cálculo** · preguntas frecuentes · **bloque final de conversión** · pie. Ya no existen las secciones "Cómo se calcula" ni "Construye memoria. Decide mejor." (se quitaron a propósito; las FAQ y la línea de estimación bajo el desglose cubren ese papel).
 - **Revelación:** la animación de la cifra grande y la entrada escalonada (`.rv`) ocurren una sola vez, la primera vez que la tarjeta del resultado (`#netCard`) entra en pantalla (`IntersectionObserver`, función `reveal()`). Hasta entonces la cifra se ve sin animar. La barra fija del móvil (`#stickyBar`) solo aparece cuando ya se reveló el resultado.
 - La barra de direcciones se mantiene limpia: el estado (`#c=...`) solo se genera al pulsar "Copiar enlace con mi cálculo" (`shareLink()`), al enviar el formulario o al ir a reservar llamada/demo. Al abrir un enlace con `#c=...` se lee el estado y se borra el hash. Los enlaces antiguos (sin campo `v`) siguen funcionando: se ignoran los campos que ya no existen y se convierten `people`, `loom` y `others`. Idioma en `localStorage`.
 
@@ -65,8 +66,24 @@ Calculadora web (ES/EN) que estima cuánto se ahorraría y cuánto más ganaría
 ## Vídeo
 - Va ANTES del resultado, con el título "Por qué y cómo puedes ahorrar dinero con Fivo" / "Why and how you can save money with Fivo", marco 16:9 con el estilo de tarjeta y debajo el botón discreto "Ir a mi cálculo ↓" / "Go to my numbers ↓" (baja suave hasta `#resultTop`, sin añadir `#` a la dirección).
 - Se configura en `CFG.videoUrl = { es: "", en: "" }` (línea con el comentario "← AQUÍ las direcciones del vídeo"). Si el idioma activo está vacío se usa el otro. Acepta enlaces de compartir o insertar de YouTube (se convierten a `youtube-nocookie.com`), Vimeo y Loom, y un archivo `.mp4` (etiqueta `<video controls playsinline preload="metadata">`, con `CFG.videoPoster` opcional para la portada). Los iframes llevan `loading="lazy"`. Nunca hay reproducción automática.
-- Sin ninguna dirección: en localhost o con `?preview=1` se enseña el marco con "Aquí irá el vídeo"; en la web publicada el apartado no se muestra.
+- Sin ninguna dirección: en localhost o con `?preview=1` (y sin `?public=1`) se enseña el marco con "Aquí irá el vídeo"; en la web publicada el apartado no se muestra.
 - **Seguridad:** el `.htaccess` ya incluye `frame-src` para YouTube (nocookie), Vimeo y Loom. Si se añade o cambia una política CSP (en Apache, en Cloudflare o en otro sitio) hay que permitir `frame-src` para el proveedor del vídeo; para un `.mp4` alojado fuera hay que permitir también `media-src` de ese dominio. GitHub Pages no usa el `.htaccess`.
+
+## Testimonios (carrusel)
+- **Regla de oro: NUNCA se inventan testimonios, nombres, cargos, empresas, puntuaciones ni cifras de reseñas. Solo se muestran los que el dueño del proyecto entregue con consentimiento.** Los textos de relleno son siempre claramente de relleno.
+- Los datos salen de `CFG.testimonials`, que **empieza vacía**. Cada testimonio real tiene esta forma: `{ name, role, company, text: {es, en}, rating, consent, sourceName, sourceUrl }`.
+  - Solo se muestran los que tengan `consent === true` (permiso por escrito de la persona). Sin `consent`, el testimonio se ignora aunque esté en la lista.
+  - Si falta el texto de un idioma se usa el otro. Las estrellas solo se dibujan si `rating` es un número entre 1 y 5. Si hay `sourceUrl` (https), el nombre de la fuente enlaza a ella en pestaña nueva con `rel="noopener"`.
+- `CFG.reviews = { count, storeName, url }`: el subtítulo "Con más de {count} reseñas en {storeName}…" solo sale si los tres están rellenos (count número, url https). Si no, no se muestra nada. No rellenar con datos que no sean reales.
+- **Sin testimonios reales:** en la web publicada la sección entera no se muestra. En localhost o con `?preview=1` salen 5 tarjetas de relleno ("NOMBRE APELLIDO · Cargo · Empresa" y la etiqueta amarilla "VISTA PREVIA – NO REAL"). `?public=1` simula la web publicada (el relleno no se ve).
+- Interacción: flechas, puntos, deslizar con dedo o ratón (pointer events), teclado (← → con el carrusel enfocado), clic en una tarjeta vecina. Pase automático cada 7 s: se pausa con el ratón o el foco y se detiene del todo en cuanto el usuario interactúa; sin pase automático con `prefers-reduced-motion`. Bucle infinito; en móvil (< 700 px) una tarjeta cada vez.
+- Accesibilidad: `role="region"` + `aria-roledescription="carrusel"/"carousel"`, cada tarjeta `role="group"` con "n de N", las tarjetas fuera del centro son `aria-hidden` y sus enlaces no se enfocan; `aria-live` está en `off` durante el pase automático y en `polite` cuando navega el usuario.
+- Eventos `dataLayer`: `calc_testimonial_view` (la primera vez que entra en pantalla) y `calc_testimonial_nav` (al navegar), **solo con `variant` y `step`**.
+
+## Ejemplos de cálculo (ilustrativos)
+- Sección bajo el carrusel, visible siempre (también en la web pública), con el aviso "Ejemplos ilustrativos con datos de muestra. No son clientes reales." Cada tarjeta lleva la etiqueta "EJEMPLO ILUSTRATIVO".
+- Perfiles en `CFG.examples`: `{ label: {es,en}, sector, comerciales, resto, gastoAnual, ingresos, revisaLlamadas ("no"|"some"|"yes"), consultores (null = no tiene; 0-3 = tramo), gastoApps, gastoGrabacion }` (los dos últimos, en €/mes, hacen falta para la línea de herramientas). Hoy: agencia de marketing (12 personas), inmobiliaria (6) y consultora (30).
+- Las cifras ("Te ahorrarías", "Ganarías más", "Beneficio neto") salen de `compute()` con el formato del idioma; nunca se escriben a mano. "Cargar este ejemplo" rellena el estado, recalcula, pasa al paso 4 y sube suavemente al resultado.
 
 ## Test A/B del cierre del resultado
 - Con más de 2 miembros (comerciales + resto): variante A = título con el beneficio neto + texto + botón "Reservar llamada" (`CFG.callUrl` con los números en el enlace). Variante B = "Empieza a usar Fivo ahora" + botón "Prueba 7 días gratis" (`CFG.registerUrl`).
@@ -75,12 +92,17 @@ Calculadora web (ES/EN) que estima cuánto se ahorraría y cuánto más ganaría
 - Con 1 o 2 miembros no hay test: siempre la versión de conversión (igual que B, `utm_content=cta-conversion`).
 - Asignación aleatoria 50/50 **en cada carga de la página y solo en memoria**: NO se usa localStorage, sessionStorage ni cookies para la variante. Se fuerza con `?ab=A` o `?ab=B`. **Guardar la variante entre visitas necesitaría consentimiento y revisión legal.**
 - Los enlaces de los botones llevan `utm_source=calculadora&utm_medium=web&utm_campaign=roi-calculator&utm_content=cta-A|cta-B|cta-conversion`.
-- `window.dataLayer` (se crea si no existe; no se carga ningún script externo) recibe `calc_step`, `calc_result`, `calc_cta_view`, `calc_cta_click`, `calc_video_view` (el vídeo entra en pantalla; solo si hay vídeo de verdad, una vez por carga) y `calc_video_skip` (clic en "Ir a mi cálculo"), solo con `variant`, `step`, `sector` y `team_size` (1-2, 3-10, 11+). Nunca cifras ni datos personales.
+- `window.dataLayer` (se crea si no existe; no se carga ningún script externo) recibe `calc_step`, `calc_result`, `calc_cta_view`, `calc_cta_click`, `calc_video_view` (el vídeo entra en pantalla; solo si hay vídeo de verdad, una vez por carga), `calc_video_skip` (clic en "Ir a mi cálculo"), `calc_testimonial_view` y `calc_testimonial_nav`, solo con `variant`, `step`, `sector` y `team_size` (1-2, 3-10, 11+); los de testimonios, solo `variant` y `step`. Los de CTA añaden `placement` (`result`, `sticky` o `final`) para saber qué botón fue. Nunca cifras ni datos personales.
+
+## Bloque final de conversión
+- Tarjeta a todo el ancho después de las preguntas frecuentes y antes del pie (degradado de la marca, esquinas de 32 px, textura). Usa la variante del test A/B: **A** (3 o más miembros) "IMPLANTACIÓN CON NUESTRO EQUIPO" · "¿Quieres que lo implementemos en tu empresa?" · botón "Reservar mi llamada" (`CFG.callUrl` con los números en el enlace) y enlace secundario "Prueba 7 días gratis"; **B y conversión (1-2 miembros)** "EMPIEZA HOY" · "Empieza a usar Fivo hoy mismo" · botón "Prueba 7 días gratis", con el precio mensual tomado de `CFG.priceMonthly`. Es adicional: no repite el título del cierre personalizado del resultado ni sustituye a la barra fija.
+- Los enlaces llevan los `utm` con `utm_content=cta-final-A`, `cta-final-B` o `cta-final-conversion`. Eventos `calc_cta_view` (al entrar en pantalla) y `calc_cta_click`.
+- **No prometer lo que no podemos cumplir:** nada de "sin compromiso", duración de la llamada ni plazos. `CFG.callDuration = null`: solo si tiene un número de minutos se añade al botón de la variante A.
 
 ## Reglas que no se pueden romper
 a) **Los números siempre cuadran.** Toda cifra sale de `compute()`; nada de cifras escritas a mano en los textos (en los textos del HTML se usan `{variables}` de `CFG`). El gasto sustituible en herramientas se muestra exactamente como lo introduce el usuario.
 b) **ES y EN siempre a la par.** Cualquier texto nuevo va en los diccionarios `STATIC` o `D` en los dos idiomas (también el formato de números), y en inglés no puede quedar ninguna palabra en español.
-c) **Cero afirmaciones sin respaldo.** Nada de testimonios, cifras de clientes ni urgencia falsa. Lo estimado se marca como estimación y las fuentes se citan.
+c) **Cero afirmaciones sin respaldo.** Nada de testimonios, cifras de clientes ni urgencia falsa. Lo estimado se marca como estimación y las fuentes se citan. **NUNCA se inventan testimonios, nombres, cargos, empresas, puntuaciones ni cifras de reseñas; solo se muestran los que el dueño del proyecto entregue con consentimiento.**
 d) **Marca Fivo.** Azul `#296BDC`, degradado `#5173FF` a `#0AC6FF`, fondo negro, tarjetas `#0A0A0A`, titulares en Outfit y texto en Poppins. No cambiar colores ni fuentes sin pedirlo al usuario.
 e) **No relajar la seguridad de `lead.php`** (origen, honeypot, límite por IP, saneado).
 f) **No borrar las carpetas `.github` ni `.deploy-now`** si existen (las crea IONOS Deploy Now).
@@ -91,9 +113,11 @@ i) **Sin almacenamiento para el test A/B** (ver arriba).
 El usuario no es programador: explicar en español y de forma sencilla.
 
 ## PENDIENTES
+- Conseguir testimonios reales **con permiso por escrito** de cada persona y añadirlos a `CFG.testimonials` con `consent: true` (hasta entonces el carrusel no sale en la web publicada).
+- Definir `CFG.reviews` si se van a usar reseñas de una tienda (count, storeName y url reales).
 - Poner las direcciones del vídeo en `CFG.videoUrl` (`es` y `en`; hoy vacías).
 - Confirmar **por escrito** que las empresas de la banda de logos autorizan usar su logo y que "ya usan Fivo".
-- Conectar una analítica (Google Tag Manager u otra, con consentimiento) para leer el test A/B y los eventos de vídeo desde `dataLayer`.
+- Conectar una analítica (Google Tag Manager u otra, con consentimiento) para leer el test A/B y los eventos de vídeo, testimonios y CTA desde `dataLayer`.
 - Dirección real para reservar llamadas (`CFG.callUrl`; ahora https://fivo.ai/contact).
 - Precio anual real de Fivo (`CFG.priceAnnual`, ahora 29,99 €, deducido del 25 % de ahorro). El mensual (39,99 €) está confirmado.
 - Confirmar que existen las rutas `app.fivo.ai/en/auth/`.
