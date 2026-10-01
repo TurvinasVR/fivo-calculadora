@@ -48,6 +48,5 @@ El usuario no es programador: explicar en español y de forma sencilla.
 - Revisión legal (consentimiento y política de privacidad).
 - Analítica del embudo.
 - `canonical` y `og:image` (1200×630).
-- Un favicon real (`favicon.png` está referenciado pero no existe).
 - Un caso real de cliente.
 - Excluir la carpeta `dev` del despliegue en `.deploy-now/<proyecto>/config.yaml` al conectar con IONOS.
