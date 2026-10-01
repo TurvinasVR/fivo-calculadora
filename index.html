@@ -1458,6 +1458,8 @@
 
   window.__fivoCompute = compute;   /* expuestos para pruebas */
   window.__fivoTierSet = tierSet;
+  window.__fivoState = state;
+  window.__fivoRender = render;
   window.__fivoSetLang = setLang;
   var fromLink = decode();
   if(fromLink){ try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){} }  /* estado ya leído: barra limpia */
