@@ -84,12 +84,12 @@
   .page{position:relative;z-index:1}
 
   /* ---------- Banda de logos (solo en "Tu resultado", dentro del hero) ---------- */
-  .logo-band{margin:0 auto;max-width:1100px}
-  .lb-title{margin:0 0 14px;font-family:var(--font-head);font-size:14px;font-weight:500;color:rgba(255,255,255,.88)}
+  .logo-band{margin:44px auto 0}
+  .lb-title{margin:0 0 10px;font-family:var(--font-head);font-size:13px;font-weight:500;text-align:center;color:rgba(255,255,255,.85)}
   .lb-view{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
   .lb-track{display:flex;width:max-content;animation:lb-move 70s linear infinite;will-change:transform}
   .lb-half{display:flex;flex:none;align-items:center}
-  .lb-half img{height:calc(30px * var(--s,1));width:auto;max-width:calc(170px * var(--s,1));object-fit:contain;margin-right:76px;flex:none;filter:brightness(0) invert(1);opacity:.8}
+  .lb-half img{height:calc(24px * var(--s,1));width:auto;max-width:calc(150px * var(--s,1));object-fit:contain;margin-right:56px;flex:none;filter:brightness(0) invert(1);opacity:.8}
   .logo-band:hover .lb-track{animation-play-state:paused}
   @keyframes lb-move{from{transform:translateX(-50%)}to{transform:translateX(0)}}
   @media (prefers-reduced-motion: reduce){
@@ -180,7 +180,7 @@
   .link-btn{background:none;border:0;padding:0;color:#7FA0FF;font-size:12.5px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
   .link-btn:hover{color:#fff}
   .rs-back{margin:0 0 10px;text-align:left}
-  .rs-back .link-btn{font-size:14px;text-decoration:none;opacity:.9}
+  .rs-back .link-btn{font-size:14px;text-decoration:none;color:rgba(255,255,255,.85)}
   .rs-back .link-btn:hover{opacity:1;text-decoration:underline}
   .helper{display:none;margin-top:10px;padding:12px 14px;background:rgba(81,115,255,.12);border:1px solid rgba(81,115,255,.3);border-radius:10px;font-size:12.5px;color:var(--label)}
   .helper.open{display:block}
@@ -213,57 +213,53 @@
   .seg button{white-space:nowrap}
   .seg .save{white-space:nowrap;font-family:var(--font);font-size:12px;font-weight:500;color:#12C383;background:#121212;border-radius:6px;padding:3px 9px;letter-spacing:.01em}
 
-  /* ---------- Resultado ---------- */
-  .res{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:22px;align-items:start}
-  .stack{display:flex;flex-direction:column;gap:20px;min-width:0}
-  .hero-net{position:relative;overflow:hidden;background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;border-radius:var(--r-card);padding:38px 36px 32px}
+  /* ---------- Resultado: una columna centrada ---------- */
+  .rs{max-width:760px;margin:0 auto}
+  .hero-net{position:relative;overflow:hidden;background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;border-radius:var(--r-card)}
   .hero-net::after{content:"";position:absolute;inset:0;background:url("https://pub-3e391b23958e4e1b93d08a1ebeb9c70d.r2.dev/brain_resources/images/texture.png") center/cover;opacity:.22;mix-blend-mode:soft-light;pointer-events:none}
   .hero-net > *{position:relative;z-index:1}
-  .hero-net .k{font-family:var(--font-head);font-size:17px;font-weight:500;margin:0 0 6px}
-  .hero-net .big{font-family:var(--font-head);font-size:clamp(54px,8.6vw,98px);font-weight:600;letter-spacing:-.04em;line-height:1;margin:0;font-variant-numeric:tabular-nums}
-  .hero-net .per{font-size:16px;margin:14px 0 0}
-  .hero-net .per b{font-weight:600}
-  .hero-net .inv{font-family:var(--font-head);font-size:15.5px;margin:10px 0 0;opacity:.95}
-  .hero-net.neg{background:linear-gradient(100deg,#3a4150,#23272f)}
-  .eq{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.35)}
-  .eq div span{display:block;font-size:12.5px;opacity:.92}
-  .eq div b{display:block;font-family:var(--font-head);font-size:24px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .eq div small{display:block;font-size:11.5px;opacity:.82;margin-top:1px}
-  .bill{margin-top:20px;background:rgba(0,0,0,.26);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .rs-card{display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - 150px);min-height:calc(100svh - 150px);padding:26px 28px;text-align:center}
+  .rs-title{font-family:var(--font-head);font-size:clamp(18px,2.6vw,22px);font-weight:500;margin:0 0 14px;line-height:1.25}
+  .dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}
+  .dual.one{grid-template-columns:minmax(0,1fr)}
+  .dual>div{min-width:0}
+  .dual .dl{display:block;font-family:var(--font-head);font-size:clamp(14px,1.9vw,17px);font-weight:500}
+  .dual .big{font-family:var(--font-head);font-weight:600;letter-spacing:-.04em;line-height:1;margin:6px 0 0;font-variant-numeric:tabular-nums;font-size:clamp(30px,6.6vw,58px)}
+  .dual .dy{display:block;font-size:13px;margin-top:4px;opacity:.95}
+  .rs-est{margin:12px 0 0;font-size:12.5px;color:rgba(255,255,255,.78)}
+  .rs-net{margin:10px 0 0;font-size:15px;font-weight:500;line-height:1.4}
+  .rs-price{margin:6px 0 0;font-size:14.5px;line-height:1.4;opacity:.96}
+  .rs-cta{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.35)}
+  .rs-cta h3{font-family:var(--font-head);font-size:clamp(20px,3vw,26px);font-weight:600;letter-spacing:-.015em;line-height:1.2;margin:0 0 14px}
+  .btn-main{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 40px;border-radius:999px;background:#fff;color:#0b1020;font-family:var(--font-head);font-weight:600;font-size:18px;text-decoration:none;box-shadow:0 10px 30px rgba(8,20,60,.28);transition:transform .15s,box-shadow .15s}
+  .btn-main:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(8,20,60,.34)}
+  .btn-main svg{width:20px;height:20px;flex:none}
+  .rs-small{margin:10px 0 0;font-size:13.5px;opacity:.95}
+  .rs-alt{margin:6px 0 0;font-size:12.5px;opacity:.9}
+  .rs-alt a{color:#fff;text-underline-offset:3px}
+  /* panel plegado: desglose, plan, supuestos y compartir */
+  .rs-fold{margin:34px auto 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+  .rs-fold summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 28px;font-family:var(--font-head);font-weight:600;font-size:16.5px}
+  .rs-fold summary::-webkit-details-marker{display:none}
+  .rs-fold summary::after{content:"+";font-size:26px;line-height:1;color:var(--b2);flex:none}
+  .rs-fold[open] summary::after{content:"–"}
+  .rs-fold[open] summary{border-bottom:1px solid var(--line)}
+  .rs-pad{padding:20px 28px}
+  .rs-fold .bill{margin:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .rs-fold .bill-note{color:var(--muted);font-size:13.5px;margin:12px 0 0;font-weight:500}
+  .rs-fold .bill-note b{color:#fff;font-weight:700}
   .bill-l .t{display:block;font-family:var(--font-head);font-weight:600;font-size:14.5px}
-  .bill-l .d{display:block;font-size:12.5px;opacity:.92;margin-top:3px;font-variant-numeric:tabular-nums}
-  .bill-note{font-size:13.5px;margin:12px 0 0;font-weight:500}
-  .bill-note b{font-weight:700}
+  .bill-l .d{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;font-variant-numeric:tabular-nums}
   .seg-sm button{padding:9px 15px;font-size:14px}
-  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .tile{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 18px 18px}
-  .tile b{display:block;font-family:var(--font-head);font-size:26px;font-weight:600;letter-spacing:-.025em;line-height:1.15;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .tile span{display:block;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
-  .loss .k{font-size:13.5px;color:var(--muted);margin:0 0 6px}
-  .loss .n{font-family:var(--font-head);font-size:clamp(34px,4.6vw,46px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin:0;font-variant-numeric:tabular-nums;color:var(--warn)}
-  .loss p{margin:10px 0 0;font-size:13.5px;line-height:1.55;color:var(--muted)}
-  .loss p b{color:#fff;font-weight:500}
-  .loss .back{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px;color:#fff}
-  .loss .back b{color:#3DDC97;font-weight:600}
-  .plan-note{font-size:12.5px;color:var(--ph);margin:14px 0 0}
-  .plan-note b{color:#fff;font-weight:500}
-  .tune summary{cursor:pointer;font-family:var(--font-head);font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center}
-  .tune summary::-webkit-details-marker{display:none}
-  .tune summary::after{content:"+";font-size:24px;color:var(--b2);line-height:1}
-  .tune[open] summary::after{content:"–"}
-  .tune .body{padding-top:16px}
-  .tune .mini-sub{font-size:12.5px;color:var(--muted);margin:0 0 16px}
-  .tune .field label{font-size:13.5px}
-
-  /* barras */
-  .bars{display:flex;flex-direction:column;gap:16px}
-  .bar-row .cap{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:7px;color:var(--label)}
-  .bar-row .cap span:last-child{font-variant-numeric:tabular-nums;color:#fff;font-weight:500}
-  .bar{display:flex;height:22px;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.07)}
-  .bar i{display:block;height:100%;transition:width .35s ease}
-  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:12.5px;color:var(--muted)}
-  .legend span{display:inline-flex;align-items:center;gap:6px}
-  .legend s{display:inline-block;width:10px;height:10px;border-radius:3px;text-decoration:none}
+  .rs-assume h3{font-family:var(--font-head);font-size:16px;font-weight:600;margin:0 0 6px}
+  .rs-assume .mini-sub{font-size:12.5px;color:var(--muted);margin:0 0 16px}
+  .rs-btns{display:flex;gap:8px;flex-wrap:wrap}
+  #foldBox{scroll-margin-top:16px}
+  .sticky-net{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;border-radius:999px;padding:8px 8px 8px 22px;border:1.5px solid transparent;background:linear-gradient(#000,#000) padding-box, linear-gradient(100deg,#0AC6FF,#5173FF) border-box;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+  .sticky-label{font-family:var(--font-head);font-size:15px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.2}
+  .sticky-btn{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#000;font-family:var(--font-head);font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap}
+  @media (max-width:560px){ .rs-card{padding:20px 16px;min-height:calc(100vh - 130px);min-height:calc(100svh - 130px)} .dual{gap:10px} .btn-main{width:100%;padding:0 20px} .rs-pad{padding:18px} .rs-fold summary{padding:18px} .sticky-label{font-size:13px} .sticky-btn{padding:0 16px;font-size:13.5px} }
+  @media (prefers-reduced-motion: reduce){ .btn-main{transition:none} .btn-main:hover{transform:none} }
 
   /* ---------- Preguntas: opciones seleccionables, dos columnas, casilla ---------- */
   .qt{margin:0 0 8px;font-size:14px;color:var(--label)}
@@ -286,17 +282,8 @@
   .input.off{opacity:.45}
   @media (max-width:560px){ .two{grid-template-columns:minmax(0,1fr)} .choices.tiers{grid-template-columns:minmax(0,1fr)} }
 
-  /* ---------- Resultado: dos cifras, mensaje de precio, vídeo y cierre ---------- */
-  .dual{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:8px 0 6px}
-  .dual.one{grid-template-columns:minmax(0,1fr)}
-  .dual>div{min-width:0}
-  .dual .dl{display:block;font-family:var(--font-head);font-size:17px;font-weight:500}
-  .dual .big{font-size:clamp(36px,5.2vw,62px);margin:4px 0 0}
-  .dual .dy{display:block;font-size:14.5px;margin-top:6px;opacity:.95}
-  .hero-net .per{margin-top:18px;font-size:15.5px}
-  .price-msg{margin:18px 0 0;padding:13px 16px;border-radius:14px;background:rgba(0,0,0,.3);font-size:15px;font-weight:500;line-height:1.45}
-  .optline{margin:14px 0 0;font-size:14px;color:#fff;line-height:1.5}
-  .vid-sec{margin:0 0 34px}
+  /* ---------- Vídeo ---------- */
+  .vid-sec{margin:34px 0 0}
   .vid-sec h2{font-family:var(--font-head);text-align:center;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.015em;margin:0 0 18px;font-weight:600}
   .vid{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r-card);overflow:hidden;background:var(--card);border:1px solid var(--line)}
   .vid iframe,.vid video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
@@ -305,20 +292,8 @@
   .vid-skip{text-align:center;margin:14px 0 0}
   .vid-skip a{font-family:var(--font-head);font-size:14.5px;font-weight:500;color:#9db4ff;text-decoration:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);display:inline-block}
   .vid-skip a:hover{color:#fff;border-color:#2b3b78}
-  #resultTop{scroll-margin-top:16px}
-  .closebox{position:relative;overflow:hidden;margin:34px 0 0;border-radius:var(--r-card);background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;padding:38px 28px;text-align:center}
-  .closebox p{margin:-6px auto 22px;max-width:640px;font-size:16px;line-height:1.5}
-  .closebox h2{font-family:var(--font-head);font-size:clamp(22px,3.2vw,34px);letter-spacing:-.02em;line-height:1.2;margin:0 auto 22px;max-width:760px;font-weight:600}
-  @media (max-width:560px){ .dual{gap:12px} .dual .big{font-size:clamp(28px,9vw,38px)} .dual .dl{font-size:15px} .closebox{padding:30px 20px} }
-
-  /* Revelación orquestada */
-  .go .rv{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
-  .go .rv.d1{animation-delay:.9s}.go .rv.d2{animation-delay:1.1s}.go .rv.d3{animation-delay:1.3s}.go .rv.d4{animation-delay:1.5s}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-
   /* ---------- Desglose ---------- */
   .section{max-width:1240px;margin:0 auto;padding:0 24px 30px}
-  .bd .card{padding:0;overflow:hidden}
   .bd-head{padding:30px 32px 6px}
   .bd-head h2{font-family:var(--font-head);margin:0 0 4px;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.015em;font-weight:600}
   .bd-head p{margin:0;color:var(--muted);font-size:14px}
@@ -416,22 +391,13 @@
   /* ---------- Textos de apoyo y consentimiento ---------- */
   .how{margin:10px 0 0;font-size:13.5px}
   .how a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+  footer{padding-bottom:84px}
   .legal{font-size:12px;color:var(--ph);margin:12px 0 0}
   .legal a{color:#9db4ff;text-underline-offset:2px}
   .sticky-net{display:none}
 
   @media (max-width: 980px){
     .links{display:none}
-    .res{grid-template-columns:minmax(0,1fr)}
-    .tiles{grid-template-columns:minmax(0,1fr)}
-    .tile{display:flex;align-items:baseline;gap:12px}
-    .tile b{flex:none}.tile span{margin:0}
-    .sticky-net{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;background:#000;color:#fff;border-radius:999px;padding:10px 12px 10px 22px;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;border:1.5px solid transparent;
-      background:linear-gradient(#000,#000) padding-box, linear-gradient(100deg,#0AC6FF,#5173FF) border-box;box-shadow:0 10px 40px rgba(0,0,0,.6)}
-    .sticky-net span{font-size:11.5px;opacity:.8;display:block;line-height:1.2}
-    .sticky-net b{font-family:var(--font-head);font-size:19px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-    .sticky-net em{font-style:normal;font-family:var(--font-head);font-weight:500;font-size:13.5px;background:#fff;color:#000;padding:10px 16px;border-radius:999px}
-    footer{padding-bottom:84px}
     .dia{display:none}
   }
   @media (max-width: 560px){
@@ -439,29 +405,27 @@
     .nav-cta .btn-white{display:none}
     .glass{padding:24px 20px}
     .card{padding:22px 20px}
-    .hero-net{padding:30px 22px 26px}
-    .eq{grid-template-columns:1fr 1fr}
     .stp span{display:none}.stp.on span{display:inline}
     .stp + .stp::before{width:20px}
     .tbl td{padding:13px 18px;font-size:14px}
     .bd-head{padding:24px 18px 4px}.check{padding:14px 18px 20px}.empty-note{padding:20px 18px}
     .tag{display:block;margin:5px 0 0;width:max-content}
-    .bill{flex-direction:column;align-items:stretch}
+    .rs-fold .bill{flex-direction:column;align-items:stretch}
     .seg{width:100%}.seg button{flex:1;justify-content:center;padding:10px 8px;font-size:14px;gap:6px}
     .seg .save{font-size:10.5px;padding:3px 6px}
     }
-  @media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} .btn:hover{transform:none} .go .rv{animation:none!important} }
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} .btn:hover{transform:none} }
 
   /* ---------- Impresión / PDF: fondo blanco para no gastar tinta ---------- */
   @media print{
     :root{--bg:#fff;--card:#fff;--line:#d8dde6;--ink:#0C1A33;--muted:#4a5568;--label:#2d3748;--ph:#5b6b86}
     body{background:#fff;color:#0C1A33}
-    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,footer,.seg,.tune,.steps,#leadCard,.tst,.ex,.vid-sec,.closebox{display:none!important}
+    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,footer,.seg,.rs-assume,.rs-share,.rs-back,.rs-cta,.steps,.tst,.ex,.vid-sec,.rs-price{display:none!important}
     .wrap{padding:0}
-    .card,.tile{background:#fff;border-color:#d8dde6}
-    .tile b,.sumstrip b{-webkit-text-fill-color:#296BDC;color:#296BDC;background:none}
-    .loss .n{color:#B4361F}.loss p,.loss .k{color:#4a5568}.loss p b,.loss .back{color:#0C1A33}
-    .hero-net,.tbl tr.total td,.tbl tr.group td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.rs-fold{background:#fff;border-color:#d8dde6}
+    .rs-card{min-height:0}
+    .sumstrip b{-webkit-text-fill-color:#296BDC;color:#296BDC;background:none}
+    .hero-net,.tbl tr.total td,.tbl tr.group td,.rs-fold{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .tbl tr.group td{color:#12336E;background:#e9efff}.tbl tr.sub td{background:#f6f8fc}
     .tbl td,.tbl tr.sub td.amt{color:#0C1A33}
     .tbl tr.total td{color:#fff}
@@ -490,10 +454,6 @@
 <section class="hero-in" id="hero">
 <h1 data-i18n="s008" id="heroTitle">¿Cuánto dinero se te escapa en las llamadas de venta y reuniones de tu empresa?</h1>
 <p class="lead" data-i18n="s009" id="heroLead">Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.</p>
-<div aria-labelledby="lbTitle" class="logo-band" hidden="" id="logoBand" role="region">
-<p class="lb-title" data-i18n="w001" id="lbTitle">Empresas que ya usan Fivo</p>
-<div class="lb-view"><div class="lb-track" id="lbTrack"></div></div>
-</div>
 </section>
 <main class="wrap" id="calc">
 <ol aria-label="Progreso" class="steps" data-i18n-aria="s092" id="steps">
@@ -611,7 +571,30 @@
 </section>
 <!-- PASO 4 -->
 <section aria-live="polite" hidden="" id="step4">
+<div class="rs">
 <p class="rs-back"><button class="link-btn" data-i18n="s070" id="editData" type="button">← Cambiar mis datos</button></p>
+<div class="hero-net rs-card" id="netCard">
+<div class="rs-main">
+<h2 class="rs-title" data-i18n="r001">Esto es lo que Fivo podría darte cada año</h2>
+<div class="dual" id="dual">
+<div><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
+<div id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
+</div>
+<p class="rs-est" data-i18n="r030">Estimación a partir de tus datos</p>
+<p class="rs-net" hidden="" id="netLine"></p>
+<p class="rs-price" id="priceMsg"></p>
+<div class="rs-cta" id="ctaBox">
+<h3 id="ctaTitle"></h3>
+<a class="btn-main" href="#" id="ctaBtn"><span id="ctaBtnText"></span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<p class="rs-small" id="ctaSmall"></p>
+<p class="rs-alt" hidden="" id="ctaAlt"><a href="#" id="ctaAltLink"></a></p>
+</div>
+</div>
+</div>
+<div aria-labelledby="lbTitle" class="logo-band" hidden="" id="logoBand" role="region">
+<p class="lb-title" data-i18n="w001" id="lbTitle">Empresas que ya usan Fivo</p>
+<div class="lb-view"><div class="lb-track" id="lbTrack"></div></div>
+</div>
 <section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
 <h2 data-i18n="r020" id="t-vid">Por qué y cómo puedes ahorrar dinero con Fivo</h2>
 <div class="vid">
@@ -619,25 +602,42 @@
 <video controls="" hidden="" id="videoFile" playsinline="" preload="metadata"></video>
 <div class="vid-ph" data-i18n="r022" hidden="" id="videoPh">Aquí irá el vídeo</div>
 </div>
-<p class="vid-skip"><a data-i18n="r021" href="#resultTop" id="videoSkip">Ir a mi cálculo ↓</a></p>
+<p class="vid-skip"><a data-i18n="r021" href="#foldBox" id="videoSkip">Ir a mi cálculo ↓</a></p>
 </section>
-<div class="res" id="resultTop">
-<div class="stack">
-<div class="hero-net" id="netCard">
-<p class="k" data-i18n="r001">Cuánto te ahorrarías y cuánto más ganarías con Fivo</p>
-<div class="dual" id="dual">
-<div><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
-<div id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
 </div>
-<p class="per rv d1" id="netPer"></p>
-<p class="inv rv d1" id="inv"></p><p class="how rv d1"><a data-i18n="n005" href="#desglose">Ver cómo se calcula</a></p>
-<div class="eq rv d2">
-<div><span data-i18n="s039">Valor que recuperas</span><b id="mBen">—</b></div>
-<div><span data-i18n="s040">− Inversión en Fivo</span><b id="mCost">—</b><small id="mCostSub"></small></div>
-<div><span data-i18n="s041">Recuperas por cada 1 € invertido</span><b id="mRoi">—</b></div>
+<section aria-labelledby="t-ex" class="ex" hidden="" id="examples">
+<div class="ex-in">
+<h2 data-i18n="x001" id="t-ex">Así sale el cálculo en empresas como la tuya</h2>
+<p class="ex-note" data-i18n="x002">Ejemplos ilustrativos con datos de muestra. No son clientes reales.</p>
+<div class="ex-grid" id="exGrid"></div>
 </div>
-<p class="price-msg rv d2" id="priceMsg"></p>
-<div class="bill rv d2">
+</section>
+<section aria-labelledby="t-tst" class="tst" hidden="" id="testimonials">
+<div class="tst-in">
+<p class="tst-tag" data-i18n="t001">TESTIMONIOS</p>
+<h2 data-i18n="t002" id="t-tst">Lo que dicen nuestros usuarios</h2>
+<p class="tst-sub" hidden="" id="tstSub"></p>
+<div class="tst-carousel" id="tstCar" role="region" tabindex="0">
+<div class="tst-stage" id="tstStage"></div>
+<div class="tst-ctrl">
+<button class="tst-nav" id="tstPrev" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<div class="tst-dots" id="tstDots"></div>
+<button class="tst-nav" id="tstNext" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</div>
+</section>
+<div class="rs">
+<details class="rs-fold" id="foldBox">
+<summary data-i18n="r031">Ver cómo se calcula y ajustar supuestos</summary>
+<div class="bd-head">
+<h2 data-i18n="s071" id="t-bd">Cada euro, explicado</h2>
+<p data-i18n="s072">Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.</p>
+</div>
+<table class="tbl" id="tbl"></table>
+<p class="check" id="check"></p>
+<div class="rs-pad">
+<div class="bill">
 <div class="bill-l">
 <span class="t" data-i18n="s042">Facturación · Plan Business, el más vendido</span>
 <span class="d" id="billDetail"></span>
@@ -647,48 +647,10 @@
 <button aria-pressed="false" data-plan="annual" type="button"><span data-i18n="s044">Anual</span> <span class="save" data-i18n="s045">AHORRA 25%</span></button>
 </div>
 </div>
-<p class="bill-note rv d2" id="billNote"></p>
+<p class="bill-note" id="billNote"></p>
 </div>
-<div class="tiles rv d4">
-<div class="tile"><b id="tPay">—</b><span data-i18n="s049">para que Fivo se pague solo (estimado)</span></div>
-<div class="tile"><b id="tDay">—</b><span data-i18n="s050">es lo que dejas de ganar cada día que lo aplazas</span></div>
-<div class="tile"><b id="tMonth">—</b><span data-i18n="s051">de beneficio neto cada mes</span></div>
-</div>
-<div class="card rv d4">
-<h2 data-i18n="s052">De dónde sale tu beneficio</h2>
-<p class="sub" data-i18n="s053" style="margin-bottom:18px">Mismas cifras que el desglose de abajo.</p>
-<div class="bars">
-<div class="bar-row"><div class="cap"><span data-i18n="s039">Valor que recuperas</span><span id="capBen"></span></div><div class="bar" id="barBen"></div></div>
-<div class="bar-row"><div class="cap"><span data-i18n="s054">Inversión en Fivo</span><span id="capCost"></span></div><div class="bar" id="barCost"></div></div>
-</div>
-<div class="legend" id="legend"></div>
-</div>
-</div>
-<div class="stack">
-<div class="card loss rv d2" id="lossCard">
-<p class="k" data-i18n="s055">Sin memoria compartida, hoy tu equipo pierde</p>
-<p class="n" id="lossN">—</p>
-<p id="lossTxt"></p>
-<p class="back" id="lossBack"></p>
-<p class="optline" data-i18n="r010" hidden="" id="optLine">Fivo te enseña dónde se pierden tiempo y ventas en cada departamento.</p>
-</div>
-<div class="card" id="leadCard">
-<h2 data-i18n="s056">Comparte tu cálculo</h2>
-<p class="sub" data-i18n="s057" style="margin-bottom:16px">Copia el enlace o descárgalo en PDF para enseñárselo a quien decide la compra.</p>
-<form id="leadForm" novalidate="" style="display:flex;gap:10px;flex-wrap:wrap">
-              <input type="text" name="company" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-<div class="input" style="flex:1;min-width:190px"><input aria-label="Correo electrónico" autocomplete="email" data-i18n-aria="s100" data-i18n-ph="s099" id="email" placeholder="tu@empresa.com" required="" type="email"/></div>
-<button class="btn btn-grad btn-rect" data-i18n="s058" type="submit">Enviarme mi informe</button>
-</form>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-<button class="btn btn-line btn-rect btn-sm" data-i18n="s059" id="copyBtn" type="button">Copiar enlace con mi cálculo</button>
-<button class="btn btn-line btn-rect btn-sm" data-i18n="s060" id="pdfBtn" type="button">Descargar PDF</button>
-</div>
-<p class="legal" id="legalNote"><span data-i18n="n004">Al enviarlo aceptas la</span> <a data-i18n="s085" href="https://fivo.ai/privacy-policy" rel="noopener" target="_blank">Política de Privacidad</a>.</p><p id="msg" role="status" style="font-size:13px;margin:12px 0 0;min-height:1em"></p>
-</div>
-<details class="card tune">
-<summary data-i18n="s061">Pon a prueba los supuestos</summary>
-<div class="body">
+<div class="rs-pad rs-assume">
+<h3 data-i18n="s061">Pon a prueba los supuestos</h3>
 <p class="mini-sub" data-i18n="s062">Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.</p>
 <div class="range-row">
 <div class="top"><span data-i18n="s063">Tiempo de búsqueda que recuperas</span><b id="recv"></b></div>
@@ -712,49 +674,24 @@
 <span class="t"><input checked="" id="audOn" type="checkbox"/><span><span data-i18n="w050">Incluir el análisis externo</span><small data-i18n="w051">Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.</small></span></span>
 </label>
 </div>
+<div class="rs-pad rs-share">
+<div class="rs-btns">
+<button class="btn btn-line btn-rect btn-sm" data-i18n="s059" id="copyBtn" type="button">Copiar enlace con mi cálculo</button>
+<button class="btn btn-line btn-rect btn-sm" data-i18n="s060" id="pdfBtn" type="button">Descargar PDF</button>
+</div>
+<form id="leadForm" novalidate="" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+<input type="text" name="company" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+<div class="input" style="flex:1;min-width:190px"><input aria-label="Correo electrónico" autocomplete="email" data-i18n-aria="s100" data-i18n-ph="s099" id="email" placeholder="tu@empresa.com" required="" type="email"/></div>
+<button class="btn btn-grad btn-rect" data-i18n="s058" type="submit">Enviarme mi informe</button>
+</form>
+<p class="legal" id="legalNote"><span data-i18n="n004">Al enviarlo aceptas la</span> <a data-i18n="s085" href="https://fivo.ai/privacy-policy" rel="noopener" target="_blank">Política de Privacidad</a>.</p><p id="msg" role="status" style="font-size:13px;margin:12px 0 0;min-height:1em"></p>
+</div>
+<p class="est-note rs-pad" data-i18n="e001">Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.</p>
 </details>
-</div>
-</div>
-<div class="closebox" hidden="" id="closeBox">
-<h2 id="closeTitle"></h2>
-<p hidden="" id="closeText"></p>
-<a class="btn btn-white btn-rect" href="#" id="closeBtn"></a>
 </div>
 </section>
 </main>
-<section aria-labelledby="t-bd" class="section bd" hidden="" id="desglose">
-<div class="card">
-<div class="bd-head">
-<h2 data-i18n="s071" id="t-bd">Cada euro, explicado</h2>
-<p data-i18n="s072">Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.</p>
-</div>
-<table class="tbl" id="tbl"></table>
-<p class="check" id="check"></p>
-</div>
-<p class="est-note" data-i18n="e001">Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.</p>
-</section>
-<section aria-labelledby="t-tst" class="tst" hidden="" id="testimonials">
-<div class="tst-in">
-<p class="tst-tag" data-i18n="t001">TESTIMONIOS</p>
-<h2 data-i18n="t002" id="t-tst">Lo que dicen nuestros usuarios</h2>
-<p class="tst-sub" hidden="" id="tstSub"></p>
-<div class="tst-carousel" id="tstCar" role="region" tabindex="0">
-<div class="tst-stage" id="tstStage"></div>
-<div class="tst-ctrl">
-<button class="tst-nav" id="tstPrev" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></button>
-<div class="tst-dots" id="tstDots"></div>
-<button class="tst-nav" id="tstNext" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
-</div>
-</div>
-</div>
-</section>
-<section aria-labelledby="t-ex" class="ex" hidden="" id="examples">
-<div class="ex-in">
-<h2 data-i18n="x001" id="t-ex">Así sale el cálculo en empresas como la tuya</h2>
-<p class="ex-note" data-i18n="x002">Ejemplos ilustrativos con datos de muestra. No son clientes reales.</p>
-<div class="ex-grid" id="exGrid"></div>
-</div>
-</section>
+
 <footer>
 <div class="foot">
 <span data-i18n="s084">Copyright 2026 Fivo AI. Todos los derechos reservados</span>
@@ -766,9 +703,10 @@
 </div>
 </footer>
 </div>
-<a class="sticky-net" hidden="" href="https://app.fivo.ai/es/auth/register" id="stickyBar">
-<div><span data-i18n="s088">Tu beneficio neto estimado</span><b id="stickyNet">—</b></div><em id="stickyBtn"></em>
-</a>
+<div class="sticky-net" hidden="" id="stickyBar">
+<span class="sticky-label" id="stickyLabel"></span>
+<a class="sticky-btn" href="#" id="stickyBtn"></a>
+</div>
 
 <script>
 (function(){
@@ -835,7 +773,7 @@
   /* ============ TEXTOS ============
      STATIC: textos del HTML (clave → texto). Se aplican con data-i18n, data-i18n-ph y data-i18n-aria.
      D: textos que genera el cálculo. Usan {variables}. */
-  var STATIC = {"es":{"s001":"Fivo","s002":"SOLUCIONES","s003":"PRECIOS","s004":"CONTACTAR VENTAS","s005":"Iniciar sesión","s006":"Empieza gratis","s008":"¿Cuánto dinero se te escapa en las llamadas de venta y reuniones de tu empresa?","s009":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s015":"Empecemos por tu empresa","s016":"Con cuatro datos tienes tu primera cifra. Todo en euros al año.","s018":"personas","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas que cerráis por llamadas y reuniones. Solo cuenta si activas la mejora de ventas.","s023":"Continuar","s024":"Cuéntanos cómo vendéis","s025":"Tres preguntas rápidas para ajustar la estimación de ventas.","s036":"Atrás","s037":"Ver mi resultado","s039":"Valor que recuperas","s040":"− Inversión en Fivo","s041":"Recuperas por cada 1 € invertido","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s049":"para que Fivo se pague solo (estimado)","s050":"es lo que dejas de ganar cada día que lo aplazas","s051":"de beneficio neto cada mes","s052":"De dónde sale tu beneficio","s053":"Mismas cifras que el desglose de abajo.","s054":"Inversión en Fivo","s055":"Sin memoria compartida, hoy tu equipo pierde","s056":"Comparte tu cálculo","s057":"Copia el enlace o descárgalo en PDF para enseñárselo a quien decide la compra.","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s071":"Cada euro, explicado","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s088":"Tu beneficio neto estimado","s090":"Principal","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","n005":"Ver cómo se calcula","title":"¿Cuánto dinero se te escapa en tus llamadas de venta y reuniones? | Fivo.ai","metaDesc":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","w010":"Tus ventas","w011":"Sector","w012":"Elige tu sector","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales (venden o hablan con clientes por llamada)","w025":"Resto del equipo","w026":"Cuenta a todas las personas que usarían Fivo.","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa para vender más y ser más productivo con menos equipo?","w040":"Quizá","w041":"Ahora, tus herramientas","w042":"Lo que pagas hoy por las aplicaciones de tu empresa y por lo que Fivo reemplazaría.","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación de pantalla, transcripción o notas de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Cuánto te ahorrarías y cuánto más ganarías con Fivo","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r010":"Fivo te enseña dónde se pierden tiempo y ventas en cada departamento.","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ir a mi cálculo ↓","r022":"Aquí irá el vídeo","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales."},"en":{"s001":"Fivo","s002":"SOLUTIONS","s003":"PRICING","s004":"CONTACT SALES","s005":"Log in","s006":"Start for free","s008":"How much money is slipping away in your company's sales calls and meetings?","s009":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","s012":"Your company","s013":"Your tools","s014":"Your result","s015":"Let's start with your company","s016":"Four numbers are enough for a first figure. Everything in euros per year.","s018":"people","s019":"Annual cost","s020":"Salaries and payroll costs for the whole team.","s021":"Approx. annual revenue","s022":"What the sales you close through calls and meetings generate per year. Only counts if you turn on the sales improvement.","s023":"Continue","s024":"Tell us how you sell","s025":"Three quick questions to fine-tune the sales estimate.","s036":"Back","s037":"See my result","s039":"Value you recover","s040":"− Fivo investment","s041":"You recover for every €1 invested","s042":"Billing · Business plan, the best seller","s043":"Monthly","s044":"Annual","s045":"SAVE 25%","s049":"to earn back what you pay for Fivo (estimate)","s050":"is what waiting costs you every day","s051":"in net profit every month","s052":"Where your profit comes from","s053":"Same figures as the breakdown below.","s054":"Fivo investment","s055":"Without shared memory, your team loses today","s056":"Share your calculation","s057":"Copy the link or download it as a PDF to show whoever signs off on the purchase.","s058":"Email me my report","s059":"Copy link to my calculation","s060":"Download PDF","s061":"Stress-test the assumptions","s062":"They start at reasonable values. Lower them or switch off the extras and see how much still holds.","s063":"Search time you recover","s064":"Include the sales improvement","s065":"It's an assumption: better call follow-up and fewer missed opportunities.","s066":"Improvement on your call revenue","s067":"Tools that Fivo replaces","s070":"← Edit my answers","s071":"Every euro, explained","s072":"Every line adds up to its subtotal and the total. Your data appears exactly as you enter it, and estimates are labeled as such.","s084":"Copyright 2026 Fivo AI. All rights reserved","s085":"Privacy Policy","s086":"Security Policy","s087":"Terms of Service","s088":"Your estimated net profit","s090":"Main","s092":"Progress","s093":"Number of people","s094":"Annual cost","s095":"Annual revenue","s098":"Fivo billing","s099":"you@company.com","s100":"Email","s101":"Percentage of search time you recover","s102":"Improvement in call revenue","s103":"Percentage of tools replaced","s105":"Legal","n004":"By submitting, you agree to the","n005":"See how it's calculated","title":"How much money is slipping away in your sales calls and meetings? | Fivo.ai","metaDesc":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","w010":"Your sales","w011":"Industry","w012":"Choose your industry","w013":"Technology and software","w014":"Professional services and consulting","w015":"Agency or marketing","w016":"Real estate","w017":"Insurance and finance","w018":"Healthcare","w019":"Education and training","w020":"Industry and construction","w021":"Retail and e-commerce","w022":"Other","w023":"My team members","w024":"Sales reps (they sell or talk to customers by phone)","w025":"Rest of the team","w026":"Count everyone who would use Fivo.","w032":"Do you record and review your sales calls?","w033":"No","w034":"Sometimes","w035":"Yes, always","w036":"Do you have outside consultants or agencies that review your sales calls or processes?","w037":"Yes","w038":"How much do you spend on them per year?","w039":"Do you think someone should optimize every department in your company so you can sell more and be more productive with a smaller team?","w040":"Maybe","w041":"Now, your tools","w042":"What you pay today for your company's apps and for what Fivo would replace.","w043":"How much do you spend per month on apps for your company?","w044":"€ per month","w045":"How much of that is on screen recording, transcription or meeting notes (Loom, Otter, Fireflies…)?","w046":"I don't know","w047":"Monthly spend","w050":"Include the external analysis","w051":"What hiring consultants or an outside analysis would cost. Fivo does it continuously from your meetings. Turn it off if you wouldn't hire it.","r001":"How much you'd save and how much more you'd earn with Fivo","r002":"You'd save","r003":"You'd earn more","r004":"per year","r010":"Fivo shows you where time and sales are lost in every department.","r020":"Why and how you can save money with Fivo","w001":"Companies already using Fivo","r021":"Go to my numbers ↓","r022":"The video will go here","e001":"Estimate based on your data, McKinsey Global Institute (2012) and Fivo's public pricing. Actual results depend on each team.","t001":"TESTIMONIALS","t002":"What our users say","x001":"What the calculation looks like for companies like yours","x002":"Illustrative examples with sample data. These are not real customers."}};
+  var STATIC = {"es":{"s001":"Fivo","s002":"SOLUCIONES","s003":"PRECIOS","s004":"CONTACTAR VENTAS","s005":"Iniciar sesión","s006":"Empieza gratis","s008":"¿Cuánto dinero se te escapa en las llamadas de venta y reuniones de tu empresa?","s009":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s015":"Empecemos por tu empresa","s016":"Con cuatro datos tienes tu primera cifra. Todo en euros al año.","s018":"personas","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas que cerráis por llamadas y reuniones. Solo cuenta si activas la mejora de ventas.","s023":"Continuar","s024":"Cuéntanos cómo vendéis","s025":"Tres preguntas rápidas para ajustar la estimación de ventas.","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s071":"Cada euro, explicado","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s090":"Principal","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se te escapa en tus llamadas de venta y reuniones? | Fivo.ai","metaDesc":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","w010":"Tus ventas","w011":"Sector","w012":"Elige tu sector","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales (venden o hablan con clientes por llamada)","w025":"Resto del equipo","w026":"Cuenta a todas las personas que usarían Fivo.","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa para vender más y ser más productivo con menos equipo?","w040":"Quizá","w041":"Ahora, tus herramientas","w042":"Lo que pagas hoy por las aplicaciones de tu empresa y por lo que Fivo reemplazaría.","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación de pantalla, transcripción o notas de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ir a mi cálculo ↓","r022":"Aquí irá el vídeo","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula y ajustar supuestos"},"en":{"s001":"Fivo","s002":"SOLUTIONS","s003":"PRICING","s004":"CONTACT SALES","s005":"Log in","s006":"Start for free","s008":"How much money is slipping away in your company's sales calls and meetings?","s009":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","s012":"Your company","s013":"Your tools","s014":"Your result","s015":"Let's start with your company","s016":"Four numbers are enough for a first figure. Everything in euros per year.","s018":"people","s019":"Annual cost","s020":"Salaries and payroll costs for the whole team.","s021":"Approx. annual revenue","s022":"What the sales you close through calls and meetings generate per year. Only counts if you turn on the sales improvement.","s023":"Continue","s024":"Tell us how you sell","s025":"Three quick questions to fine-tune the sales estimate.","s036":"Back","s037":"See my result","s042":"Billing · Business plan, the best seller","s043":"Monthly","s044":"Annual","s045":"SAVE 25%","s058":"Email me my report","s059":"Copy link to my calculation","s060":"Download PDF","s061":"Stress-test the assumptions","s062":"They start at reasonable values. Lower them or switch off the extras and see how much still holds.","s063":"Search time you recover","s064":"Include the sales improvement","s065":"It's an assumption: better call follow-up and fewer missed opportunities.","s066":"Improvement on your call revenue","s067":"Tools that Fivo replaces","s070":"← Edit my answers","s071":"Every euro, explained","s072":"Every line adds up to its subtotal and the total. Your data appears exactly as you enter it, and estimates are labeled as such.","s084":"Copyright 2026 Fivo AI. All rights reserved","s085":"Privacy Policy","s086":"Security Policy","s087":"Terms of Service","s090":"Main","s092":"Progress","s093":"Number of people","s094":"Annual cost","s095":"Annual revenue","s098":"Fivo billing","s099":"you@company.com","s100":"Email","s101":"Percentage of search time you recover","s102":"Improvement in call revenue","s103":"Percentage of tools replaced","s105":"Legal","n004":"By submitting, you agree to the","title":"How much money is slipping away in your sales calls and meetings? | Fivo.ai","metaDesc":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","w010":"Your sales","w011":"Industry","w012":"Choose your industry","w013":"Technology and software","w014":"Professional services and consulting","w015":"Agency or marketing","w016":"Real estate","w017":"Insurance and finance","w018":"Healthcare","w019":"Education and training","w020":"Industry and construction","w021":"Retail and e-commerce","w022":"Other","w023":"My team members","w024":"Sales reps (they sell or talk to customers by phone)","w025":"Rest of the team","w026":"Count everyone who would use Fivo.","w032":"Do you record and review your sales calls?","w033":"No","w034":"Sometimes","w035":"Yes, always","w036":"Do you have outside consultants or agencies that review your sales calls or processes?","w037":"Yes","w038":"How much do you spend on them per year?","w039":"Do you think someone should optimize every department in your company so you can sell more and be more productive with a smaller team?","w040":"Maybe","w041":"Now, your tools","w042":"What you pay today for your company's apps and for what Fivo would replace.","w043":"How much do you spend per month on apps for your company?","w044":"€ per month","w045":"How much of that is on screen recording, transcription or meeting notes (Loom, Otter, Fireflies…)?","w046":"I don't know","w047":"Monthly spend","w050":"Include the external analysis","w051":"What hiring consultants or an outside analysis would cost. Fivo does it continuously from your meetings. Turn it off if you wouldn't hire it.","r001":"Here's what Fivo could do for you every year","r002":"You'd save","r003":"You'd earn more","r004":"a year","r020":"Why and how you can save money with Fivo","w001":"Companies already using Fivo","r021":"Go to my numbers ↓","r022":"The video will go here","e001":"Estimate based on your data, McKinsey Global Institute (2012) and Fivo's public pricing. Actual results depend on each team.","t001":"TESTIMONIALS","t002":"What our users say","x001":"What the calculation looks like for companies like yours","x002":"Illustrative examples with sample data. These are not real customers.","r030":"Estimate based on your data","r031":"See how it's calculated and adjust assumptions"}};
 
   var D = {
     es:{
@@ -848,14 +786,6 @@
       sumHave:'<div class="l">Fivo sustituiría<small>{m} al mes de tus {a} al mes en aplicaciones</small></div><b>{y} al año</b>',
       sumNone:'<div class="l">Añade lo que gastas hoy<small>Aunque sea una estimación: así el cálculo es más exacto.</small></div><b>{zero}</b>',
       recEq:"≈ {h} h por persona y semana, sobre el {p} de la semana que se va buscando información.",
-      netPerNeg:"Beneficio neto tras pagar Fivo: <b>{n}</b> al año, con estos datos. Prueba a ajustar los supuestos o añade más herramientas.",
-      netPerPos:"Beneficio neto tras pagar Fivo: <b>{n}</b> al año (≈ {m} al mes)",
-      priceMsg:"Si el precio es lo que te preocupa, que sepas que Fivo cuesta menos de {max} al mes por persona.",
-      closeTitleA:"Tu cálculo estima {x} al año. ¿Hablamos de cómo conseguirlo en tu empresa?",
-      closeTitleAGen:"¿Hablamos de cómo mejorar tus procesos de venta con Fivo?",
-      closeTextA:"Reserva una llamada y revisamos juntos tus números: cómo implantar Fivo, qué procesos mejorar primero y cuánto de este cálculo es realista en tu caso.",
-      closeBtnA:"Reservar llamada",
-      closeTitleB:"Empieza a usar Fivo ahora",
       exTag:"EJEMPLO ILUSTRATIVO", exPeople:"Personas", exSpend:"Gasto anual", exRevenue:"Ingresos anuales",
       exSave:"Te ahorrarías", exEarn:"Ganarías más", exNet:"Beneficio neto", exPerYear:"al año", exLoad:"Cargar este ejemplo",
       tstLabel:"Testimonios de usuarios", tstCarousel:"carrusel", tstSlide:"diapositiva", tstSlideOf:"{n} de {total}",
@@ -863,20 +793,16 @@
       tstPreview:"VISTA PREVIA – NO REAL", tstPhName:"NOMBRE APELLIDO", tstPhRole:"Cargo", tstPhCompany:"Empresa",
       tstPhText:"Aquí irá un testimonio real, con permiso de la persona.",
       reviewsLine:"Con más de {count} reseñas en {storeName}, nuestros usuarios destacan la eficacia y fiabilidad de la plataforma.",
-      closeBtnB:"Prueba 7 días gratis",
-      stickyBtnA:"Reservar llamada", stickyBtnB:"Empieza ahora",
-      inv:"Fivo no es un gasto; es una inversión.",
-      subM:"pago mensual", subA:"pago anual",
       billM:"{us} × {price} al mes × 12 meses = {cost}",
       billA:"{us} × ≈ {price} al mes × 12 meses = {cost}",
       noteA:"Con pago anual ahorras <b>{s}</b> al año frente al pago mensual.",
       noteM:"Con pago anual ahorras <b>{s}</b> al año y tu beneficio sube a <b>{n}</b>.",
-      pay1:"1 día", payN:"{n} días",
-      perDay:"≈ {x} al día",
-      lossN:"{x} al año",
-      lossTxt:"Según McKinsey Global Institute, los trabajadores del conocimiento dedican de media cerca del <b>20 % de la semana</b> a buscar información interna. Es el 20 % del gasto de tu equipo ({team}).",
-      lossBack:"Con Fivo recuperas el <b>{p}</b>: <b>{x}</b> al año.",
       empty:"Aquí aparecerá el desglose en cuanto introduzcas tus datos.",
+      netLine:"Beneficio neto estimado: {x} al año, ya descontado lo que pagas por Fivo.",
+      priceMsg:"Fivo cuesta menos de {max} al mes por persona.",
+      ctaTitleA:"¿Quieres que lo implementemos en tu empresa?", ctaBtnA:"Reservar mi llamada", ctaSmallA:"Revisamos tus números contigo.", ctaAlt:"o prueba 7 días gratis",
+      ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min",
+      stickyProfit:"Beneficio estimado: {x}/año", stickySave:"Ahorro estimado: {x}/año", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
       toolsLabel:"Grabación, transcripción y notas de reuniones",
       toolsOwn:"{m} al mes × 12 meses, tal como lo indicas",
       toolsEst:"Estimación: el {pc} de tus {a} al mes en aplicaciones ({m} al mes) × 12 meses",
@@ -900,8 +826,6 @@
       priceM:"{p} al mes", priceA:"≈ {p} al mes ({m} −{d})",
       modeM:"mensual", modeA:"anual",
       netRow:"Beneficio neto anual estimado", netNote:"Total que recuperas − inversión en Fivo",
-      sTools:"Herramientas", sAudit:"Análisis externo", sTime:"Tiempo recuperado", sExtra:"Ventas extra",
-      costBar:"Inversión en Fivo: {x}",
       chkOkHead:"<b>✓ Cifras verificadas.</b> ",
       chkTools:"Herramientas ({t}) = 12 × {m} al mes que indicas; ",
       chkTail:"{lines} de líneas = {ben} recuperados; {ben} − {cost} = {net}.",
@@ -924,14 +848,6 @@
       sumHave:'<div class="l">Fivo would replace<small>{m} per month of your {a} per month on apps</small></div><b>{y} per year</b>',
       sumNone:'<div class="l">Add what you spend today<small>Even an estimate helps: it makes the calculation more accurate.</small></div><b>{zero}</b>',
       recEq:"≈ {h} h per person per week, out of the {p} of the week spent searching for information.",
-      netPerNeg:"Net profit after paying for Fivo: <b>{n}</b> per year, with this data. Try adjusting the assumptions or adding more tools.",
-      netPerPos:"Net profit after paying for Fivo: <b>{n}</b> per year (≈ {m} a month)",
-      priceMsg:"If price is what worries you, Fivo costs less than {max} per person per month.",
-      closeTitleA:"Your calculation estimates {x} a year. Shall we talk about how to get there in your company?",
-      closeTitleAGen:"Shall we talk about improving your sales processes with Fivo?",
-      closeTextA:"Book a call and we'll review your numbers together: how to roll out Fivo, which processes to improve first, and how much of this estimate is realistic for you.",
-      closeBtnA:"Book a call",
-      closeTitleB:"Start using Fivo now",
       exTag:"ILLUSTRATIVE EXAMPLE", exPeople:"People", exSpend:"Annual cost", exRevenue:"Annual revenue",
       exSave:"You'd save", exEarn:"You'd earn more", exNet:"Net profit", exPerYear:"per year", exLoad:"Load this example",
       tstLabel:"User testimonials", tstCarousel:"carousel", tstSlide:"slide", tstSlideOf:"{n} of {total}",
@@ -939,20 +855,16 @@
       tstPreview:"PREVIEW – NOT REAL", tstPhName:"FIRST LAST NAME", tstPhRole:"Job title", tstPhCompany:"Company",
       tstPhText:"A real testimonial, with the person's permission, will go here.",
       reviewsLine:"With more than {count} reviews on {storeName}, our users highlight the platform's effectiveness and reliability.",
-      closeBtnB:"Try free for 7 days",
-      stickyBtnA:"Book a call", stickyBtnB:"Start now",
-      inv:"Fivo is not an expense; it's an investment.",
-      subM:"monthly billing", subA:"annual billing",
       billM:"{us} × {price} per month × 12 months = {cost}",
       billA:"{us} × ≈ {price} per month × 12 months = {cost}",
       noteA:"With annual billing you save <b>{s}</b> a year compared to monthly billing.",
       noteM:"With annual billing you save <b>{s}</b> a year and your profit rises to <b>{n}</b>.",
-      pay1:"1 day", payN:"{n} days",
-      perDay:"≈ {x} a day",
-      lossN:"{x} a year",
-      lossTxt:"According to McKinsey Global Institute, knowledge workers spend on average about <b>20% of the week</b> searching for internal information. That is 20% of your team's cost ({team}).",
-      lossBack:"With Fivo you recover <b>{p}</b>: <b>{x}</b> a year.",
       empty:"Your breakdown will appear here as soon as you enter your data.",
+      netLine:"Estimated net profit: {x} a year, after paying for Fivo.",
+      priceMsg:"Fivo costs less than {max} per person per month.",
+      ctaTitleA:"Want us to set it up in your company?", ctaBtnA:"Book my call", ctaSmallA:"We'll go through your numbers with you.", ctaAlt:"or try free for 7 days",
+      ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min",
+      stickyProfit:"Estimated profit: {x}/yr", stickySave:"Estimated savings: {x}/yr", stickyBtnA:"Book a call", stickyBtnB:"Try free",
       toolsLabel:"Screen recording, transcription and meeting notes",
       toolsOwn:"{m} per month × 12 months, as you entered it",
       toolsEst:"Estimate: {pc} of your {a} per month on apps ({m} per month) × 12 months",
@@ -976,8 +888,6 @@
       priceM:"{p} per month", priceA:"≈ {p} per month ({m} −{d})",
       modeM:"monthly", modeA:"annual",
       netRow:"Estimated annual net profit", netNote:"Total you recover − Fivo investment",
-      sTools:"Tools", sAudit:"External analysis", sTime:"Time recovered", sExtra:"Extra sales",
-      costBar:"Fivo investment: {x}",
       chkOkHead:"<b>✓ Figures verified.</b> ",
       chkTools:"Tools ({t}) = 12 × the {m} per month you enter; ",
       chkTail:"{lines} in line items = {ben} recovered; {ben} − {cost} = {net}.",
@@ -1079,7 +989,6 @@
                 rec:CFG.recDefault, uplift:CFG.upliftDefault, upliftSet:false, subst:100, plan:"monthly",
                 audOn:true, revOn:true, step:1, lang:"" };
 
-  var COLORS = {tools:"#5173FF", audit:"#0AC6FF", time:"#B9C6FF", extra:"#8BE8FF"};
   var LAST = 4;   /* número de pasos; el último es el resultado */
   var bandOK = false;   /* hay logos que mostrar */
   var revealed = false; /* la tarjeta del resultado ya entró en pantalla (una sola vez) */
@@ -1109,9 +1018,8 @@
   /* Con 1 o 2 miembros no hay test: siempre la versión de conversión */
   function variant(){ return members()>2 ? AB : "conversion"; }
   function sizeBucket(n){ return n<=2 ? "1-2" : (n<=10 ? "3-10" : "11+"); }
-  function track(name, minimal, placement){
+  function track(name, minimal){
     var e = {event:name, variant:variant(), step:state.step};
-    if(placement) e.placement = placement;
     if(!minimal){ e.sector = state.sector; e.team_size = sizeBucket(members()); }
     window.dataLayer.push(e);
   }
@@ -1119,26 +1027,22 @@
     var h = "", i = url.indexOf("#"); if(i>=0){ h = url.slice(i); url = url.slice(0,i); }
     return url + (url.indexOf("?")>=0 ? "&" : "?") + "utm_source=calculadora&utm_medium=web&utm_campaign=roi-calculator&utm_content=" + content + h;
   }
-  var viewedVariant = "", closeObs = null;
-  function renderClose(r){
-    var v = variant(), box = $("closeBox");
-    var call = v==="A";
-    /* Variante A: el título lleva el beneficio neto del resultado (de compute()); con 0 o negativo, el título genérico */
-    $("closeTitle").textContent = !call ? tr("closeTitleB") : (r.net>0 ? tr("closeTitleA",{x:eur(r.net)}) : tr("closeTitleAGen"));
-    $("closeText").hidden = !call;
-    if(call) $("closeText").textContent = tr("closeTextA");
-    $("closeBtn").textContent   = tr(call ? "closeBtnA" : "closeBtnB");
-    $("closeBtn").href = call ? withUtm(CFG.callUrl + "#" + encode(), "cta-A")
-                              : withUtm(CFG.registerUrl.replace("{lang}", LANG), v==="B" ? "cta-B" : "cta-conversion");
-    box.hidden = false;
+  /* CTA principal de la tarjeta del resultado y barra fija: misma variante del test A/B; con 1-2 miembros, siempre la de conversión */
+  function renderCta(r){
+    var v = variant(), call = v==="A", key = v==="A" ? "A" : v==="B" ? "B" : "conversion";
+    $("ctaTitle").textContent = tr(call ? "ctaTitleA" : "ctaTitleB");
+    var dur = (call && typeof CFG.callDuration==="number" && CFG.callDuration>0) ? tr("ctaDuration",{n:group(CFG.callDuration)}) : "";
+    $("ctaBtnText").textContent = tr(call ? "ctaBtnA" : "ctaBtnB") + dur;
+    $("ctaSmall").textContent = tr(call ? "ctaSmallA" : "ctaSmallB");
+    var reg = CFG.registerUrl.replace("{lang}", LANG);
+    var main = call ? CFG.callUrl + "#" + encode() : reg;
+    $("ctaBtn").setAttribute("href", withUtm(main, "cta-main-" + key));
+    $("ctaAlt").hidden = !call;
+    if(call){ $("ctaAltLink").textContent = tr("ctaAlt"); $("ctaAltLink").setAttribute("href", withUtm(reg, "cta-main-" + key)); }
+    /* barra fija: beneficio estimado (o el ahorro si el beneficio no es positivo) y el mismo botón */
+    $("stickyLabel").textContent = r.net>0 ? tr("stickyProfit",{x:eur(r.net)}) : tr("stickySave",{x:eur(r.save)});
     $("stickyBtn").textContent = tr(call ? "stickyBtnA" : "stickyBtnB");
-    $("stickyBar").setAttribute("href", $("closeBtn").getAttribute("href"));
-    if(!closeObs && "IntersectionObserver" in window){
-      closeObs = new IntersectionObserver(function(es){
-        es.forEach(function(en){ if(en.isIntersecting && viewedVariant!==variant()){ viewedVariant = variant(); track("calc_cta_view", false, "result"); } });
-      }, {threshold:0.5});
-      closeObs.observe(box);
-    }
+    $("stickyBtn").setAttribute("href", withUtm(main, "cta-sticky-" + key));
   }
   /* Vídeo: YouTube (se convierte a youtube-nocookie.com), Vimeo, Loom o un archivo .mp4. Devuelve {kind, src} o null. */
   function videoEmbed(u){
@@ -1197,11 +1101,10 @@
     }
     var res = state.step===LAST;
     $("steps").hidden = res;
-    $("heroTitle").hidden = res; $("heroLead").hidden = res;
+    $("hero").hidden = res;
     $("logoBand").hidden = !(res && bandOK);
     document.body.classList.toggle("is-result", res);
     updateSticky();
-    $("desglose").hidden = state.step!==LAST;
   }
   /* La cifra y la entrada escalonada de los bloques se animan UNA vez, la primera vez que la tarjeta del resultado entra en pantalla */
   var revealObs = null;
@@ -1272,49 +1175,33 @@
 
     renderSeg();
 
-    if(state.step!==LAST || !r.ready){ renderTable(r, null); return r; }
+    if(state.step!==LAST || !r.ready){ renderTable(r); return r; }
 
-    var neg = r.net < 0;
-    $("netCard").classList.toggle("neg", neg);
     if(!counting){ $("saveBig").textContent = eur(r.save); $("earnBig").textContent = eur(r.earn); }
     $("earnBox").hidden = !state.revOn;
     $("dual").classList.toggle("one", !state.revOn);
-    $("stickyNet").textContent = eur(r.net);
-    $("netPer").innerHTML = neg ? tr("netPerNeg",{n:eur(r.net)}) : tr("netPerPos",{n:eur(r.net), m:eur(r.perMonth)});
-    $("priceMsg").textContent = tr("priceMsg",{max:eur(Math.floor(CFG.priceMonthly/10)*10 + 10)});
-    $("optLine").hidden = !(state.optimize==="yes" || state.optimize==="maybe");
-    renderVideo(); renderClose(r);
-    $("inv").textContent = neg ? "" : tr("inv");
-    $("mBen").textContent  = eur(r.benefits);
-    $("mCost").textContent = eur(r.cost);
-    $("mRoi").textContent  = r.ratio>0 ? eurDec(r.ratio) : "—";
+    var nl = $("netLine"); nl.hidden = !(r.net>0);
+    if(r.net>0) nl.textContent = tr("netLine",{x:eur(r.net)});
+    $("priceMsg").textContent = tr("priceMsg",{max:eur(Math.floor(CFG.priceMonthly)+1)});   /* techo de CFG.priceMonthly */
+    var us = usersN(r.people);
     var costM = Math.round(r.people * CFG.priceMonthly * CFG.months);
     var costA = Math.round(r.people * CFG.priceAnnual  * CFG.months);
     var saveYr = costM - costA;
-    var us = usersN(r.people);
-    $("mCostSub").textContent = tr(state.plan==="annual" ? "subA" : "subM");
     $("billDetail").textContent = tr(state.plan==="annual" ? "billA" : "billM", {us:us, price:eur2(state.plan==="annual" ? CFG.priceAnnual : CFG.priceMonthly), cost:eur(r.cost)});
     $("billNote").innerHTML = state.plan==="annual"
       ? tr("noteA",{s:eur(saveYr)})
       : tr("noteM",{s:eur(saveYr), n:eur(compute(Object.assign({}, state, {plan:"annual"})).net)});
-
-    $("tPay").textContent  = r.payDays===null ? "—" : (r.payDays<=1 ? tr("pay1") : tr("payN",{n:group(r.payDays)}));
-    $("tDay").textContent  = r.perDay>0 ? tr("perDay",{x:eur(r.perDay)}) : "—";
-    $("tMonth").textContent= "≈ "+eur(r.perMonth);
-
-    $("lossN").textContent = tr("lossN",{x:eur(r.lossToday)});
-    $("lossTxt").innerHTML = tr("lossTxt",{team:eur(r.team)});
-    $("lossBack").innerHTML = tr("lossBack",{p:pct(r.rec), x:eur(r.time)});
-
-    renderTable(r, neg);
+    renderVideo(); renderCta(r);
+    renderTable(r);
     return r;
   }
 
-  function renderTable(r, neg){
+  function renderTable(r){
+    var neg = r.net < 0;
     var tbl = $("tbl");
     if(!r.ready){
       tbl.innerHTML = '<tr><td colspan="2" style="padding:0;border:0"><p class="empty-note">'+tr("empty")+'</p></td></tr>';
-      $("check").innerHTML=""; $("barBen").innerHTML=$("barCost").innerHTML=$("legend").innerHTML=""; return;
+      $("check").innerHTML=""; return;
     }
 
     var TAG = {own:tr("tagOwn"), ref:tr("tagRef"), est:tr("tagEst")};
@@ -1322,12 +1209,12 @@
       ? tr("toolsEst",{pc:pct(Math.round(CFG.unknownShare*100)), a:eur(r.appsM), m:eur(r.subM)})
       : tr("toolsOwn",{m:eur(r.subM)});
     if(r.subst!==100) toolsNote += tr("toolsPart",{p:pct(Math.round(r.subst))});
-    var rowsA = [{key:"tools", label:tr("toolsLabel"), note:toolsNote, tag:state.appsUnknown?"est":"own", amt:r.tools, short:tr("sTools")}];
+    var rowsA = [{key:"tools", label:tr("toolsLabel"), note:toolsNote, tag:state.appsUnknown?"est":"own", amt:r.tools}];
     var rowsB = [];
-    if(r.auditKind==="own") rowsB.push({key:"audit", label:tr("auditOwnLabel"), note:tr("auditOwnNote",{x:eur(r.tierValue), p:pct(Math.round(CFG.consultantReplace*100))}), tag:"own", amt:r.audit, short:tr("sAudit")});
-    else if(r.auditKind==="ref") rowsB.push({key:"audit", label:tr("auditRefLabel"), note:tr("auditRefNote",{pc:pct(Math.round(CFG.auditRefPct*100)), team:eur(r.team), min:eur(CFG.auditRefMin), max:eur(CFG.auditRefMax)}), tag:"ref", amt:r.audit, short:tr("sAudit")});
-    var rowsC = [{key:"time", label:tr("timeLabel"), note:tr("timeNote",{p:pct(r.rec), loss:eur(r.lossToday), n:group(r.people), pl:peopleW(r.people), team:eur(r.team)}), tag:"est", amt:r.time, short:tr("sTime")}];
-    var rowsD = state.revOn ? [{key:"extra", label:tr("extraLabel"), note:tr("extraNote",{p:pct(r.uplift), x:eur(r.calls)}), tag:"est", amt:r.extra, short:tr("sExtra")}] : [];
+    if(r.auditKind==="own") rowsB.push({key:"audit", label:tr("auditOwnLabel"), note:tr("auditOwnNote",{x:eur(r.tierValue), p:pct(Math.round(CFG.consultantReplace*100))}), tag:"own", amt:r.audit});
+    else if(r.auditKind==="ref") rowsB.push({key:"audit", label:tr("auditRefLabel"), note:tr("auditRefNote",{pc:pct(Math.round(CFG.auditRefPct*100)), team:eur(r.team), min:eur(CFG.auditRefMin), max:eur(CFG.auditRefMax)}), tag:"ref", amt:r.audit});
+    var rowsC = [{key:"time", label:tr("timeLabel"), note:tr("timeNote",{p:pct(r.rec), loss:eur(r.lossToday), n:group(r.people), pl:peopleW(r.people), team:eur(r.team)}), tag:"est", amt:r.time}];
+    var rowsD = state.revOn ? [{key:"extra", label:tr("extraLabel"), note:tr("extraNote",{p:pct(r.uplift), x:eur(r.calls)}), tag:"est", amt:r.extra}] : [];
 
     function row(x){ return '<tr><td>'+x.label+'<span class="tag '+x.tag+'">'+TAG[x.tag]+'</span><span class="note">'+x.note+'</span></td><td class="amt">'+eur(x.amt)+'</td></tr>'; }
     var hasB = rowsB.length>0;
@@ -1351,13 +1238,6 @@
     tbl.innerHTML = html;
 
     var all = rowsA.concat(rowsB, rowsC, rowsD);
-    var segs = all.filter(function(s){return s.amt>0;});
-    var scale = Math.max(r.benefits, r.cost, 1);
-    $("barBen").innerHTML = segs.map(function(s){ return '<i title="'+s.label+': '+eur(s.amt)+'" style="width:'+(s.amt/scale*100).toFixed(3)+'%;background:'+COLORS[s.key]+'"></i>'; }).join("");
-    $("barCost").innerHTML = '<i title="'+tr("costBar",{x:eur(r.cost)})+'" style="width:'+(r.cost/scale*100).toFixed(3)+'%;background:#FF6B5B"></i>';
-    $("capBen").textContent = eur(r.benefits); $("capCost").textContent = eur(r.cost);
-    $("legend").innerHTML = segs.map(function(s){ return '<span><s style="background:'+COLORS[s.key]+'"></s>'+s.short+' '+eur(s.amt)+'</span>'; }).join("");
-
     var sumRows = all.reduce(function(a,s){return a+s.amt;},0);
     var okTools = r.subst!==100 || r.tools===r.subM*12;
     var ok = sumRows===r.benefits && r.save+r.earn===r.benefits && r.tools+r.audit+r.time===r.save && r.benefits-r.cost===r.net && okTools;
@@ -1525,14 +1405,15 @@
       navigator.clipboard.writeText(url).then(function(){ msg(tr("copied")); }, function(){ window.prompt(tr("copyPrompt"), url); });
     } else window.prompt(tr("copyPrompt"), url);
   });
-  $("pdfBtn").addEventListener("click", function(){ window.print(); });
-  $("closeBtn").addEventListener("click", function(){ track("calc_cta_click", false, "result"); });
+  $("pdfBtn").addEventListener("click", function(){ var f = $("foldBox"), was = f.open; f.open = true; window.print(); f.open = was; });
+  $("ctaBtn").addEventListener("click", function(){ track("calc_cta_click"); });
+  $("ctaAltLink").addEventListener("click", function(){ track("calc_cta_click"); });
   /* "Ir a mi cálculo": baja suavemente hasta el resultado (sin ensuciar la barra de direcciones con un #) */
   $("videoSkip").addEventListener("click", function(e){
     e.preventDefault(); track("calc_video_skip");
-    $("resultTop").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
+    $("foldBox").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
   });
-  $("stickyBar").addEventListener("click", function(){ track("calc_cta_click", false, "sticky"); });
+  $("stickyBtn").addEventListener("click", function(){ track("calc_sticky_click"); });
 
   $("leadForm").addEventListener("submit", function(e){
     e.preventDefault();
@@ -1766,7 +1647,7 @@
       rec:x.rec, uplift:x.uplift, upliftSet:false, subst:100, plan:"monthly", audOn:true, revOn:true});
     syncControls();
     goto(LAST);
-    var r = $("resultTop"); if(r && r.scrollIntoView) r.scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
+    var r = $("netCard"); if(r && r.scrollIntoView) r.scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
   }
 
   window.__fivoCompute = compute;   /* expuestos para pruebas */
