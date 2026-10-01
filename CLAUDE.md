@@ -24,7 +24,7 @@ Calculadora web (ES/EN) que estima el beneficio neto anual que deja Fivo (fivo.a
 - `compute(state)`: única fuente de cifras (enteros, no depende del idioma).
 - `render()` y `renderTable()` pintan resultado, desglose, barras y comprobación de cuadre.
 - Formato por idioma: `eur()`, `pct()`, `dec()` (ES `17.301 €` / EN `€17,301`).
-- Estado en la URL (`#c=...`) para compartir el cálculo; idioma en `localStorage`.
+- La barra de direcciones se mantiene limpia: el estado (`#c=...`) solo se genera al pulsar "Copiar enlace con mi cálculo" (`shareLink()`) o al enviar el formulario/demo. Al abrir un enlace con `#c=...` se lee el estado y se borra el hash; los enlaces antiguos siguen funcionando. Idioma en `localStorage`.
 
 ## Modelo de cálculo
 Beneficio neto = herramientas (Loom + otras, × % sustituido) + auditorías (coach + analista, si se activan) + tiempo recuperado (gasto del equipo × 20 % × % recuperado, por defecto 25 %) + ventas extra (ingresos por llamadas × % de mejora, si se activa) − coste de Fivo (personas × precio mensual × 12; Business 39,99 €/mes o ≈ 29,99 €/mes en anual).

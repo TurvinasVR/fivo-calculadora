@@ -907,7 +907,6 @@
     var hash = encode();
     $("salesBtn").href = CFG.contactUrl + "#" + hash;
     $("salesBtn2").href = CFG.contactUrl + "#" + hash;
-    try{ history.replaceState(null,"","#"+hash); }catch(e){}
 
     if(state.step!==3 || !r.ready){ renderTable(r, null); return r; }
 
@@ -1099,8 +1098,10 @@
   });
 
   function msg(t, bad){ var m=$("msg"); m.textContent=t; m.style.color = bad ? "#FF8A7A" : "#3DDC97"; }
+  /* Enlace con el cálculo: se genera solo al copiar o enviar; la barra de direcciones se mantiene limpia */
+  function shareLink(){ return location.origin + location.pathname + location.search + "#" + encode(); }
   $("copyBtn").addEventListener("click", function(){
-    var url = location.href;
+    var url = shareLink();
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(url).then(function(){ msg(tr("copied")); }, function(){ window.prompt(tr("copyPrompt"), url); });
     } else window.prompt(tr("copyPrompt"), url);
@@ -1114,7 +1115,7 @@
     var r = compute(state);
     if(!r.ready){ msg(tr("needData"), true); return; }
     var payload = { email:email, lang:LANG, hp:$("hp").value, source:"calculadora-ahorro", inputs:state, results:{
-      tools:r.tools, audit:r.audit, value:r.value, benefits:r.benefits, cost:r.cost, net:r.net }, link:location.href };
+      tools:r.tools, audit:r.audit, value:r.value, benefits:r.benefits, cost:r.cost, net:r.net }, link:shareLink() };
     if(CFG.leadEndpoint){
       fetch(CFG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
         .then(function(res){ if(!res.ok) throw 0; msg(tr("sent",{email:email})); })
@@ -1131,6 +1132,7 @@
   window.__fivoCompute = compute;   /* expuestos para pruebas */
   window.__fivoSetLang = setLang;
   var fromLink = decode();
+  if(fromLink){ try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){} }  /* estado ya leído: barra limpia */
   var lang0 = initialLang(fromLink);
   LANG = lang0; state.lang = lang0;
   document.documentElement.lang = lang0;
