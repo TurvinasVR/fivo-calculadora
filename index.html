@@ -286,6 +286,24 @@
   .input.off{opacity:.45}
   @media (max-width:560px){ .two{grid-template-columns:minmax(0,1fr)} .choices.tiers{grid-template-columns:minmax(0,1fr)} }
 
+  /* ---------- Resultado: dos cifras, mensaje de precio, vídeo y cierre ---------- */
+  .dual{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:8px 0 6px}
+  .dual.one{grid-template-columns:minmax(0,1fr)}
+  .dual>div{min-width:0}
+  .dual .dl{display:block;font-family:var(--font-head);font-size:17px;font-weight:500}
+  .dual .big{font-size:clamp(36px,5.2vw,62px);margin:4px 0 0}
+  .dual .dy{display:block;font-size:14.5px;margin-top:6px;opacity:.95}
+  .hero-net .per{margin-top:18px;font-size:15.5px}
+  .price-msg{margin:18px 0 0;padding:13px 16px;border-radius:14px;background:rgba(0,0,0,.3);font-size:15px;font-weight:500;line-height:1.45}
+  .optline{margin:14px 0 0;font-size:14px;color:#fff;line-height:1.5}
+  .vid-sec{margin:34px 0 0}
+  .vid-sec h2{font-family:var(--font-head);text-align:center;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.015em;margin:0 0 18px;font-weight:600}
+  .vid{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r-card);overflow:hidden;background:#000;border:1px solid var(--line)}
+  .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .closebox{position:relative;overflow:hidden;margin:34px 0 0;border-radius:var(--r-card);background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;padding:38px 28px;text-align:center}
+  .closebox h2{font-family:var(--font-head);font-size:clamp(22px,3.2vw,34px);letter-spacing:-.02em;line-height:1.2;margin:0 auto 22px;max-width:760px;font-weight:600}
+  @media (max-width:560px){ .dual{gap:12px} .dual .big{font-size:clamp(28px,9vw,38px)} .dual .dl{font-size:15px} .closebox{padding:30px 20px} }
+
   /* Revelación orquestada */
   .go .rv{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
   .go .rv.d1{animation-delay:.9s}.go .rv.d2{animation-delay:1.1s}.go .rv.d3{animation-delay:1.3s}.go .rv.d4{animation-delay:1.5s}
@@ -394,7 +412,7 @@
   @media print{
     :root{--bg:#fff;--card:#fff;--line:#d8dde6;--ink:#0C1A33;--muted:#4a5568;--label:#2d3748;--ph:#5b6b86}
     body{background:#fff;color:#0C1A33}
-    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,.cta-wrap,footer,.cta-row,.free-note,.seg,.tune,.steps,.method,.sources,#leadCard,.faq,.assure{display:none!important}
+    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,.cta-wrap,footer,.cta-row,.free-note,.seg,.tune,.steps,.method,.sources,#leadCard,.faq,.assure,.vid-sec,.closebox{display:none!important}
     .wrap{padding:0}
     .card,.tile{background:#fff;border-color:#d8dde6}
     .tile b,.sumstrip b{-webkit-text-fill-color:#296BDC;color:#296BDC;background:none}
@@ -550,8 +568,11 @@
 <div class="res">
 <div class="stack">
 <div class="hero-net" id="netCard">
-<p class="k" data-i18n="s038">Tu beneficio neto estimado con Fivo</p>
-<p class="big" id="netBig">—</p>
+<p class="k" data-i18n="r001">Cuánto te ahorrarías y cuánto más ganarías con Fivo</p>
+<div class="dual" id="dual">
+<div><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
+<div id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
+</div>
 <p class="per rv d1" id="netPer"></p>
 <p class="inv rv d1" id="inv"></p><p class="how rv d1"><a data-i18n="n005" href="#desglose">Ver cómo se calcula</a></p>
 <div class="eq rv d2">
@@ -559,6 +580,7 @@
 <div><span data-i18n="s040">− Inversión en Fivo</span><b id="mCost">—</b><small id="mCostSub"></small></div>
 <div><span data-i18n="s041">Recuperas por cada 1 € invertido</span><b id="mRoi">—</b></div>
 </div>
+<p class="price-msg rv d2" id="priceMsg"></p>
 <div class="bill rv d2">
 <div class="bill-l">
 <span class="t" data-i18n="s042">Facturación · Plan Business, el más vendido</span>
@@ -570,11 +592,6 @@
 </div>
 </div>
 <p class="bill-note rv d2" id="billNote"></p>
-<div class="cta-row rv d3">
-<a class="btn btn-white btn-rect" href="https://app.fivo.ai/es/auth/register"><span data-i18n="s046">Prueba 7 días gratis</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-<a class="btn btn-black btn-rect" data-i18n="s047" href="https://fivo.ai/contact" id="salesBtn">Reservar demo con mis números</a>
-</div>
-<p class="free-note rv d3" data-i18n="s048">¿Prefieres ir paso a paso? También tienes el plan Free.</p>
 </div>
 <div class="tiles rv d4">
 <div class="tile"><b id="tPay">—</b><span data-i18n="s049">para que Fivo se pague solo (estimado)</span></div>
@@ -597,6 +614,7 @@
 <p class="n" id="lossN">—</p>
 <p id="lossTxt"></p>
 <p class="back" id="lossBack"></p>
+<p class="optline" data-i18n="r010" hidden="" id="optLine">Fivo te enseña dónde se pierden tiempo y ventas en cada departamento.</p>
 </div>
 <div class="card" id="leadCard">
 <h2 data-i18n="s056">Llévate tu cálculo</h2>
@@ -641,6 +659,14 @@
 </div>
 </details>
 </div>
+</div>
+<section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
+<h2 data-i18n="r020" id="t-vid">Mira cómo Fivo lo hace</h2>
+<div class="vid"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" id="videoFrame" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Fivo"></iframe></div>
+</section>
+<div class="closebox" hidden="" id="closeBox">
+<h2 id="closeTitle"></h2>
+<a class="btn btn-white btn-rect" href="#" id="closeBtn"></a>
 </div>
 </section>
 </main>
@@ -725,6 +751,9 @@
     maxAvgPerson: 120000,
     leadEndpoint: "",  // "" = sin formulario de email (GitHub Pages no ejecuta PHP). Con PHP: "lead.php" → reenvía al webhook de lead-config.php
     contactUrl: "https://fivo.ai/contact",
+    callUrl: "https://fivo.ai/contact",                       // "Reservar llamada" (variante A del cierre); se le añaden los números y los utm
+    registerUrl: "https://app.fivo.ai/{lang}/auth/register",  // "Prueba 7 días gratis"
+    videoUrl: "",   // ← AQUÍ la dirección del vídeo (YouTube, Vimeo o Loom: vale la de compartir o la de insertar). Vacío = el apartado no se muestra.
     defaultLang: "es",
     storageKey: "fivo-calc-lang",
     /* Banda de logos superior. Para cambiar un logo, edita su url o su nombre. Confirma que cada empresa autoriza mostrar su logo. */
@@ -743,7 +772,7 @@
   /* ============ TEXTOS ============
      STATIC: textos del HTML (clave → texto). Se aplican con data-i18n, data-i18n-ph y data-i18n-aria.
      D: textos que genera el cálculo. Usan {variables}. */
-  var STATIC = {"es":{"s001":"Fivo","s002":"SOLUCIONES","s003":"PRECIOS","s004":"CONTACTAR VENTAS","s005":"Iniciar sesión","s006":"Empieza gratis","s008":"Calcula en 1 minuto el beneficio neto que te deja Fivo cada año","s009":"Invertir en herramientas que optimizan tu tiempo no es un gasto; es una inversión. Compruébalo con tus propios números: sin registrarte y con cada cifra explicada.","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s015":"Empecemos por tu empresa","s016":"Con cuatro datos tienes tu primera cifra. Todo en euros al año.","s017":"Personas que usarían Fivo","s018":"personas","s019":"Gasto anual","s020":"salarios y cargas de todo el equipo","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas que cerráis por llamadas y reuniones. Solo cuenta si activas la mejora de ventas.","s023":"Continuar","s024":"Cuéntanos cómo vendéis","s025":"Tres preguntas rápidas para ajustar la estimación de ventas.","s036":"Atrás","s037":"Ver mi resultado","s038":"Tu beneficio neto estimado con Fivo","s039":"Valor que recuperas","s040":"− Inversión en Fivo","s041":"Recuperas por cada 1 € invertido","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s046":"Prueba 7 días gratis","s047":"Reservar demo con mis números","s048":"¿Prefieres ir paso a paso? También tienes el plan Free.","s049":"para que Fivo se pague solo (estimado)","s050":"es lo que dejas de ganar cada día que lo aplazas","s051":"de beneficio neto cada mes","s052":"De dónde sale tu beneficio","s053":"Mismas cifras que el desglose de abajo.","s054":"Inversión en Fivo","s055":"Sin memoria compartida, hoy tu equipo pierde","s056":"Comparte tu cálculo","s057":"Copia el enlace o descárgalo en PDF para enseñárselo a quien decide la compra.","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"Cambiar mis datos","s071":"Cada euro, explicado","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s073":"Lo que dejas de pagar","s074":"Loom y otras herramientas son tus cifras, sin retoques. El coach y el analista son una referencia de lo que costaría contratar ese análisis y solo cuentan si los activas. Fivo lo hace de forma continua con tus reuniones.","s075":"El tiempo que recuperas","s076":"Según McKinsey Global Institute, los trabajadores del conocimiento dedican cerca del 20 % de la semana a buscar información interna. Estimamos que Fivo te devuelve una parte (25 % por defecto) y la valoramos al coste de las personas que lo usan. Puedes bajar ese porcentaje cuando quieras.","s077":"Lo que pagas por Fivo","s078":"Plan Business, el más vendido: 39,99 € por usuario y mes, con IA ilimitada y funciones avanzadas. Con facturación anual, la página de precios indica un 25 % de ahorro (el importe exacto puede variar). Si necesitas más, existe un plan Enterprise personalizado.","s079":"Fuentes: McKinsey Global Institute, «The social economy» (2012). Precios públicos de Loom (Business ≈ 15–18 $ por usuario y mes) y de Fivo (fivo.ai/pricing). El porcentaje de tiempo recuperado y la mejora de ventas son estimaciones que puedes ajustar; los resultados reales dependen de cada equipo.","s081":"Construye memoria. Decide mejor.","s082":"Tu equipo ya genera el conocimiento. Fivo lo convierte en memoria que no se pierde. Prueba 7 días gratis o repasamos tus números juntos en una demo.","s083":"Reservar demo","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s088":"Tu beneficio neto estimado","s089":"Probar gratis","s090":"Principal","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s104":"Cómo se calcula","s105":"Legal","s106":"Calculadora de ROI de Fivo: tu beneficio neto al año | Fivo.ai","s107":"Calcula en 1 minuto el beneficio neto que te deja Fivo: herramientas que dejas de pagar, análisis que te ahorras y tiempo que recupera tu equipo. Sin registro.","n001":"Sin registro","n002":"Resultado en 1 minuto","n003":"Cada cifra, explicada","n004":"Al enviarlo aceptas la","n005":"Ver cómo se calcula","n006":"Preguntas frecuentes","n007":"¿Cómo se calcula mi beneficio neto?","n008":"Sumamos lo que dejas de pagar en herramientas (tus cifras) y el tiempo que recupera tu equipo. Si las activas, añadimos también las auditorías externas y la mejora de ventas. Después restamos lo que pagas por Fivo. El desglose muestra cada línea.","n009":"¿Qué parte son mis datos y cuál son estimaciones?","n010":"El ahorro en Loom y otras herramientas son tus cifras. El tiempo recuperado y la mejora de ventas son estimaciones: cada una va marcada como tal y puedes bajarla o desactivarla en «Pon a prueba los supuestos».","n011":"¿Cuánto cuesta Fivo?","n012":"El plan Business, el más vendido, cuesta 39,99 € por usuario y mes. Con facturación anual hay un 25 % de ahorro. También existe un plan Free y un plan Enterprise personalizado.","n013":"¿Puedo probar Fivo antes de pagar?","n014":"Sí. Puedes probarlo 7 días gratis, y también existe el plan Free.","n015":"¿Qué es Fivo exactamente?","n016":"Fivo captura cómo trabajan realmente los equipos —reuniones, grabaciones de pantalla, decisiones— y lo transforma en memoria organizacional: el activo más valioso que una empresa acumula con el tiempo.","n017":"¿Qué pasa con los datos que introduzco?","n018":"El cálculo se hace en tu navegador. Solo compartimos tus cifras si reservas una demo.","title":"Calculadora de ROI de Fivo: tu beneficio neto al año | Fivo.ai","metaDesc":"Calcula en 1 minuto el beneficio neto que te deja Fivo: herramientas que dejas de pagar, análisis que te ahorras y tiempo que recupera tu equipo. Sin registro.","w001":"Empresas que usan Fivo","w010":"Tus ventas","w011":"Sector","w012":"Elige tu sector","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales (venden o hablan con clientes por llamada)","w025":"Resto del equipo","w026":"Cuenta a todas las personas que usarían Fivo.","w032":"¿Grabáis y revisáis hoy las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa para vender más y ser más productivo con menos equipo?","w040":"Quizá","w041":"Ahora, tus herramientas","w042":"Lo que pagas hoy por las aplicaciones de tu empresa y por lo que Fivo reemplazaría.","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación de pantalla, transcripción o notas de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías."},"en":{"s001":"Fivo","s002":"SOLUTIONS","s003":"PRICING","s004":"CONTACT SALES","s005":"Log in","s006":"Start for free","s008":"Calculate in 1 minute the net profit Fivo brings you every year","s009":"Investing in tools that optimize your time isn't an expense; it's an investment. Check it with your own numbers: no sign-up, and every figure explained.","s012":"Your company","s013":"Your tools","s014":"Your result","s015":"Let's start with your company","s016":"Four numbers are enough for a first figure. Everything in euros per year.","s017":"People who would use Fivo","s018":"people","s019":"Annual cost","s020":"salaries and payroll costs of the whole team","s021":"Approx. annual revenue","s022":"What the sales you close through calls and meetings generate per year. Only counts if you turn on the sales improvement.","s023":"Continue","s024":"Tell us how you sell","s025":"Three quick questions to fine-tune the sales estimate.","s036":"Back","s037":"See my result","s038":"Your estimated net profit with Fivo","s039":"Value you recover","s040":"− Fivo investment","s041":"You recover for every €1 invested","s042":"Billing · Business plan, the best seller","s043":"Monthly","s044":"Annual","s045":"SAVE 25%","s046":"Try free for 7 days","s047":"Book a demo with my numbers","s048":"Prefer to take it step by step? There's also a Free plan.","s049":"to earn back what you pay for Fivo (estimate)","s050":"is what waiting costs you every day","s051":"in net profit every month","s052":"Where your profit comes from","s053":"Same figures as the breakdown below.","s054":"Fivo investment","s055":"Without shared memory, your team loses today","s056":"Share your calculation","s057":"Copy the link or download it as a PDF to show whoever signs off on the purchase.","s058":"Email me my report","s059":"Copy link to my calculation","s060":"Download PDF","s061":"Stress-test the assumptions","s062":"They start at reasonable values. Lower them or switch off the extras and see how much still holds.","s063":"Search time you recover","s064":"Include the sales improvement","s065":"It's an assumption: better call follow-up and fewer missed opportunities.","s066":"Improvement on your call revenue","s067":"Tools that Fivo replaces","s070":"Change my data","s071":"Every euro, explained","s072":"Every line adds up to its subtotal and the total. Your data appears exactly as you enter it, and estimates are labeled as such.","s073":"What you stop paying for","s074":"Loom and other tools are your own figures, untouched. The coach and the analyst are a reference for what that analysis would cost to hire, and only count if you turn them on. Fivo does it continuously from your meetings.","s075":"The time you recover","s076":"According to McKinsey Global Institute, knowledge workers spend about 20% of the week searching for internal information. We estimate Fivo gives back a share of it (25% by default) and value it at the cost of the people who use it. You can lower that percentage whenever you like.","s077":"What you pay for Fivo","s078":"Business plan, the best seller: €39.99 per user per month, with unlimited AI and advanced features. With annual billing, the pricing page shows a 25% saving (the exact amount may vary). If you need more, there is a custom Enterprise plan.","s079":"Sources: McKinsey Global Institute, “The social economy” (2012). Public prices of Loom (Business ≈ $15–18 per user per month) and Fivo (fivo.ai/pricing). The share of time recovered and the sales improvement are estimates you can adjust; actual results depend on each team.","s081":"Build memory. Decide better.","s082":"Your team already creates the knowledge. Fivo turns it into memory that doesn't get lost. Try it free for 7 days, or we'll go over your numbers together in a demo.","s083":"Book a demo","s084":"Copyright 2026 Fivo AI. All rights reserved","s085":"Privacy Policy","s086":"Security Policy","s087":"Terms of Service","s088":"Your estimated net profit","s089":"Try free","s090":"Main","s092":"Progress","s093":"Number of people","s094":"Annual cost","s095":"Annual revenue","s098":"Fivo billing","s099":"you@company.com","s100":"Email","s101":"Percentage of search time you recover","s102":"Improvement in call revenue","s103":"Percentage of tools replaced","s104":"How it is calculated","s105":"Legal","s106":"Fivo ROI calculator: your annual net profit | Fivo.ai","s107":"Calculate in 1 minute the net profit Fivo brings you: tools you stop paying for, analysis you save and time your team recovers. No sign-up.","n001":"No sign-up","n002":"Result in 1 minute","n003":"Every figure explained","n004":"By submitting, you agree to the","n005":"See how it's calculated","n006":"Frequently asked questions","n007":"How is my net profit calculated?","n008":"We add what you stop paying for tools (your figures) and the time your team recovers. If you turn them on, we also add external audits and the sales improvement. Then we subtract what you pay for Fivo. The breakdown shows every line.","n009":"Which part is my data and which are estimates?","n010":"The savings on Loom and other tools are your own figures. The time recovered and the sales improvement are estimates: each one is labeled as such, and you can lower or switch it off under “Stress-test the assumptions”.","n011":"How much does Fivo cost?","n012":"The Business plan, the best seller, costs €39.99 per user per month. Annual billing saves 25%. There is also a Free plan and a custom Enterprise plan.","n013":"Can I try Fivo before paying?","n014":"Yes. You can try it free for 7 days, and there is also a Free plan.","n015":"What exactly is Fivo?","n016":"Fivo captures how teams really work (meetings, screen recordings, decisions) and turns it into organizational memory: the most valuable asset a company builds over time.","n017":"What happens to the data I enter?","n018":"The calculation runs in your browser. We only share your figures if you book a demo.","title":"Fivo ROI calculator: your annual net profit | Fivo.ai","metaDesc":"Calculate in 1 minute the net profit Fivo brings you: tools you stop paying for, analysis you save and time your team recovers. No sign-up.","w001":"Companies that use Fivo","w010":"Your sales","w011":"Industry","w012":"Choose your industry","w013":"Technology and software","w014":"Professional services and consulting","w015":"Agency or marketing","w016":"Real estate","w017":"Insurance and finance","w018":"Healthcare","w019":"Education and training","w020":"Industry and construction","w021":"Retail and e-commerce","w022":"Other","w023":"My team members","w024":"Sales reps (they sell or talk to customers by phone)","w025":"Rest of the team","w026":"Count everyone who would use Fivo.","w032":"Do you record and review your sales calls today?","w033":"No","w034":"Sometimes","w035":"Yes, always","w036":"Do you have outside consultants or agencies that review your sales calls or processes?","w037":"Yes","w038":"How much do you spend on them per year?","w039":"Do you think someone should optimize every department in your company so you can sell more and be more productive with a smaller team?","w040":"Maybe","w041":"Now, your tools","w042":"What you pay today for your company's apps and for what Fivo would replace.","w043":"How much do you spend per month on apps for your company?","w044":"€ per month","w045":"How much of that is on screen recording, transcription or meeting notes (Loom, Otter, Fireflies…)?","w046":"I don't know","w047":"Monthly spend","w050":"Include the external analysis","w051":"What hiring consultants or an outside analysis would cost. Fivo does it continuously from your meetings. Turn it off if you wouldn't hire it."}};
+  var STATIC = {"es":{"s001":"Fivo","s002":"SOLUCIONES","s003":"PRECIOS","s004":"CONTACTAR VENTAS","s005":"Iniciar sesión","s006":"Empieza gratis","s008":"Calcula en 1 minuto el beneficio neto que te deja Fivo cada año","s009":"Invertir en herramientas que optimizan tu tiempo no es un gasto; es una inversión. Compruébalo con tus propios números: sin registrarte y con cada cifra explicada.","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s015":"Empecemos por tu empresa","s016":"Con cuatro datos tienes tu primera cifra. Todo en euros al año.","s017":"Personas que usarían Fivo","s018":"personas","s019":"Gasto anual","s020":"salarios y cargas de todo el equipo","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas que cerráis por llamadas y reuniones. Solo cuenta si activas la mejora de ventas.","s023":"Continuar","s024":"Cuéntanos cómo vendéis","s025":"Tres preguntas rápidas para ajustar la estimación de ventas.","s036":"Atrás","s037":"Ver mi resultado","s039":"Valor que recuperas","s040":"− Inversión en Fivo","s041":"Recuperas por cada 1 € invertido","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s046":"Prueba 7 días gratis","s049":"para que Fivo se pague solo (estimado)","s050":"es lo que dejas de ganar cada día que lo aplazas","s051":"de beneficio neto cada mes","s052":"De dónde sale tu beneficio","s053":"Mismas cifras que el desglose de abajo.","s054":"Inversión en Fivo","s055":"Sin memoria compartida, hoy tu equipo pierde","s056":"Comparte tu cálculo","s057":"Copia el enlace o descárgalo en PDF para enseñárselo a quien decide la compra.","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"Cambiar mis datos","s071":"Cada euro, explicado","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s073":"Lo que dejas de pagar","s074":"Loom y otras herramientas son tus cifras, sin retoques. El coach y el analista son una referencia de lo que costaría contratar ese análisis y solo cuentan si los activas. Fivo lo hace de forma continua con tus reuniones.","s075":"El tiempo que recuperas","s076":"Según McKinsey Global Institute, los trabajadores del conocimiento dedican cerca del 20 % de la semana a buscar información interna. Estimamos que Fivo te devuelve una parte (25 % por defecto) y la valoramos al coste de las personas que lo usan. Puedes bajar ese porcentaje cuando quieras.","s077":"Lo que pagas por Fivo","s078":"Plan Business, el más vendido: 39,99 € por usuario y mes, con IA ilimitada y funciones avanzadas. Con facturación anual, la página de precios indica un 25 % de ahorro (el importe exacto puede variar). Si necesitas más, existe un plan Enterprise personalizado.","s079":"Fuentes: McKinsey Global Institute, «The social economy» (2012). Precios públicos de Loom (Business ≈ 15–18 $ por usuario y mes) y de Fivo (fivo.ai/pricing). El porcentaje de tiempo recuperado y la mejora de ventas son estimaciones que puedes ajustar; los resultados reales dependen de cada equipo.","s081":"Construye memoria. Decide mejor.","s082":"Tu equipo ya genera el conocimiento. Fivo lo convierte en memoria que no se pierde. Prueba 7 días gratis o repasamos tus números juntos en una demo.","s083":"Reservar demo","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s088":"Tu beneficio neto estimado","s089":"Probar gratis","s090":"Principal","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s104":"Cómo se calcula","s105":"Legal","s106":"Calculadora de ROI de Fivo: tu beneficio neto al año | Fivo.ai","s107":"Calcula en 1 minuto el beneficio neto que te deja Fivo: herramientas que dejas de pagar, análisis que te ahorras y tiempo que recupera tu equipo. Sin registro.","n001":"Sin registro","n002":"Resultado en 1 minuto","n003":"Cada cifra, explicada","n004":"Al enviarlo aceptas la","n005":"Ver cómo se calcula","n006":"Preguntas frecuentes","n007":"¿Cómo se calcula mi beneficio neto?","n008":"Sumamos lo que dejas de pagar en herramientas (tus cifras) y el tiempo que recupera tu equipo. Si las activas, añadimos también las auditorías externas y la mejora de ventas. Después restamos lo que pagas por Fivo. El desglose muestra cada línea.","n009":"¿Qué parte son mis datos y cuál son estimaciones?","n010":"El ahorro en Loom y otras herramientas son tus cifras. El tiempo recuperado y la mejora de ventas son estimaciones: cada una va marcada como tal y puedes bajarla o desactivarla en «Pon a prueba los supuestos».","n011":"¿Cuánto cuesta Fivo?","n012":"El plan Business, el más vendido, cuesta 39,99 € por usuario y mes. Con facturación anual hay un 25 % de ahorro. También existe un plan Free y un plan Enterprise personalizado.","n013":"¿Puedo probar Fivo antes de pagar?","n014":"Sí. Puedes probarlo 7 días gratis, y también existe el plan Free.","n015":"¿Qué es Fivo exactamente?","n016":"Fivo captura cómo trabajan realmente los equipos —reuniones, grabaciones de pantalla, decisiones— y lo transforma en memoria organizacional: el activo más valioso que una empresa acumula con el tiempo.","n017":"¿Qué pasa con los datos que introduzco?","n018":"El cálculo se hace en tu navegador. Solo compartimos tus cifras si reservas una demo.","title":"Calculadora de ROI de Fivo: tu beneficio neto al año | Fivo.ai","metaDesc":"Calcula en 1 minuto el beneficio neto que te deja Fivo: herramientas que dejas de pagar, análisis que te ahorras y tiempo que recupera tu equipo. Sin registro.","w001":"Empresas que usan Fivo","w010":"Tus ventas","w011":"Sector","w012":"Elige tu sector","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales (venden o hablan con clientes por llamada)","w025":"Resto del equipo","w026":"Cuenta a todas las personas que usarían Fivo.","w032":"¿Grabáis y revisáis hoy las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa para vender más y ser más productivo con menos equipo?","w040":"Quizá","w041":"Ahora, tus herramientas","w042":"Lo que pagas hoy por las aplicaciones de tu empresa y por lo que Fivo reemplazaría.","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación de pantalla, transcripción o notas de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Cuánto te ahorrarías y cuánto más ganarías con Fivo","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r010":"Fivo te enseña dónde se pierden tiempo y ventas en cada departamento.","r020":"Mira cómo Fivo lo hace"},"en":{"s001":"Fivo","s002":"SOLUTIONS","s003":"PRICING","s004":"CONTACT SALES","s005":"Log in","s006":"Start for free","s008":"Calculate in 1 minute the net profit Fivo brings you every year","s009":"Investing in tools that optimize your time isn't an expense; it's an investment. Check it with your own numbers: no sign-up, and every figure explained.","s012":"Your company","s013":"Your tools","s014":"Your result","s015":"Let's start with your company","s016":"Four numbers are enough for a first figure. Everything in euros per year.","s017":"People who would use Fivo","s018":"people","s019":"Annual cost","s020":"salaries and payroll costs of the whole team","s021":"Approx. annual revenue","s022":"What the sales you close through calls and meetings generate per year. Only counts if you turn on the sales improvement.","s023":"Continue","s024":"Tell us how you sell","s025":"Three quick questions to fine-tune the sales estimate.","s036":"Back","s037":"See my result","s039":"Value you recover","s040":"− Fivo investment","s041":"You recover for every €1 invested","s042":"Billing · Business plan, the best seller","s043":"Monthly","s044":"Annual","s045":"SAVE 25%","s046":"Try free for 7 days","s049":"to earn back what you pay for Fivo (estimate)","s050":"is what waiting costs you every day","s051":"in net profit every month","s052":"Where your profit comes from","s053":"Same figures as the breakdown below.","s054":"Fivo investment","s055":"Without shared memory, your team loses today","s056":"Share your calculation","s057":"Copy the link or download it as a PDF to show whoever signs off on the purchase.","s058":"Email me my report","s059":"Copy link to my calculation","s060":"Download PDF","s061":"Stress-test the assumptions","s062":"They start at reasonable values. Lower them or switch off the extras and see how much still holds.","s063":"Search time you recover","s064":"Include the sales improvement","s065":"It's an assumption: better call follow-up and fewer missed opportunities.","s066":"Improvement on your call revenue","s067":"Tools that Fivo replaces","s070":"Change my data","s071":"Every euro, explained","s072":"Every line adds up to its subtotal and the total. Your data appears exactly as you enter it, and estimates are labeled as such.","s073":"What you stop paying for","s074":"Loom and other tools are your own figures, untouched. The coach and the analyst are a reference for what that analysis would cost to hire, and only count if you turn them on. Fivo does it continuously from your meetings.","s075":"The time you recover","s076":"According to McKinsey Global Institute, knowledge workers spend about 20% of the week searching for internal information. We estimate Fivo gives back a share of it (25% by default) and value it at the cost of the people who use it. You can lower that percentage whenever you like.","s077":"What you pay for Fivo","s078":"Business plan, the best seller: €39.99 per user per month, with unlimited AI and advanced features. With annual billing, the pricing page shows a 25% saving (the exact amount may vary). If you need more, there is a custom Enterprise plan.","s079":"Sources: McKinsey Global Institute, “The social economy” (2012). Public prices of Loom (Business ≈ $15–18 per user per month) and Fivo (fivo.ai/pricing). The share of time recovered and the sales improvement are estimates you can adjust; actual results depend on each team.","s081":"Build memory. Decide better.","s082":"Your team already creates the knowledge. Fivo turns it into memory that doesn't get lost. Try it free for 7 days, or we'll go over your numbers together in a demo.","s083":"Book a demo","s084":"Copyright 2026 Fivo AI. All rights reserved","s085":"Privacy Policy","s086":"Security Policy","s087":"Terms of Service","s088":"Your estimated net profit","s089":"Try free","s090":"Main","s092":"Progress","s093":"Number of people","s094":"Annual cost","s095":"Annual revenue","s098":"Fivo billing","s099":"you@company.com","s100":"Email","s101":"Percentage of search time you recover","s102":"Improvement in call revenue","s103":"Percentage of tools replaced","s104":"How it is calculated","s105":"Legal","s106":"Fivo ROI calculator: your annual net profit | Fivo.ai","s107":"Calculate in 1 minute the net profit Fivo brings you: tools you stop paying for, analysis you save and time your team recovers. No sign-up.","n001":"No sign-up","n002":"Result in 1 minute","n003":"Every figure explained","n004":"By submitting, you agree to the","n005":"See how it's calculated","n006":"Frequently asked questions","n007":"How is my net profit calculated?","n008":"We add what you stop paying for tools (your figures) and the time your team recovers. If you turn them on, we also add external audits and the sales improvement. Then we subtract what you pay for Fivo. The breakdown shows every line.","n009":"Which part is my data and which are estimates?","n010":"The savings on Loom and other tools are your own figures. The time recovered and the sales improvement are estimates: each one is labeled as such, and you can lower or switch it off under “Stress-test the assumptions”.","n011":"How much does Fivo cost?","n012":"The Business plan, the best seller, costs €39.99 per user per month. Annual billing saves 25%. There is also a Free plan and a custom Enterprise plan.","n013":"Can I try Fivo before paying?","n014":"Yes. You can try it free for 7 days, and there is also a Free plan.","n015":"What exactly is Fivo?","n016":"Fivo captures how teams really work (meetings, screen recordings, decisions) and turns it into organizational memory: the most valuable asset a company builds over time.","n017":"What happens to the data I enter?","n018":"The calculation runs in your browser. We only share your figures if you book a demo.","title":"Fivo ROI calculator: your annual net profit | Fivo.ai","metaDesc":"Calculate in 1 minute the net profit Fivo brings you: tools you stop paying for, analysis you save and time your team recovers. No sign-up.","w001":"Companies that use Fivo","w010":"Your sales","w011":"Industry","w012":"Choose your industry","w013":"Technology and software","w014":"Professional services and consulting","w015":"Agency or marketing","w016":"Real estate","w017":"Insurance and finance","w018":"Healthcare","w019":"Education and training","w020":"Industry and construction","w021":"Retail and e-commerce","w022":"Other","w023":"My team members","w024":"Sales reps (they sell or talk to customers by phone)","w025":"Rest of the team","w026":"Count everyone who would use Fivo.","w032":"Do you record and review your sales calls today?","w033":"No","w034":"Sometimes","w035":"Yes, always","w036":"Do you have outside consultants or agencies that review your sales calls or processes?","w037":"Yes","w038":"How much do you spend on them per year?","w039":"Do you think someone should optimize every department in your company so you can sell more and be more productive with a smaller team?","w040":"Maybe","w041":"Now, your tools","w042":"What you pay today for your company's apps and for what Fivo would replace.","w043":"How much do you spend per month on apps for your company?","w044":"€ per month","w045":"How much of that is on screen recording, transcription or meeting notes (Loom, Otter, Fireflies…)?","w046":"I don't know","w047":"Monthly spend","w050":"Include the external analysis","w051":"What hiring consultants or an outside analysis would cost. Fivo does it continuously from your meetings. Turn it off if you wouldn't hire it.","r001":"How much you'd save and how much more you'd earn with Fivo","r002":"You'd save","r003":"You'd earn more","r004":"per year","r010":"Fivo shows you where time and sales are lost in every department.","r020":"See how Fivo does it"}};
 
   var D = {
     es:{
@@ -760,8 +789,13 @@
       sumHave:'<div class="l">Fivo sustituiría<small>{m} al mes de tus {a} al mes en aplicaciones</small></div><b>{y} al año</b>',
       sumNone:'<div class="l">Añade lo que gastas hoy<small>Aunque sea una estimación: así el cálculo es más exacto.</small></div><b>{zero}</b>',
       recEq:"≈ {h} h por persona y semana, sobre el {p} de la semana que se va buscando información.",
-      netPerNeg:"al año, con estos datos. Prueba a ajustar los supuestos o añade más herramientas.",
-      netPerPos:"al año (≈ <b>{m} al mes</b>), ya descontado lo que pagas por Fivo",
+      netPerNeg:"Beneficio neto tras pagar Fivo: <b>{n}</b> al año, con estos datos. Prueba a ajustar los supuestos o añade más herramientas.",
+      netPerPos:"Beneficio neto tras pagar Fivo: <b>{n}</b> al año (≈ {m} al mes)",
+      priceMsg:"Si el precio es lo que te preocupa, que sepas que Fivo cuesta menos de {max} al mes por persona.",
+      closeTitleA:"¿Quieres hacer una llamada para que te lo implementemos en tu empresa? Haz clic aquí",
+      closeBtnA:"Reservar llamada",
+      closeTitleB:"Empieza a usar Fivo ahora",
+      closeBtnB:"Prueba 7 días gratis",
       inv:"Fivo no es un gasto; es una inversión.",
       subM:"pago mensual", subA:"pago anual",
       billM:"{us} × {price} al mes × 12 meses = {cost}",
@@ -825,8 +859,13 @@
       sumHave:'<div class="l">Fivo would replace<small>{m} per month of your {a} per month on apps</small></div><b>{y} per year</b>',
       sumNone:'<div class="l">Add what you spend today<small>Even an estimate helps: it makes the calculation more accurate.</small></div><b>{zero}</b>',
       recEq:"≈ {h} h per person per week, out of the {p} of the week spent searching for information.",
-      netPerNeg:"per year, with this data. Try adjusting the assumptions or adding more tools.",
-      netPerPos:"per year (≈ <b>{m} a month</b>), already net of what you pay for Fivo",
+      netPerNeg:"Net profit after paying for Fivo: <b>{n}</b> per year, with this data. Try adjusting the assumptions or adding more tools.",
+      netPerPos:"Net profit after paying for Fivo: <b>{n}</b> per year (≈ {m} a month)",
+      priceMsg:"If price is what worries you, Fivo costs less than {max} per person per month.",
+      closeTitleA:"Would you like a call so we can set Fivo up in your company? Click here",
+      closeBtnA:"Book a call",
+      closeTitleB:"Start using Fivo now",
+      closeBtnB:"Try free for 7 days",
       inv:"Fivo is not an expense; it's an investment.",
       subM:"monthly billing", subA:"annual billing",
       billM:"{us} × {price} per month × 12 months = {cost}",
@@ -971,14 +1010,70 @@
 
   function renderSeg(){ document.querySelectorAll(".seg button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.plan===state.plan)); }); }
   var counting = false;
-  function countUp(el, to){
-    if(reduced || window.__fivoNoAnim){ el.textContent = eur(to); return; }
+  function countUp(){
+    var r = compute(state), s = $("saveBig"), g = $("earnBig");
+    if(reduced || window.__fivoNoAnim){ s.textContent = eur(r.save); g.textContent = eur(r.earn); return; }
     var t0 = performance.now(), ms = 1100; counting = true;
     (function f(t){
       var k = Math.min(1,(t-t0)/ms), e = 1-Math.pow(1-k,3);
-      if(k<1){ el.textContent = eur(Math.round(to*e)); requestAnimationFrame(f); }
-      else { counting = false; el.textContent = eur(compute(state).net); }
+      if(k<1){ s.textContent = eur(Math.round(r.save*e)); g.textContent = eur(Math.round(r.earn*e)); requestAnimationFrame(f); }
+      else { counting = false; var c = compute(state); s.textContent = eur(c.save); g.textContent = eur(c.earn); }
     })(t0);
+  }
+
+  /* ============ MEDICIÓN Y TEST A/B ============
+     Sin cookies ni almacenamiento: la variante se asigna al azar en cada carga y vive solo en memoria (se fuerza con ?ab=A o ?ab=B).
+     dataLayer solo recibe variante, paso, sector y tramo de tamaño del equipo: ninguna cifra ni dato personal. No se carga ningún script externo. */
+  window.dataLayer = window.dataLayer || [];
+  var abForced = (location.search.match(/[?&]ab=(A|B)\b/i)||[])[1];
+  var AB = abForced ? abForced.toUpperCase() : (Math.random()<0.5 ? "A" : "B");
+  function members(){ return posInt(state.reps,1e5) + posInt(state.rest,1e5); }
+  /* Con 1 o 2 miembros no hay test: siempre la versión de conversión */
+  function variant(){ return members()>2 ? AB : "conversion"; }
+  function sizeBucket(n){ return n<=2 ? "1-2" : (n<=10 ? "3-10" : "11+"); }
+  function track(name){
+    window.dataLayer.push({event:name, variant:variant(), step:state.step, sector:state.sector, team_size:sizeBucket(members())});
+  }
+  function withUtm(url, content){
+    var h = "", i = url.indexOf("#"); if(i>=0){ h = url.slice(i); url = url.slice(0,i); }
+    return url + (url.indexOf("?")>=0 ? "&" : "?") + "utm_source=calculadora&utm_medium=web&utm_campaign=roi-calculator&utm_content=" + content + h;
+  }
+  var viewedVariant = "", closeObs = null;
+  function renderClose(){
+    var v = variant(), box = $("closeBox");
+    var call = v==="A";
+    $("closeTitle").textContent = tr(call ? "closeTitleA" : "closeTitleB");
+    $("closeBtn").textContent   = tr(call ? "closeBtnA" : "closeBtnB");
+    $("closeBtn").href = call ? withUtm(CFG.callUrl + "#" + encode(), "cta-A")
+                              : withUtm(CFG.registerUrl.replace("{lang}", LANG), v==="B" ? "cta-B" : "cta-conversion");
+    box.hidden = false;
+    if(!closeObs && "IntersectionObserver" in window){
+      closeObs = new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting && viewedVariant!==variant()){ viewedVariant = variant(); track("calc_cta_view"); } });
+      }, {threshold:0.5});
+      closeObs.observe(box);
+    }
+  }
+  /* Vídeo: acepta la dirección de compartir o de insertar de YouTube, Vimeo o Loom; si está vacía, el apartado no se muestra */
+  function videoEmbed(u){
+    try{
+      var x = new URL(u), h = x.hostname.replace(/^www\./,""), m;
+      if(x.protocol!=="https:") return "";
+      if(h==="youtu.be") return "https://www.youtube-nocookie.com/embed/"+x.pathname.slice(1);
+      if(h==="youtube.com" || h==="youtube-nocookie.com"){
+        if(x.pathname.indexOf("/embed/")===0) return "https://www.youtube-nocookie.com"+x.pathname;
+        var id = x.searchParams.get("v"); return id ? "https://www.youtube-nocookie.com/embed/"+id : "";
+      }
+      if(h==="vimeo.com"){ m = x.pathname.match(/(\d+)/); return m ? "https://player.vimeo.com/video/"+m[1] : ""; }
+      if(h==="player.vimeo.com") return x.href;
+      if(h==="loom.com"){ m = x.pathname.match(/\/(?:share|embed)\/([A-Za-z0-9]+)/); return m ? "https://www.loom.com/embed/"+m[1] : ""; }
+    }catch(e){}
+    return "";
+  }
+  function renderVideo(){
+    var src = CFG.videoUrl ? videoEmbed(CFG.videoUrl) : "", sec = $("videoSec"), fr = $("videoFrame");
+    sec.hidden = !src;
+    if(src){ var S = STATIC[LANG] || STATIC.es; fr.title = S.r020 || STATIC.es.r020; if(fr.getAttribute("src")!==src) fr.setAttribute("src", src); }
   }
 
   /* ============ PASOS ============ */
@@ -996,9 +1091,11 @@
   }
   function goto(n, reveal){
     state.step = n; renderSteps(); render();
+    track("calc_step");
+    if(n===LAST){ track("calc_result"); }
     if(n===LAST && reveal){
       var s = $("step"+LAST); s.classList.remove("go"); void s.offsetWidth; s.classList.add("go");
-      var r = compute(state); if(r.ready) countUp($("netBig"), r.net);
+      var r = compute(state); if(r.ready) countUp();
     }
     var f = $("calc"); if(f && f.scrollIntoView) f.scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
   }
@@ -1055,16 +1152,20 @@
 
     renderSeg();
     var hash = encode();
-    $("salesBtn").href = CFG.contactUrl + "#" + hash;
     $("salesBtn2").href = CFG.contactUrl + "#" + hash;
 
     if(state.step!==LAST || !r.ready){ renderTable(r, null); return r; }
 
     var neg = r.net < 0;
     $("netCard").classList.toggle("neg", neg);
-    if(!counting) $("netBig").textContent = eur(r.net);
+    if(!counting){ $("saveBig").textContent = eur(r.save); $("earnBig").textContent = eur(r.earn); }
+    $("earnBox").hidden = !state.revOn;
+    $("dual").classList.toggle("one", !state.revOn);
     $("stickyNet").textContent = eur(r.net);
-    $("netPer").innerHTML = neg ? tr("netPerNeg") : tr("netPerPos",{m:eur(r.perMonth)});
+    $("netPer").innerHTML = neg ? tr("netPerNeg",{n:eur(r.net)}) : tr("netPerPos",{n:eur(r.net), m:eur(r.perMonth)});
+    $("priceMsg").textContent = tr("priceMsg",{max:eur(Math.floor(CFG.priceMonthly/10)*10 + 10)});
+    $("optLine").hidden = !(state.optimize==="yes" || state.optimize==="maybe");
+    renderVideo(); renderClose();
     $("inv").textContent = neg ? "" : tr("inv");
     $("mBen").textContent  = eur(r.benefits);
     $("mCost").textContent = eur(r.cost);
@@ -1292,6 +1393,7 @@
     } else window.prompt(tr("copyPrompt"), url);
   });
   $("pdfBtn").addEventListener("click", function(){ window.print(); });
+  $("closeBtn").addEventListener("click", function(){ track("calc_cta_click"); });
 
   $("leadForm").addEventListener("submit", function(e){
     e.preventDefault();
@@ -1348,7 +1450,7 @@
   document.documentElement.lang = lang0;
   applyStatic(); applyLinks(); updateLangUI();
   syncControls();
-  if(fromLink && state.step===LAST && compute(state).ready){ renderSteps(); render(); }
+  if(fromLink && state.step===LAST && compute(state).ready){ renderSteps(); render(); track("calc_result"); }
   else { if(state.step===LAST || (state.step>1 && !canNext1(compute(state)))) state.step = 1; renderSteps(); render(); }
 })();
 </script>

@@ -22,7 +22,7 @@ DirectoryIndex index.html
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://pub-3e391b23958e4e1b93d08a1ebeb9c70d.r2.dev https://fivo.ai; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://pub-3e391b23958e4e1b93d08a1ebeb9c70d.r2.dev https://fivo.ai; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://player.vimeo.com https://www.loom.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
   <FilesMatch "\.png$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
