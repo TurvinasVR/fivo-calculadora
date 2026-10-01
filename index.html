@@ -312,6 +312,7 @@
   .vid-skip a:hover{color:#fff;border-color:#2b3b78}
   #resultTop{scroll-margin-top:16px}
   .closebox{position:relative;overflow:hidden;margin:34px 0 0;border-radius:var(--r-card);background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;padding:38px 28px;text-align:center}
+  .closebox p{margin:-6px auto 22px;max-width:640px;font-size:16px;line-height:1.5}
   .closebox h2{font-family:var(--font-head);font-size:clamp(22px,3.2vw,34px);letter-spacing:-.02em;line-height:1.2;margin:0 auto 22px;max-width:760px;font-weight:600}
   @media (max-width:560px){ .dual{gap:12px} .dual .big{font-size:clamp(28px,9vw,38px)} .dual .dl{font-size:15px} .closebox{padding:30px 20px} }
 
@@ -682,6 +683,7 @@
 </div>
 <div class="closebox" hidden="" id="closeBox">
 <h2 id="closeTitle"></h2>
+<p hidden="" id="closeText"></p>
 <a class="btn btn-white btn-rect" href="#" id="closeBtn"></a>
 </div>
 </section>
@@ -806,7 +808,9 @@
       netPerNeg:"Beneficio neto tras pagar Fivo: <b>{n}</b> al año, con estos datos. Prueba a ajustar los supuestos o añade más herramientas.",
       netPerPos:"Beneficio neto tras pagar Fivo: <b>{n}</b> al año (≈ {m} al mes)",
       priceMsg:"Si el precio es lo que te preocupa, que sepas que Fivo cuesta menos de {max} al mes por persona.",
-      closeTitleA:"¿Quieres hacer una llamada para que te lo implementemos en tu empresa? Haz clic aquí",
+      closeTitleA:"Tu cálculo estima {x} al año. ¿Hablamos de cómo conseguirlo en tu empresa?",
+      closeTitleAGen:"¿Hablamos de cómo mejorar tus procesos de venta con Fivo?",
+      closeTextA:"Reserva una llamada y revisamos juntos tus números: cómo implantar Fivo, qué procesos mejorar primero y cuánto de este cálculo es realista en tu caso.",
       closeBtnA:"Reservar llamada",
       closeTitleB:"Empieza a usar Fivo ahora",
       closeBtnB:"Prueba 7 días gratis",
@@ -873,7 +877,9 @@
       netPerNeg:"Net profit after paying for Fivo: <b>{n}</b> per year, with this data. Try adjusting the assumptions or adding more tools.",
       netPerPos:"Net profit after paying for Fivo: <b>{n}</b> per year (≈ {m} a month)",
       priceMsg:"If price is what worries you, Fivo costs less than {max} per person per month.",
-      closeTitleA:"Would you like a call so we can set Fivo up in your company? Click here",
+      closeTitleA:"Your calculation estimates {x} a year. Shall we talk about how to get there in your company?",
+      closeTitleAGen:"Shall we talk about improving your sales processes with Fivo?",
+      closeTextA:"Book a call and we'll review your numbers together: how to roll out Fivo, which processes to improve first, and how much of this estimate is realistic for you.",
       closeBtnA:"Book a call",
       closeTitleB:"Start using Fivo now",
       closeBtnB:"Try free for 7 days",
@@ -1052,10 +1058,13 @@
     return url + (url.indexOf("?")>=0 ? "&" : "?") + "utm_source=calculadora&utm_medium=web&utm_campaign=roi-calculator&utm_content=" + content + h;
   }
   var viewedVariant = "", closeObs = null;
-  function renderClose(){
+  function renderClose(r){
     var v = variant(), box = $("closeBox");
     var call = v==="A";
-    $("closeTitle").textContent = tr(call ? "closeTitleA" : "closeTitleB");
+    /* Variante A: el título lleva el beneficio neto del resultado (de compute()); con 0 o negativo, el título genérico */
+    $("closeTitle").textContent = !call ? tr("closeTitleB") : (r.net>0 ? tr("closeTitleA",{x:eur(r.net)}) : tr("closeTitleAGen"));
+    $("closeText").hidden = !call;
+    if(call) $("closeText").textContent = tr("closeTextA");
     $("closeBtn").textContent   = tr(call ? "closeBtnA" : "closeBtnB");
     $("closeBtn").href = call ? withUtm(CFG.callUrl + "#" + encode(), "cta-A")
                               : withUtm(CFG.registerUrl.replace("{lang}", LANG), v==="B" ? "cta-B" : "cta-conversion");
@@ -1089,6 +1098,7 @@
     return null;
   }
   var vidReal = false;   /* hay un vídeo de verdad (no solo el marco de ejemplo) */
+  var videoViewed = false, videoObs = null;
   function renderVideo(){
     var other = LANG==="es" ? "en" : "es", u = CFG.videoUrl[LANG] || CFG.videoUrl[other] || "";
     var v = u ? videoEmbed(u) : null;
@@ -1101,6 +1111,13 @@
       fr.title = (STATIC[LANG] || STATIC.es).r020;
       if(fr.getAttribute("src")!==v.src) fr.setAttribute("src", v.src);
     } else if(fr.getAttribute("src")){ fr.removeAttribute("src"); }
+    /* calc_video_view: una vez, cuando el vídeo entra en pantalla (solo si hay vídeo de verdad) */
+    if(vidReal && !videoObs && "IntersectionObserver" in window){
+      videoObs = new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting && !videoViewed){ videoViewed = true; track("calc_video_view"); } });
+      }, {threshold:0.5});
+      videoObs.observe(sec);
+    }
     if(v && v.kind==="file"){
       if(CFG.videoPoster) vf.setAttribute("poster", CFG.videoPoster);
       if(vf.getAttribute("src")!==v.src) vf.setAttribute("src", v.src);
@@ -1206,7 +1223,7 @@
     $("netPer").innerHTML = neg ? tr("netPerNeg",{n:eur(r.net)}) : tr("netPerPos",{n:eur(r.net), m:eur(r.perMonth)});
     $("priceMsg").textContent = tr("priceMsg",{max:eur(Math.floor(CFG.priceMonthly/10)*10 + 10)});
     $("optLine").hidden = !(state.optimize==="yes" || state.optimize==="maybe");
-    renderVideo(); renderClose();
+    renderVideo(); renderClose(r);
     $("inv").textContent = neg ? "" : tr("inv");
     $("mBen").textContent  = eur(r.benefits);
     $("mCost").textContent = eur(r.cost);
@@ -1450,6 +1467,11 @@
   });
   $("pdfBtn").addEventListener("click", function(){ window.print(); });
   $("closeBtn").addEventListener("click", function(){ track("calc_cta_click"); });
+  /* "Ir a mi cálculo": baja suavemente hasta el resultado (sin ensuciar la barra de direcciones con un #) */
+  $("videoSkip").addEventListener("click", function(e){
+    e.preventDefault(); track("calc_video_skip");
+    $("resultTop").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
+  });
   $("stickyBar").addEventListener("click", function(){ track("calc_cta_click"); });
 
   $("leadForm").addEventListener("submit", function(e){
