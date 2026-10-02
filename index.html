@@ -399,7 +399,6 @@
   footer{padding-bottom:84px}
   .legal{font-size:12px;color:var(--ph);margin:12px 0 0}
   .legal a{color:#9db4ff;text-underline-offset:2px}
-  .sticky-net{display:none}
 
   @media (max-width: 980px){
     .links{display:none}
@@ -812,7 +811,7 @@
       priceMsg:"Fivo cuesta menos de {max} al mes por persona.",
       ctaTitleA:"¿Quieres hacer una llamada para que lo implementemos en tu empresa?", ctaBtnA:"Reservar mi llamada", ctaSmallA:"Revisamos tus números contigo y te decimos por dónde empezar.", ctaAlt:"o prueba 7 días gratis",
       ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min",
-      stickyProfit:"Beneficio estimado: {x}/año", stickySave:"Ahorro estimado: {x}/año", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
+      stickyProfit:"Beneficio estimado: {x}/año", stickyNoProfit:"¿Quieres una llamada para implementarlo?", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
       toolsLabel:"Grabación, transcripción y notas de reuniones",
       toolsOwn:"{m} al mes × 12 meses, tal como lo indicas",
       toolsEst:"Estimación: el {pc} de tus {a} al mes en aplicaciones ({m} al mes) × 12 meses",
@@ -874,7 +873,7 @@
       priceMsg:"Fivo costs less than {max} per person per month.",
       ctaTitleA:"Want to book a call so we can set it up in your company?", ctaBtnA:"Book my call", ctaSmallA:"We'll go through your numbers with you and tell you where to start.", ctaAlt:"or try free for 7 days",
       ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min",
-      stickyProfit:"Estimated profit: {x}/yr", stickySave:"Estimated savings: {x}/yr", stickyBtnA:"Book a call", stickyBtnB:"Try free",
+      stickyProfit:"Estimated profit: {x}/yr", stickyNoProfit:"Want a call to set it up?", stickyBtnA:"Book a call", stickyBtnB:"Try free",
       toolsLabel:"Screen recording, transcription and meeting notes",
       toolsOwn:"{m} per month × 12 months, as you entered it",
       toolsEst:"Estimate: {pc} of your {a} per month on apps ({m} per month) × 12 months",
@@ -1025,7 +1024,7 @@
 
   var LAST = 4;   /* número de pasos; el último es el resultado */
   var bandOK = false;   /* hay logos que mostrar */
-  var ctaVisible = true;  /* el botón principal del CTA está a la vista (la barra fija se muestra cuando no lo está) */
+  var ctaVisible = false; /* el botón principal de la tarjeta está a la vista (la barra fija se muestra cuando no lo está) */
 
   function renderSeg(){ document.querySelectorAll(".seg button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.plan===state.plan)); }); }
   var counting = false;
@@ -1073,8 +1072,8 @@
     $("ctaBtn").setAttribute("href", withUtm(main, "cta-main-" + key));
     $("ctaAlt").hidden = !call;
     if(call){ $("ctaAltLink").textContent = tr("ctaAlt"); $("ctaAltLink").setAttribute("href", withUtm(reg, "cta-main-" + key)); }
-    /* barra fija: beneficio estimado (o el ahorro si el beneficio no es positivo) y el mismo botón */
-    $("stickyLabel").textContent = r.net>0 ? tr("stickyProfit",{x:eur(r.net)}) : tr("stickySave",{x:eur(r.save)});
+    /* barra fija: beneficio estimado (o la invitación a la llamada si no es positivo) y el mismo botón */
+    $("stickyLabel").textContent = r.net>0 ? tr("stickyProfit",{x:eur(r.net)}) : tr("stickyNoProfit");
     $("stickyBtn").textContent = tr(call ? "stickyBtnA" : "stickyBtnB");
     $("stickyBtn").setAttribute("href", withUtm(main, "cta-sticky-" + key));
   }
@@ -1173,7 +1172,7 @@
     state.step = n; renderSteps(); render();
     track("calc_step");
     if(n===LAST){
-      ctaVisible = true; updateSticky();   /* al llegar el botón se ve; el observador lo corrige si no cabe */
+      ctaVisible = false; updateSticky();   /* la barra aparece al llegar; el observador la oculta si el botón de la tarjeta ya se ve */
       track("calc_result");
       window.scrollTo({top:0, behavior: reduced ? "auto" : "smooth"});
     } else {
