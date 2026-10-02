@@ -37,6 +37,8 @@
     --b1:#5173FF;                    /* inicio del degradado de acento (tarjeta Business / toggle) */
     --b2:#0AC6FF;                    /* fin del degradado de acento */
     --grad:linear-gradient(90deg,#5173FF 0%,#0AC6FF 100%);
+    --b1-rgb:81,115,255;             /* --b1 en RGB, para fondos translúcidos */
+    --track:rgba(255,255,255,.12);   /* pista de los deslizadores */
 
     --bg:#000000;                    /* fondo de página (precios) */
     --card:#0A0A0A;                  /* tarjetas (precios) */
@@ -148,7 +150,7 @@
   .hero-in{max-width:980px;margin:0 auto;padding:20px 24px 14px;text-align:center}
   h1{font-family:var(--font-head);font-size:clamp(24px,calc(16px + 2.2vw),46px);line-height:1.1;letter-spacing:-.02em;margin:0;font-weight:700;text-wrap:balance}   /* título único: 2 líneas como máximo */
 
-  .wrap{max-width:1240px;margin:0 auto;padding:0 24px 70px}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px 24px}
 
   /* ---------- Pasos ---------- */
   .steps{display:flex;justify-content:center;align-items:center;margin:0 0 14px;flex-wrap:wrap;list-style:none;padding:0}
@@ -187,11 +189,14 @@
   .helper{display:none;margin-top:10px;padding:12px 14px;background:rgba(81,115,255,.12);border:1px solid rgba(81,115,255,.3);border-radius:10px;font-size:12.5px;color:var(--label)}
   .helper.open{display:block}
   .helper .input{margin-top:8px}
-  .opt{display:block;border:1px solid var(--field);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:rgba(255,255,255,.02);cursor:pointer;transition:border-color .15s,background .15s}
-  .opt:hover{border-color:#6b7279}
-  .opt:has(input[type=checkbox]:checked){border-color:var(--b1);background:rgba(81,115,255,.12)}
+  .opt{position:relative;display:block;border:1px solid var(--field);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:rgba(255,255,255,.03);cursor:pointer;transition:border-color .15s,background .15s}
+  .opt:hover,.ch:hover{border-color:rgba(255,255,255,.4)}
+  /* marcado: borde en degradado (técnica de máscara) y fondo suave */
+  .opt::before,.ch::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;pointer-events:none;transition:opacity .15s}
+  .opt:has(input[type=checkbox]:checked),.ch:has(input:checked){border-color:transparent;background:rgba(var(--b1-rgb),.08)}
+  .opt:has(input[type=checkbox]:checked)::before,.ch:has(input:checked)::before{opacity:1}
   .opt .t{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;font-weight:500}
-  .opt input[type=checkbox]{accent-color:var(--b1);width:18px;height:18px;margin-top:2px;flex:none}
+  .opt input[type=checkbox]{margin-top:2px}
   .opt small{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:3px}
   .opt .more{margin:12px 0 0 30px}
   .nav-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px calc(var(--px) * -1) calc(var(--pb) * -1);padding:12px var(--px) var(--pb);position:sticky;bottom:0;z-index:6;background:#1F2D3A;border-top:1px solid rgba(255,255,255,.1);border-radius:0 0 var(--r-card) var(--r-card)}   /* Atrás / Continuar siempre a la vista mientras la tarjeta se ve */
@@ -199,7 +204,22 @@
   .range-row{margin-bottom:16px}
   .range-row .top{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--label);margin-bottom:4px}
   .range-row .top b{color:#fff;font-family:var(--font-head);font-weight:600;white-space:nowrap}
-  input[type=range]{width:100%;accent-color:var(--b1);height:26px}
+  /* Casillas propias */
+  input[type=checkbox]{-webkit-appearance:none;appearance:none;display:inline-grid;place-content:center;flex:none;width:20px;height:20px;margin:0;border:1.5px solid var(--field);border-radius:6px;background:transparent;cursor:pointer;transition:background .15s,border-color .15s}
+  input[type=checkbox]::after{content:"";width:10px;height:5.5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .12s}
+  input[type=checkbox]:checked{background:var(--grad);border-color:transparent}
+  input[type=checkbox]:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+  input[type=checkbox]:focus-visible{outline:3px solid var(--b2);outline-offset:2px}
+  /* Deslizadores: pista 6 px, relleno en degradado, tirador blanco de 20 px (webkit y moz) */
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;margin:0;background:transparent;cursor:pointer;--fill:0%}
+  input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:var(--grad) 0 0/var(--fill) 100% no-repeat,var(--track)}
+  input[type=range]::-moz-range-track{height:6px;border-radius:999px;background:var(--track)}
+  input[type=range]::-moz-range-progress{height:6px;border-radius:999px;background:var(--grad)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:20px;height:20px;margin-top:-7px;border-radius:50%;background:#fff;border:2px solid var(--b2);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+  input[type=range]::-moz-range-thumb{box-sizing:border-box;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--b2);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+  input[type=range]:focus{outline:none}
+  input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(10,198,255,.35),0 1px 5px rgba(0,0,0,.35)}
+  input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px rgba(10,198,255,.35),0 1px 5px rgba(0,0,0,.35)}
   select{width:100%;font:inherit;font-size:14px;padding:12px 14px;border:1px solid var(--field);border-radius:10px;background:#111;color:#fff}
 
   /* ---------- Toggle Mensual / Anual (mismo componente que la página de precios) ---------- */
@@ -276,15 +296,15 @@
   fieldset.q legend{padding:0;margin:0 0 10px;font-size:14.5px;color:var(--label);line-height:1.45}
   .choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
   .choices.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ch{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--field);border-radius:12px;padding:13px 12px;background:rgba(255,255,255,.02);cursor:pointer;font-size:14.5px;font-weight:500;transition:border-color .15s,background .15s}
+  .ch{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--field);border-radius:12px;padding:13px 12px;background:rgba(255,255,255,.03);cursor:pointer;font-size:14.5px;font-weight:500;transition:border-color .15s,background .15s}
   .ch input{position:absolute;opacity:0;pointer-events:none}
-  .ch:hover{border-color:#6b7279}
-  .ch:has(input:checked){border-color:var(--b1);background:rgba(81,115,255,.16)}
-  .ch:has(input:focus-visible){outline:3px solid #0AC6FF;outline-offset:2px}
-  .sub-q{margin-top:16px;padding:16px;border:1px solid rgba(81,115,255,.28);border-radius:14px;background:rgba(81,115,255,.08)}
+
+
+  .ch:has(input:focus-visible){outline:3px solid var(--b2);outline-offset:2px}
+  .sub-q{margin-top:16px;padding:16px;border:1px solid var(--field);border-radius:14px;background:rgba(255,255,255,.03)}
   .chk{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:13.5px;color:var(--label);cursor:pointer}
   .field label.chk{display:inline-flex;justify-content:flex-start;margin-bottom:0}
-  .chk input{accent-color:var(--b1);width:17px;height:17px}
+  .chk input{margin:0}
   .input.off{opacity:.45}
   @media (max-width:560px){ .two{grid-template-columns:minmax(0,1fr)} .choices.tiers{grid-template-columns:minmax(0,1fr)} }
 
@@ -397,7 +417,8 @@
   /* ---------- Textos de apoyo y consentimiento ---------- */
   .how{margin:10px 0 0;font-size:13.5px}
   .how a{color:#fff;text-decoration:underline;text-underline-offset:3px}
-  .is-result .page{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}   /* sitio para la barra fija (siempre visible): no tapa el pie ni las reseñas al llegar al final */
+  /* La barra fija ocupa su sitio como padding inferior del PIE (medido con ResizeObserver en --bar-h): la página termina exactamente donde acaba el pie y la barra queda sobre su fondo negro */
+  .is-result footer{padding-bottom:calc(var(--bar-h,0px) + 12px + env(safe-area-inset-bottom,0px))}
   #netCard{scroll-margin-top:16px}
   .legal{font-size:12px;color:var(--ph);margin:12px 0 0}
   .legal a{color:#9db4ff;text-underline-offset:2px}
@@ -1145,7 +1166,10 @@
     updateSticky();
   }
   /* Barra fija con el CTA: SIEMPRE visible en el paso "Tu resultado" (nada la oculta); la página lleva espacio inferior para que no tape el pie ni las reseñas. */
-  function updateSticky(){ $("stickyBar").hidden = state.step!==LAST; }
+  function updateSticky(){ $("stickyBar").hidden = state.step!==LAST; measureBar(); }
+  /* altura real de la barra fija -> --bar-h (padding inferior del pie) */
+  function measureBar(){ document.documentElement.style.setProperty("--bar-h", $("stickyBar").hidden ? "0px" : Math.ceil($("stickyBar").getBoundingClientRect().height)+"px"); }
+  if("ResizeObserver" in window) new ResizeObserver(measureBar).observe($("stickyBar"));
   var cardAnimated = false, cardObs = null;
   function armCardObserver(){
     if(cardObs) return;
@@ -1199,6 +1223,7 @@
 
   function render(){
     var r = compute(state);
+    document.querySelectorAll("input[type=range]").forEach(function(el){ var mn = +el.min||0, mx = +el.max||100; el.style.setProperty("--fill", (100*((+el.value)-mn)/(mx-mn))+"%"); });   /* relleno de la pista (webkit) */
 
     /* Paso 1: total de miembros */
     $("next1").disabled = !canNext1(r);
