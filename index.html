@@ -489,6 +489,21 @@
   
   /* ---------- Ordenador (>= 700 px): tarjeta de resultado más grande (920 px de ancho; padding +15 %, cifras grandes +20 %, el resto en proporción). En móvil no cambia. ---------- */
   @media (min-width:700px){
+    /* Pasos 1-3 más grandes; los tres con la misma altura mínima (no saltan al cambiar de paso); Atrás / Continuar fijos abajo */
+    .wiz{display:flex;flex-direction:column;min-height:min(600px,calc(100dvh - var(--wiz-top,200px) - 16px))}
+    .wiz > .nav-row{margin-top:auto}
+    .wiz h2{font-size:30px;margin-bottom:15px}
+    .field{margin-bottom:15px}
+    .field label,.mini,.qt,fieldset.q legend,.chk{font-size:16px}
+    .hint{font-size:14px;margin-top:6px}
+    .input input{height:56px;padding:0 16px;font-size:18px}
+    .input .unit{font-size:16px}
+    select{height:56px;padding:0 16px;font-size:18px}
+    .ch{min-height:56px;font-size:17px}
+    .wiz .nav-row .btn{min-height:56px;padding:0 30px;font-size:18px}
+    .two{gap:16px}
+    fieldset.q{margin-bottom:18px}
+    fieldset.q legend{margin-bottom:11px}
     .rs-title{font-size:24px;margin-bottom:20px}
     .dual{gap:18px}
     .dual .dl{font-size:20px}
