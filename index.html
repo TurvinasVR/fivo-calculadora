@@ -52,6 +52,8 @@
     --good:#0DAD6F;                  /* verde de "AHORRA 25%" */
     --warn:#FF8A7A;
     --r-card:24px; --r-btn:12px;
+    --card-w:800px;                  /* ancho máximo de las 4 tarjetas (pasos 1-3 y resultado) en ordenador */
+    --card-pad:40px;                 /* padding de las 4 tarjetas (20 px en móvil) */
 
     box-sizing:border-box;
     padding-top:env(safe-area-inset-top,0px);
@@ -164,8 +166,8 @@
   .card h2{font-family:var(--font-head);margin:0 0 4px;font-size:20px;letter-spacing:-.01em;font-weight:600}
   .card .sub{margin:0 0 20px;color:var(--muted);font-size:14px}
   /* El formulario reproduce el cristal oscuro del formulario de contacto */
-  .glass{background:linear-gradient(180deg,rgba(30,38,45,.95) 0%,rgba(31,46,60,.95) 100%);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-card);padding:20px 25px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-  .wiz{max-width:640px;margin:0 auto;--px:25px;--pb:20px}
+  .glass{background:linear-gradient(180deg,rgba(30,38,45,.95) 0%,rgba(31,46,60,.95) 100%);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-card);padding:var(--card-pad);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .wiz{max-width:var(--card-w);margin:0 auto;--px:var(--card-pad);--pb:var(--card-pad)}
   .wiz h2{font-family:var(--font-head);font-size:clamp(21px,2.4vw,26px);letter-spacing:-.015em;margin:0 0 13px;font-weight:600}
   .field{margin-bottom:13px}
   .field label{display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:400;color:var(--label);margin-bottom:6px}
@@ -228,11 +230,11 @@
   .seg .save{white-space:nowrap;font-family:var(--font);font-size:12px;font-weight:500;color:#12C383;background:#121212;border-radius:6px;padding:3px 9px;letter-spacing:.01em}
 
   /* ---------- Resultado: una columna centrada ---------- */
-  .rs{max-width:760px;margin:0 auto}
+  .rs{max-width:var(--card-w);margin:0 auto}
   .hero-net{position:relative;overflow:hidden;background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;border-radius:var(--r-card)}
   .hero-net::after{content:"";position:absolute;inset:0;background:url("https://pub-3e391b23958e4e1b93d08a1ebeb9c70d.r2.dev/brain_resources/images/texture.png") center/cover;opacity:.22;mix-blend-mode:soft-light;pointer-events:none}
   .hero-net > *{position:relative;z-index:1}
-  .rs-card{padding:clamp(28px,4.5vw,44px);text-align:center}
+  .rs-card{padding:var(--card-pad);text-align:center}
   .rs-title{font-family:var(--font-head);font-size:clamp(18px,2.6vw,22px);font-weight:500;margin:0 0 16px;line-height:1.25}
   .dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}
   .dual.one{grid-template-columns:minmax(0,1fr)}
@@ -425,7 +427,6 @@
   }
   @media (max-width: 560px){
     .nav{padding:16px}
-    .glass{padding:16px 16px}
     .wiz{--px:16px;--pb:16px}
     .card{padding:22px 20px}
     .stp span{display:none}.stp.on span{display:inline}
@@ -466,8 +467,9 @@
   /* ---------- Móvil (< 700 px) ---------- */
   @media (max-width:699px){
     /* Tarjeta de preguntas: llega hasta el final de la pantalla (--wiz-top = posición superior de la tarjeta, medida en JS) y con un 20 % más de aire vertical */
-    .wiz{--px:16px;--pb:19px;display:flex;flex-direction:column;min-height:calc(100dvh - var(--wiz-top,200px) - 16px)}
-    .glass{padding:19px 16px}
+    :root{--card-pad:20px}   /* mismo padding en las 4 tarjetas */
+    .wrap{padding-left:16px;padding-right:16px}   /* mismos márgenes laterales (16 px) */
+    .wiz{display:flex;flex-direction:column;min-height:calc(100dvh - var(--wiz-top,200px) - 16px)}
     .wiz h2{margin-bottom:17px}
     .field{margin-bottom:17px}
     fieldset.q{margin-bottom:22px}
@@ -481,14 +483,12 @@
     #step4 > .rs:not(:first-child){order:2}
     #step4 > .rs:first-child > .logo-band{order:3}
     #step4 > .tst{order:4}
-    #step4 .rs-back,#step4 .vid-sec,#step4 .logo-band,#step4 > .rs:not(:first-child){width:100%;max-width:760px;margin-left:auto;margin-right:auto}
+    #step4 .rs-back,#step4 .vid-sec,#step4 .logo-band,#step4 > .rs:not(:first-child){width:100%;max-width:var(--card-w);margin-left:auto;margin-right:auto}
     #step4 .logo-band{margin-top:36px;margin-bottom:8px}
   }
   
   /* ---------- Ordenador (>= 700 px): tarjeta de resultado más grande (920 px de ancho; padding +15 %, cifras grandes +20 %, el resto en proporción). En móvil no cambia. ---------- */
   @media (min-width:700px){
-    #step4 > .rs{max-width:920px}
-    .rs-card{padding:51px}
     .rs-title{font-size:24px;margin-bottom:20px}
     .dual{gap:18px}
     .dual .dl{font-size:20px}
