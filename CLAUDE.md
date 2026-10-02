@@ -82,6 +82,7 @@ Calculadora web (ES/EN) que estima cuánto se ahorraría y cuánto más ganaría
 - **Seguridad:** el `.htaccess` ya incluye `frame-src` para YouTube (nocookie), Vimeo y Loom. Si se añade o cambia una política CSP (en Apache, en Cloudflare o en otro sitio) hay que permitir `frame-src` para el proveedor del vídeo; para un `.mp4` alojado fuera hay que permitir también `media-src` de ese dominio. GitHub Pages no usa el `.htaccess`.
 
 ## Testimonios (carrusel)
+- **MAQUETA – 7 testimonios de EJEMPLO (`sample: true`) en `CFG.testimonials`:** Laura Benítez Ordóñez, Andrés Villalobos Cruz, Carolina Mendizábal Rey, Javier Montenegro Sáez, Mariana Quiroga Delgado (4 de 5), Sergio Altamirano Lozano y Valeria Cordero Ibáñez, con solo nombre, valoración y comentario ES/EN (sin cargo ni empresa). **Son de ejemplo, NO son opiniones reales y NO se pueden publicar como tales.** Solo se ven en localhost o con `?preview=1` (nunca con `?public=1` ni en la web publicada sin parámetros) y cada tarjeta lleva la etiqueta discreta "Ejemplo" / "Sample". Al añadir un testimonio real (`consent: true`) los de ejemplo desaparecen solos. **Hay que sustituirlos por testimonios reales con permiso antes del lanzamiento.** Un testimonio `sample:true` no necesita `consent`, pero tampoco se muestra nunca en público.
 - **Regla de oro: NUNCA se inventan testimonios, nombres, cargos, empresas, puntuaciones ni cifras de reseñas. Solo se muestran los que el dueño del proyecto entregue con consentimiento.** Los textos de relleno son siempre claramente de relleno.
 - **`CFG.showTestimonials = true`** (valor actual): el carrusel se muestra DESPUÉS de la tarjeta del resultado y justo antes del pie. Con `false` no sale (ni siquiera los rellenos "VISTA PREVIA – NO REAL"), pero el código y los datos siguen en el archivo. Es compacto (tarjetas de poca altura y márgenes reducidos). Título "Lo que dicen nuestros usuarios" / "What our users say".
 - **Cómo añadir un testimonio real** (solo cuando la persona haya dado su permiso por escrito): añadir un objeto a `CFG.testimonials` con esta forma y rellenar TODO con datos reales entregados por el dueño del proyecto:
@@ -125,6 +126,7 @@ m) **El beneficio neto se ve en una pastilla bajo la cuenta** y es la misma cifr
 El usuario no es programador: explicar en español y de forma sencilla.
 
 ## PENDIENTES
+- **ANTES DEL LANZAMIENTO: sustituir los 7 testimonios de EJEMPLO (`sample: true`, en `CFG.testimonials`) por testimonios reales con permiso por escrito (`consent: true`) y borrar los de ejemplo. No se pueden publicar como opiniones reales.**
 - Poner las direcciones del vídeo en `CFG.videoUrl` (`es` y `en`; hoy vacías).
 - Confirmar **por escrito** que las empresas de la banda de logos autorizan usar su logo y que "ya usan Fivo".
 - Conseguir testimonios reales **con permiso por escrito** de cada persona y añadirlos a `CFG.testimonials` con `consent: true` (el carrusel ya está activado con `CFG.showTestimonials = true`, pero hasta entonces solo muestra el relleno en localhost y nada en la web publicada). Definir `CFG.reviews` si se usan reseñas de una tienda (count, storeName y url reales; hoy `null`).

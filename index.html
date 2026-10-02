@@ -355,6 +355,7 @@
   .tst-src{margin:14px 0 0;font-size:12px;color:#6b7280}
   .tst-src a{color:#2956c9;text-underline-offset:2px}
   .tst-badge{position:absolute;top:14px;right:14px;background:#FACC15;color:#111;font-family:var(--font-head);font-weight:700;font-size:11.5px;letter-spacing:.04em;padding:5px 10px;border-radius:999px}
+  .tst-badge.is-sample{top:12px;right:12px;background:#eef0f4;color:#6b7280;font-family:var(--font-body,inherit);font-weight:500;font-size:11px;letter-spacing:.02em;padding:3px 9px}
   .tst-card.is-ph blockquote{color:#6b7280}
   .tst-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
   .tst-nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--field);background:rgba(255,255,255,.04);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s}
@@ -770,7 +771,15 @@
        Solo se muestran los que tengan consent === true. rating: número de 1 a 5 (si no, no se dibujan estrellas). Vacía = el carrusel no sale en la web publicada. */
     abTest: false,   // false = 3 o más miembros siempre ven la versión LLAMADA y 1-2 miembros la de CONVERSIÓN. true = variante aleatoria 50/50 solo en memoria (sin localStorage ni cookies). ?ab=A o ?ab=B fuerzan cada versión.
     showTestimonials: true,   // true = muestra el carrusel entre la banda de empresas y la tarjeta del resultado (solo hay tarjetas con testimonios reales con consent:true; en localhost o con ?preview=1 salen 5 rellenos "VISTA PREVIA – NO REAL"). false = lo oculta del todo.
-    testimonials: [],
+    testimonials: [
+      {sample: true, name: "Laura Benítez Ordóñez", rating: 5, text: {es: "Teníamos la información repartida entre Jira, Notion y las grabaciones de Meet. Con Fivo, cualquier directivo puede preguntar por el estado de un proyecto y obtener la respuesta con todo su historial. Hemos reducido las reuniones de seguimiento casi a la mitad.", en: "Our information was scattered across Jira, Notion and Meet recordings. With Fivo, any executive can ask about a project's status and get the answer with its full history. We've cut our follow-up meetings nearly in half."}},
+      {sample: true, name: "Andrés Villalobos Cruz", rating: 5, text: {es: "Vendo cursos y mentorías, y mis datos estaban dispersos entre Stripe, Notion y mil chats. Fivo me muestra qué alumnos han pagado, qué compromisos adquirí en cada llamada y qué tengo pendiente. Es como tener un socio que nunca olvida nada.", en: "I sell courses and mentorships, and my data was spread across Stripe, Notion and countless chats. Fivo shows me which students have paid, what I committed to on each call and what's still pending. It's like having a partner who never forgets anything."}},
+      {sample: true, name: "Carolina Mendizábal Rey", rating: 5, text: {es: "Gestionamos 14 clientes a la vez y cada cambio de cuenta era un caos de contexto perdido. Ahora, cuando alguien del equipo retoma un cliente, Fivo le resume lo hablado, aprobado y facturado. Nuestro onboarding interno pasó de semanas a días.", en: "We manage 14 clients at once, and every account handover used to mean lost context. Now, when a team member picks up a client, Fivo summarizes what was discussed, approved and invoiced. Our internal onboarding went from weeks to days."}},
+      {sample: true, name: "Javier Montenegro Sáez", rating: 5, text: {es: "Lo que más valoro es la visión conectada. Veo cómo un ticket de Jira se relaciona con un cliente de Stripe y con lo que se prometió en una reunión. Por fin tomo decisiones con datos y no con intuición.", en: "What I value most is the connected view. I can see how a Jira ticket relates to a Stripe customer and to what was promised in a meeting. At last, I make decisions based on data, not gut feeling."}},
+      {sample: true, name: "Mariana Quiroga Delgado", rating: 4, text: {es: "La integración con Trello y Meet fue lo que me convenció. Pregunto \"¿qué acordamos con el cliente sobre el alcance?\" y me responde en segundos, citando la fuente. Me encantaría que añadieran más integraciones, pero lo esencial está muy bien resuelto.", en: "The Trello and Meet integration is what won me over. I ask \"what did we agree with the client about scope?\" and it answers in seconds, citing the source. I'd love to see more integrations added, but the essentials are very well covered."}},
+      {sample: true, name: "Sergio Altamirano Lozano", rating: 5, text: {es: "Antes, saber que un cliente estaba en riesgo dependía de que alguien lo comentara. Ahora Fivo cruza pagos, tickets y conversaciones, y me da una imagen clara de cada cuenta. Hemos reducido la cancelación de forma notable.", en: "Before, knowing a client was at risk depended on someone mentioning it. Now Fivo cross-references payments, tickets and conversations, giving me a clear picture of each account. We've noticeably reduced churn."}},
+      {sample: true, name: "Valeria Cordero Ibáñez", rating: 5, text: {es: "Soy de las que quieren controlarlo todo y siempre sentía que algo se me escapaba. Fivo me da esa tranquilidad: sé qué pasa en mi negocio sin perseguir a nadie. Se paga solo con el tiempo que ahorro.", en: "I'm someone who wants to control everything, and I always felt something was slipping through. Fivo gives me peace of mind: I know what's happening in my business without chasing anyone. It pays for itself with the time I save."}}
+    ],   // EJEMPLOS (sample:true) para la maqueta: solo se ven en localhost o con ?preview=1; hay que sustituirlos por testimonios reales (consent:true) antes del lanzamiento
     /* Subtítulo opcional con reseñas de una tienda: solo se muestra si los tres campos están rellenos (count número, storeName y url https). */
     reviews: {count: null, storeName: "", url: ""},
     /* Ejemplos ilustrativos (NO son clientes reales). Cada cifra que se enseña sale de compute(). consultores: null = sin consultores; 0-3 = tramo de gasto elegido.
@@ -817,7 +826,7 @@
       exSave:"Te ahorrarías", exEarn:"Ganarías más", exNet:"Beneficio neto", exPerYear:"al año", exLoad:"Cargar este ejemplo",
       tstLabel:"Testimonios de usuarios", tstCarousel:"carrusel", tstSlide:"diapositiva", tstSlideOf:"{n} de {total}",
       tstPrev:"Testimonio anterior", tstNext:"Siguiente testimonio", tstGo:"Ir al testimonio {n}", tstStars:"{n} de 5 estrellas", tstVia:"Fuente",
-      tstPreview:"VISTA PREVIA – NO REAL", tstPhName:"NOMBRE APELLIDO", tstPhRole:"Cargo", tstPhCompany:"Empresa",
+      tstPreview:"VISTA PREVIA – NO REAL", tstSample:"Ejemplo", tstPhName:"NOMBRE APELLIDO", tstPhRole:"Cargo", tstPhCompany:"Empresa",
       tstPhText:"Aquí irá un testimonio real, con permiso de la persona.",
       reviewsLine:"Con más de {count} reseñas en {storeName}, nuestros usuarios destacan la eficacia y fiabilidad de la plataforma.",
       billM:"{us} × {price} al mes × 12 meses = {cost}",
@@ -879,7 +888,7 @@
       exSave:"You'd save", exEarn:"You'd earn more", exNet:"Net profit", exPerYear:"per year", exLoad:"Load this example",
       tstLabel:"User testimonials", tstCarousel:"carousel", tstSlide:"slide", tstSlideOf:"{n} of {total}",
       tstPrev:"Previous testimonial", tstNext:"Next testimonial", tstGo:"Go to testimonial {n}", tstStars:"{n} out of 5 stars", tstVia:"Source",
-      tstPreview:"PREVIEW – NOT REAL", tstPhName:"FIRST LAST NAME", tstPhRole:"Job title", tstPhCompany:"Company",
+      tstPreview:"PREVIEW – NOT REAL", tstSample:"Sample", tstPhName:"FIRST LAST NAME", tstPhRole:"Job title", tstPhCompany:"Company",
       tstPhText:"A real testimonial, with the person's permission, will go here.",
       reviewsLine:"With more than {count} reviews on {storeName}, our users highlight the platform's effectiveness and reliability.",
       billM:"{us} × {price} per month × 12 months = {cost}",
@@ -1556,13 +1565,17 @@
   function tstItems(){
     var other = LANG==="es" ? "en" : "es", out = [];
     (CFG.testimonials || []).forEach(function(c){
-      if(!c || c.consent!==true || !c.name) return;
+      if(!c || !c.name) return;
+      if(c.sample===true){ if(!PREVIEW) return; }   /* ejemplos de la maqueta: nunca en la web publicada ni con ?public=1 */
+      else if(c.consent!==true) return;
       var text = (c.text && (c.text[LANG] || c.text[other])) || "";
       if(!text) return;
       var rt = (typeof c.rating==="number" && isFinite(c.rating) && c.rating>=1 && c.rating<=5) ? Math.round(c.rating) : null;
       out.push({name:String(c.name), role:c.role?String(c.role):"", company:c.company?String(c.company):"", text:String(text),
-        rating:rt, sourceName:c.sourceName?String(c.sourceName):"", sourceUrl:safeUrl(c.sourceUrl), preview:false});
+        rating:rt, sourceName:c.sourceName?String(c.sourceName):"", sourceUrl:safeUrl(c.sourceUrl), preview:false, sample:c.sample===true});
     });
+    /* al llegar testimonios reales, los de ejemplo desaparecen solos */
+    if(out.some(function(x){ return !x.sample; })) out = out.filter(function(x){ return !x.sample; });
     if(!out.length && PREVIEW){
       for(var i=0; i<5; i++) out.push({name:tr("tstPhName"), role:tr("tstPhRole"), company:tr("tstPhCompany"), text:tr("tstPhText"), rating:null, sourceName:"", sourceUrl:"", preview:true});
     }
@@ -1603,6 +1616,7 @@
       var card = el("figure", "tst-card" + (c.preview ? " is-ph" : ""));
       card.setAttribute("role","group"); card.setAttribute("aria-roledescription", tr("tstSlide")); card.setAttribute("aria-label", tr("tstSlideOf",{n:i+1, total:items.length}));
       if(c.preview) card.appendChild(el("span","tst-badge",tr("tstPreview")));
+      else if(c.sample) card.appendChild(el("span","tst-badge is-sample",tr("tstSample")));
       var q = el("span","tst-q","“"); q.setAttribute("aria-hidden","true"); card.appendChild(q);
       card.appendChild(el("blockquote", "", c.text));
       if(c.rating){
