@@ -328,7 +328,7 @@
   .empty-note{margin:0;padding:24px 32px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 
   /* ---------- Testimonios (carrusel 3D suave) ---------- */
-  .tst{overflow:hidden;padding:8px 0 28px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+  .tst{overflow:hidden;padding:36px 0 22px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
   .tst-in{max-width:1240px;margin:0 auto;padding:0 24px;text-align:center}
   .tst-tag{margin:0 0 6px;font-family:var(--font-head);font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--b2)}
   .tst h2{font-family:var(--font-head);font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;line-height:1.15;margin:0 0 10px;font-weight:600}
@@ -365,7 +365,7 @@
   .tst-dot::after{content:"";width:9px;height:9px;border-radius:50%;background:#4a5058;transition:background .2s,transform .2s}
   .tst-dot[aria-current="true"]::after{background:var(--b2);transform:scale(1.35)}
   @media (max-width:700px){
-    .tst{padding:4px 0 20px}
+    .tst{padding:28px 0 18px}
     .tst-in{padding:0 14px}
     .tst-card{width:100%;padding:20px 20px 16px}
     .tst-card[data-d="1"],.tst-card[data-d="-1"],.tst-card[data-d="2"],.tst-card[data-d="-2"]{opacity:0;visibility:hidden;pointer-events:none}
@@ -615,21 +615,6 @@
 <div class="ex-grid" id="exGrid"></div>
 </div>
 </section>
-<section aria-labelledby="t-tst" class="tst" hidden="" id="testimonials">
-<div class="tst-in">
-<p class="tst-tag" data-i18n="t001">TESTIMONIOS</p>
-<h2 data-i18n="t002" id="t-tst">Lo que dicen nuestros usuarios</h2>
-<p class="tst-sub" hidden="" id="tstSub"></p>
-<div class="tst-carousel" id="tstCar" role="region" tabindex="0">
-<div class="tst-stage" id="tstStage"></div>
-<div class="tst-ctrl" id="tstCtrl">
-<button class="tst-nav" id="tstPrev" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></button>
-<div class="tst-dots" id="tstDots"></div>
-<button class="tst-nav" id="tstNext" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
-</div>
-</div>
-</div>
-</section>
 <div class="rs">
 <div class="hero-net rs-card" id="netCard">
 <div class="rs-main">
@@ -652,6 +637,21 @@
 </div>
 </div>
 </div>
+<section aria-labelledby="t-tst" class="tst" hidden="" id="testimonials">
+<div class="tst-in">
+<p class="tst-tag" data-i18n="t001">TESTIMONIOS</p>
+<h2 data-i18n="t002" id="t-tst">Lo que dicen nuestros usuarios</h2>
+<p class="tst-sub" hidden="" id="tstSub"></p>
+<div class="tst-carousel" id="tstCar" role="region" tabindex="0">
+<div class="tst-stage" id="tstStage"></div>
+<div class="tst-ctrl" id="tstCtrl">
+<button class="tst-nav" id="tstPrev" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<div class="tst-dots" id="tstDots"></div>
+<button class="tst-nav" id="tstNext" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 
