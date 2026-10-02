@@ -84,7 +84,7 @@
   .page{position:relative;z-index:1}
 
   /* ---------- Banda de logos (solo en "Tu resultado", dentro del hero) ---------- */
-  .logo-band{margin:44px auto 0}
+  .logo-band{margin:44px auto}
   .lb-title{margin:0 0 10px;font-family:var(--font-head);font-size:13px;font-weight:500;text-align:center;color:rgba(255,255,255,.85)}
   .lb-view{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
   .lb-track{display:flex;width:max-content;animation:lb-move 70s linear infinite;will-change:transform}
@@ -218,13 +218,13 @@
   .hero-net{position:relative;overflow:hidden;background:linear-gradient(100deg,#5173FF 0%,#2E9DFF 55%,#0AC6FF 100%);color:#fff;border-radius:var(--r-card)}
   .hero-net::after{content:"";position:absolute;inset:0;background:url("https://pub-3e391b23958e4e1b93d08a1ebeb9c70d.r2.dev/brain_resources/images/texture.png") center/cover;opacity:.22;mix-blend-mode:soft-light;pointer-events:none}
   .hero-net > *{position:relative;z-index:1}
-  .rs-card{display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - 150px);min-height:calc(100svh - 150px);padding:26px 28px;text-align:center}
-  .rs-title{font-family:var(--font-head);font-size:clamp(18px,2.6vw,22px);font-weight:500;margin:0 0 14px;line-height:1.25}
+  .rs-card{padding:clamp(28px,4.5vw,44px);text-align:center}
+  .rs-title{font-family:var(--font-head);font-size:clamp(18px,2.6vw,22px);font-weight:500;margin:0 0 16px;line-height:1.25}
   .dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}
   .dual.one{grid-template-columns:minmax(0,1fr)}
   .dual>div{min-width:0}
   .dual .dl{display:block;font-family:var(--font-head);font-size:clamp(14px,1.9vw,17px);font-weight:500}
-  .dual .big{font-family:var(--font-head);font-weight:600;letter-spacing:-.04em;line-height:1;margin:6px 0 0;font-variant-numeric:tabular-nums;font-size:clamp(30px,6.6vw,58px)}
+  .dual .big{font-family:var(--font-head);font-weight:600;letter-spacing:-.04em;line-height:1;margin:6px 0 0;font-variant-numeric:tabular-nums;font-size:clamp(28px,7.2vw,58px)}
   .dual .dy{display:block;font-size:13px;margin-top:4px;opacity:.95}
   .rs-est{margin:12px 0 0;font-size:12.5px;color:rgba(255,255,255,.78)}
   .rs-net{margin:10px 0 0;font-size:15px;font-weight:500;line-height:1.4}
@@ -263,7 +263,7 @@
   .sticky-net{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;border-radius:999px;padding:8px 8px 8px 22px;border:1.5px solid transparent;background:linear-gradient(#000,#000) padding-box, linear-gradient(100deg,#0AC6FF,#5173FF) border-box;box-shadow:0 10px 40px rgba(0,0,0,.6)}
   .sticky-label{font-family:var(--font-head);font-size:15px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.2}
   .sticky-btn{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#000;font-family:var(--font-head);font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap}
-  @media (max-width:560px){ .rs-card{padding:20px 16px;min-height:calc(100vh - 130px);min-height:calc(100svh - 130px)} .dual{gap:10px} .btn-main{width:100%;padding:0 20px} .rs-pad{padding:18px} .md-head{padding:14px 14px 14px 18px} .md-intro{padding:16px 18px 0} .modal{padding:12px} .sticky-label{font-size:13px} .sticky-btn{padding:0 16px;font-size:13.5px} }
+  @media (max-width:560px){ .dual{gap:10px} .btn-main{width:100%;padding:0 20px} .rs-pad{padding:18px} .md-head{padding:14px 14px 14px 18px} .md-intro{padding:16px 18px 0} .modal{padding:12px} .sticky-label{font-size:13px} .sticky-btn{padding:0 16px;font-size:13.5px} }
   @media (prefers-reduced-motion: reduce){ .btn-main{transition:none} .btn-main:hover{transform:none} }
 
   /* ---------- Preguntas: opciones seleccionables, dos columnas, casilla ---------- */
@@ -810,7 +810,7 @@
       empty:"Aquí aparecerá el desglose en cuanto introduzcas tus datos.",
       netLine:"Beneficio neto estimado: {x} al año, ya descontado lo que pagas por Fivo.",
       priceMsg:"Fivo cuesta menos de {max} al mes por persona.",
-      ctaTitleA:"¿Quieres que lo implementemos en tu empresa?", ctaBtnA:"Reservar mi llamada", ctaSmallA:"Revisamos tus números contigo.", ctaAlt:"o prueba 7 días gratis",
+      ctaTitleA:"¿Quieres hacer una llamada para que lo implementemos en tu empresa?", ctaBtnA:"Reservar mi llamada", ctaSmallA:"Revisamos tus números contigo y te decimos por dónde empezar.", ctaAlt:"o prueba 7 días gratis",
       ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min",
       stickyProfit:"Beneficio estimado: {x}/año", stickySave:"Ahorro estimado: {x}/año", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
       toolsLabel:"Grabación, transcripción y notas de reuniones",
@@ -872,7 +872,7 @@
       empty:"Your breakdown will appear here as soon as you enter your data.",
       netLine:"Estimated net profit: {x} a year, after paying for Fivo.",
       priceMsg:"Fivo costs less than {max} per person per month.",
-      ctaTitleA:"Want us to set it up in your company?", ctaBtnA:"Book my call", ctaSmallA:"We'll review your numbers with you.", ctaAlt:"or try free for 7 days",
+      ctaTitleA:"Want to book a call so we can set it up in your company?", ctaBtnA:"Book my call", ctaSmallA:"We'll go through your numbers with you and tell you where to start.", ctaAlt:"or try free for 7 days",
       ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min",
       stickyProfit:"Estimated profit: {x}/yr", stickySave:"Estimated savings: {x}/yr", stickyBtnA:"Book a call", stickyBtnB:"Try free",
       toolsLabel:"Screen recording, transcription and meeting notes",
@@ -1142,6 +1142,19 @@
   }
   /* Barra fija con el CTA: aparece cuando el botón principal sale de la pantalla y se oculta cuando vuelve a verse */
   function updateSticky(){ $("stickyBar").hidden = !(state.step===LAST && !ctaVisible); }
+  var cardAnimated = false, cardObs = null;
+  function armCardObserver(){
+    if(cardObs) return;
+    if(!("IntersectionObserver" in window)) return;   /* sin soporte: las cifras se quedan sin animar, ya con su valor */
+    cardObs = new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(state.step!==LAST || !en.isIntersecting || cardAnimated) return;
+        cardAnimated = true; if(compute(state).ready) countUp();
+        cardObs.disconnect();
+      });
+    }, {threshold:0.3});
+    cardObs.observe($("netCard"));
+  }
   var ctaViewedFor = "", ctaObs = null;
   function armCtaObserver(){
     if(ctaObs) return;
@@ -1162,7 +1175,6 @@
     if(n===LAST){
       ctaVisible = true; updateSticky();   /* al llegar el botón se ve; el observador lo corrige si no cabe */
       track("calc_result");
-      if(compute(state).ready) countUp();
       window.scrollTo({top:0, behavior: reduced ? "auto" : "smooth"});
     } else {
       var f = $("calc"); if(f && f.scrollIntoView) f.scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
@@ -1715,8 +1727,8 @@
   applyStatic(); applyLinks(); updateLangUI();
   syncControls();
   buildTestimonials(); buildExamples();
-  armCtaObserver();
-  if(fromLink && state.step===LAST && compute(state).ready){ renderSteps(); render(); track("calc_result"); if(compute(state).ready) countUp(); }
+  armCtaObserver(); armCardObserver();
+  if(fromLink && state.step===LAST && compute(state).ready){ renderSteps(); render(); track("calc_result"); }
   else { if(state.step===LAST || (state.step>1 && !canNext1(compute(state)))) state.step = 1; renderSteps(); render(); }
 })();
 </script>
