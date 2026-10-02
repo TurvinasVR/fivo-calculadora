@@ -355,7 +355,6 @@
   .tst-src{margin:14px 0 0;font-size:12px;color:#6b7280}
   .tst-src a{color:#2956c9;text-underline-offset:2px}
   .tst-badge{position:absolute;top:14px;right:14px;background:#FACC15;color:#111;font-family:var(--font-head);font-weight:700;font-size:11.5px;letter-spacing:.04em;padding:5px 10px;border-radius:999px}
-  .tst-badge.is-sample{top:12px;right:12px;background:#eef0f4;color:#6b7280;font-family:var(--font-body,inherit);font-weight:500;font-size:11px;letter-spacing:.02em;padding:3px 9px}
   .tst-card.is-ph blockquote{color:#6b7280}
   .tst-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
   .tst-nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--field);background:rgba(255,255,255,.04);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s}
@@ -826,7 +825,7 @@
       exSave:"Te ahorrarías", exEarn:"Ganarías más", exNet:"Beneficio neto", exPerYear:"al año", exLoad:"Cargar este ejemplo",
       tstLabel:"Testimonios de usuarios", tstCarousel:"carrusel", tstSlide:"diapositiva", tstSlideOf:"{n} de {total}",
       tstPrev:"Testimonio anterior", tstNext:"Siguiente testimonio", tstGo:"Ir al testimonio {n}", tstStars:"{n} de 5 estrellas", tstVia:"Fuente",
-      tstPreview:"VISTA PREVIA – NO REAL", tstSample:"Ejemplo", tstPhName:"NOMBRE APELLIDO", tstPhRole:"Cargo", tstPhCompany:"Empresa",
+      tstPreview:"VISTA PREVIA – NO REAL", tstPhName:"NOMBRE APELLIDO", tstPhRole:"Cargo", tstPhCompany:"Empresa",
       tstPhText:"Aquí irá un testimonio real, con permiso de la persona.",
       reviewsLine:"Con más de {count} reseñas en {storeName}, nuestros usuarios destacan la eficacia y fiabilidad de la plataforma.",
       billM:"{us} × {price} al mes × 12 meses = {cost}",
@@ -888,7 +887,7 @@
       exSave:"You'd save", exEarn:"You'd earn more", exNet:"Net profit", exPerYear:"per year", exLoad:"Load this example",
       tstLabel:"User testimonials", tstCarousel:"carousel", tstSlide:"slide", tstSlideOf:"{n} of {total}",
       tstPrev:"Previous testimonial", tstNext:"Next testimonial", tstGo:"Go to testimonial {n}", tstStars:"{n} out of 5 stars", tstVia:"Source",
-      tstPreview:"PREVIEW – NOT REAL", tstSample:"Sample", tstPhName:"FIRST LAST NAME", tstPhRole:"Job title", tstPhCompany:"Company",
+      tstPreview:"PREVIEW – NOT REAL", tstPhName:"FIRST LAST NAME", tstPhRole:"Job title", tstPhCompany:"Company",
       tstPhText:"A real testimonial, with the person's permission, will go here.",
       reviewsLine:"With more than {count} reviews on {storeName}, our users highlight the platform's effectiveness and reliability.",
       billM:"{us} × {price} per month × 12 months = {cost}",
@@ -1615,8 +1614,7 @@
     items.forEach(function(c, i){
       var card = el("figure", "tst-card" + (c.preview ? " is-ph" : ""));
       card.setAttribute("role","group"); card.setAttribute("aria-roledescription", tr("tstSlide")); card.setAttribute("aria-label", tr("tstSlideOf",{n:i+1, total:items.length}));
-      if(c.preview) card.appendChild(el("span","tst-badge",tr("tstPreview")));
-      else if(c.sample) card.appendChild(el("span","tst-badge is-sample",tr("tstSample")));
+      if(c.preview) card.appendChild(el("span","tst-badge",tr("tstPreview")));
       var q = el("span","tst-q","“"); q.setAttribute("aria-hidden","true"); card.appendChild(q);
       card.appendChild(el("blockquote", "", c.text));
       if(c.rating){
