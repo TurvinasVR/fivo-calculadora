@@ -326,25 +326,25 @@
   .empty-note{margin:0;padding:24px 32px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 
   /* ---------- Testimonios (carrusel 3D suave) ---------- */
-  .tst{overflow:hidden;padding:56px 0 30px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+  .tst{overflow:hidden;padding:8px 0 28px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
   .tst-in{max-width:1240px;margin:0 auto;padding:0 24px;text-align:center}
-  .tst-tag{margin:0 0 10px;font-family:var(--font-head);font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--b2)}
-  .tst h2{font-family:var(--font-head);font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;line-height:1.1;margin:0 0 14px;font-weight:600}
+  .tst-tag{margin:0 0 6px;font-family:var(--font-head);font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--b2)}
+  .tst h2{font-family:var(--font-head);font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;line-height:1.15;margin:0 0 10px;font-weight:600}
   .tst-sub{margin:0 auto 6px;max-width:640px;color:var(--muted);font-size:15px;line-height:1.5}
   .tst-sub a{color:#9db4ff;text-underline-offset:3px}
-  .tst-carousel{margin-top:30px;outline-offset:6px;border-radius:24px}
+  .tst-carousel{margin-top:18px;outline-offset:6px;border-radius:24px}
   .tst-stage{display:grid;perspective:1400px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
   .tst-stage.drag{cursor:grabbing}
-  .tst-card{grid-area:1/1;justify-self:center;align-self:start;position:relative;width:min(520px,calc(100% - 120px));margin:0;padding:34px 32px 26px;background:#fff;color:#111827;border-radius:22px;text-align:left;box-shadow:0 24px 70px rgba(0,0,0,.5);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .45s ease,filter .45s ease;will-change:transform}
+  .tst-card{grid-area:1/1;justify-self:center;align-self:start;position:relative;width:min(520px,calc(100% - 120px));margin:0;padding:22px 28px 18px;background:#fff;color:#111827;border-radius:20px;text-align:left;box-shadow:0 24px 70px rgba(0,0,0,.5);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .45s ease,filter .45s ease;will-change:transform}
   .tst-card[data-d="0"]{transform:translateX(0) scale(1);opacity:1;filter:none;z-index:5}
   .tst-card[data-d="1"]{transform:translateX(74%) scale(.84) rotate(7deg) rotateY(-10deg);opacity:.55;filter:blur(1.5px);z-index:3;cursor:pointer}
   .tst-card[data-d="-1"]{transform:translateX(-74%) scale(.84) rotate(-7deg) rotateY(10deg);opacity:.55;filter:blur(1.5px);z-index:3;cursor:pointer}
   .tst-card[data-d="2"]{transform:translateX(128%) scale(.7) rotate(8deg) rotateY(-14deg);opacity:.25;filter:blur(3px);z-index:2;cursor:pointer}
   .tst-card[data-d="-2"]{transform:translateX(-128%) scale(.7) rotate(-8deg) rotateY(14deg);opacity:.25;filter:blur(3px);z-index:2;cursor:pointer}
   .tst-card[data-d="far"]{transform:scale(.6);opacity:0;visibility:hidden;pointer-events:none}
-  .tst-q{display:block;font-family:Georgia,"Times New Roman",serif;font-size:72px;line-height:.6;height:34px;color:#E8B02F;font-weight:700}
-  .tst-card blockquote{margin:6px 0 16px;font-style:italic;font-size:17px;line-height:1.6;color:#1f2937}
-  .tst-stars{display:flex;gap:2px;margin:0 0 14px;color:#E8B02F;font-size:18px;line-height:1}
+  .tst-q{display:block;font-family:Georgia,"Times New Roman",serif;font-size:56px;line-height:.6;height:24px;color:#E8B02F;font-weight:700}
+  .tst-card blockquote{margin:4px 0 12px;font-style:italic;font-size:16px;line-height:1.5;color:#1f2937}
+  .tst-stars{display:flex;gap:2px;margin:0 0 10px;color:#E8B02F;font-size:18px;line-height:1}
   .tst-stars .off{color:#d6dae1}
   .tst-card figcaption{display:flex;align-items:center;gap:12px}
   .tst-av{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#fff;font-family:var(--font-head);font-weight:600;font-size:18px}
@@ -354,7 +354,7 @@
   .tst-src a{color:#2956c9;text-underline-offset:2px}
   .tst-badge{position:absolute;top:14px;right:14px;background:#FACC15;color:#111;font-family:var(--font-head);font-weight:700;font-size:11.5px;letter-spacing:.04em;padding:5px 10px;border-radius:999px}
   .tst-card.is-ph blockquote{color:#6b7280}
-  .tst-ctrl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:26px}
+  .tst-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
   .tst-nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--field);background:rgba(255,255,255,.04);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s}
   .tst-nav:hover{background:rgba(255,255,255,.12);border-color:#fff}
   .tst-nav svg{width:20px;height:20px}
@@ -363,9 +363,9 @@
   .tst-dot::after{content:"";width:9px;height:9px;border-radius:50%;background:#4a5058;transition:background .2s,transform .2s}
   .tst-dot[aria-current="true"]::after{background:var(--b2);transform:scale(1.35)}
   @media (max-width:700px){
-    .tst{padding:40px 0 20px}
+    .tst{padding:4px 0 20px}
     .tst-in{padding:0 14px}
-    .tst-card{width:100%;padding:28px 22px 22px}
+    .tst-card{width:100%;padding:20px 20px 16px}
     .tst-card[data-d="1"],.tst-card[data-d="-1"],.tst-card[data-d="2"],.tst-card[data-d="-2"]{opacity:0;visibility:hidden;pointer-events:none}
     .tst-card[data-d="1"]{transform:translateX(40%) scale(.9)}
     .tst-card[data-d="-1"]{transform:translateX(-40%) scale(.9)}
@@ -765,7 +765,7 @@
        Forma de cada uno: {name:"", role:"", company:"", text:{es:"", en:""}, rating:null, consent:false, sourceName:"", sourceUrl:""}
        Solo se muestran los que tengan consent === true. rating: número de 1 a 5 (si no, no se dibujan estrellas). Vacía = el carrusel no sale en la web publicada. */
     abTest: false,   // false = 3 o más miembros siempre ven la versión LLAMADA y 1-2 miembros la de CONVERSIÓN. true = variante aleatoria 50/50 solo en memoria (sin localStorage ni cookies). ?ab=A o ?ab=B fuerzan cada versión.
-    showTestimonials: false,   // true = muestra el carrusel entre la banda de empresas y la tarjeta del resultado (los datos y el código siguen en el archivo)
+    showTestimonials: true,   // true = muestra el carrusel entre la banda de empresas y la tarjeta del resultado (solo hay tarjetas con testimonios reales con consent:true; en localhost o con ?preview=1 salen 5 rellenos "VISTA PREVIA – NO REAL"). false = lo oculta del todo.
     testimonials: [],
     /* Subtítulo opcional con reseñas de una tienda: solo se muestra si los tres campos están rellenos (count número, storeName y url https). */
     reviews: {count: null, storeName: "", url: ""},
@@ -1256,7 +1256,7 @@
     $("rcNeg").hidden = pos; if(!pos) $("rcNeg").textContent = tr("calcNeg",{n:eur(r.net)});
     $("priceMsg").textContent = tr("priceMsg",{max:eur(Math.floor(CFG.priceMonthly)+1)});   /* techo de CFG.priceMonthly */
     $("billDetail").textContent = tr(state.plan==="annual" ? "billA" : "billM", {us:usersN(r.people), price:eur2(state.plan==="annual" ? CFG.priceAnnual : CFG.priceMonthly), cost:eur(r.cost)});
-    $("billNote").innerHTML = state.plan==="annual"
+    $("billNote").innerHTML = (state.plan==="annual" || r.netIfAnnual<=0)
       ? tr("noteA",{s:eur(r.costMonthly - r.costAnnual)})
       : tr("noteM",{s:eur(r.costMonthly - r.costAnnual), n:eur(r.netIfAnnual)});
     renderVideo(); renderCta(r);
