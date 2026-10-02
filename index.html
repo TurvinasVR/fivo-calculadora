@@ -226,9 +226,12 @@
   .dual .dl{display:block;font-family:var(--font-head);font-size:clamp(14px,1.9vw,17px);font-weight:500}
   .dual .big{font-family:var(--font-head);font-weight:600;letter-spacing:-.04em;line-height:1;margin:6px 0 0;font-variant-numeric:tabular-nums;font-size:clamp(28px,7.2vw,58px)}
   .dual .dy{display:block;font-size:13px;margin-top:4px;opacity:.95}
-  .rs-est{margin:12px 0 0;font-size:12.5px;color:rgba(255,255,255,.78)}
-  .rs-net{margin:10px 0 0;font-size:15px;font-weight:500;line-height:1.4}
-  .rs-price{margin:6px 0 0;font-size:14.5px;line-height:1.4;opacity:.96}
+  .rs-calc{margin:14px 0 0;font-size:15px;line-height:1.55}
+  .rs-calc .nb{white-space:nowrap}
+  .rc-res b{white-space:nowrap;font-family:var(--font-head);font-size:1.3em;font-weight:700;letter-spacing:-.01em}
+  .rs-negnote{margin:8px 0 0;font-size:14px;line-height:1.45}
+  .rs-price{margin:8px 0 0;font-size:14.5px;line-height:1.4;opacity:.96}
+  .rs-est{margin:8px 0 0;font-size:12.5px;color:rgba(255,255,255,.78)}
   .rs-cta{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.35)}
   .rs-cta h3{font-family:var(--font-head);font-size:clamp(20px,3vw,26px);font-weight:600;letter-spacing:-.015em;line-height:1.2;margin:0 0 14px}
   .btn-main{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 40px;border-radius:999px;background:#fff;color:#0b1020;font-family:var(--font-head);font-weight:600;font-size:18px;text-decoration:none;box-shadow:0 10px 30px rgba(8,20,60,.28);transition:transform .15s,box-shadow .15s}
@@ -632,9 +635,10 @@
 <div><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
 <div id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
 </div>
-<p class="rs-est"><span data-i18n="r030">Estimación a partir de tus datos</span> · <button class="rs-link" data-i18n="r031" id="openCalc" type="button">Ver cómo se calcula</button></p>
-<p class="rs-net" hidden="" id="netLine"></p>
+<p class="rs-calc"><span id="rcExpr"></span> <span class="rc-res"><b id="rcEq"></b> <span id="rcTail"></span></span></p>
+<p class="rs-negnote" hidden="" id="rcNeg"></p>
 <p class="rs-price" id="priceMsg"></p>
+<p class="rs-est"><span data-i18n="r030">Estimación a partir de tus datos</span> · <button class="rs-link" data-i18n="r031" id="openCalc" type="button">Ver cómo se calcula</button></p>
 <div class="rs-cta" id="ctaBox">
 <h3 id="ctaTitle"></h3>
 <a class="btn-main" href="#" id="ctaBtn"><span id="ctaBtnText"></span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
@@ -817,11 +821,12 @@
       noteA:"Con pago anual ahorras <b>{s}</b> al año frente al pago mensual.",
       noteM:"Con pago anual ahorras <b>{s}</b> al año y tu beneficio sube a <b>{n}</b>.",
       empty:"Aquí aparecerá el desglose en cuanto introduzcas tus datos.",
-      netLine:"Beneficio neto estimado: {x} al año, ya descontado lo que pagas por Fivo.",
+      calcExpr:"{a} + {g} − {c} de Fivo", calcEq:"= {n}", calcEqNeg:"= ({n})", calcTail:"de beneficio neto al año",
+      calcNeg:"Con estos datos el resultado neto es {n}. Ajusta los supuestos o cuéntanos tu caso.",
+      stickyProfit:"Beneficio neto estimado: {x}/año", netRow:"Beneficio neto estimado",
       priceMsg:"Fivo cuesta menos de {max} al mes por persona.",
       ctaTitleA:"¿Quieres hacer una llamada para que lo implementemos en tu empresa?", ctaBtnA:"Reservar mi llamada", ctaSmallA:"Revisamos tus números contigo y te decimos por dónde empezar.", ctaAlt:"o prueba 7 días gratis",
-      ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min",
-      stickyProfit:"Beneficio estimado: {x}/año", stickyNoProfit:"¿Quieres una llamada para implementarlo?", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
+      ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min", stickyNoProfit:"¿Quieres una llamada para implementarlo?", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
       toolsLabel:"Grabación, transcripción y notas de reuniones",
       toolsOwn:"{m} al mes × 12 meses, tal como lo indicas",
       toolsEst:"Estimación: el {pc} de tus {a} al mes en aplicaciones ({m} al mes) × 12 meses",
@@ -843,8 +848,7 @@
       costRow:"Inversión en Fivo",
       costNote:"{us} × {price} × 12 meses (plan Business, pago {mode})",
       priceM:"{p} al mes", priceA:"≈ {p} al mes ({m} −{d})",
-      modeM:"mensual", modeA:"anual",
-      netRow:"Beneficio neto anual estimado", netNote:"Total que recuperas − inversión en Fivo",
+      modeM:"mensual", modeA:"anual", netNote:"Total que recuperas − inversión en Fivo",
       chkOkHead:"<b>✓ Cifras verificadas.</b> ",
       chkTools:"Herramientas ({t}) = 12 × {m} al mes que indicas; ",
       chkTail:"{lines} de líneas = {ben} recuperados; {ben} − {cost} = {net}.",
@@ -879,11 +883,12 @@
       noteA:"With annual billing you save <b>{s}</b> a year compared to monthly billing.",
       noteM:"With annual billing you save <b>{s}</b> a year and your profit rises to <b>{n}</b>.",
       empty:"Your breakdown will appear here as soon as you enter your data.",
-      netLine:"Estimated net profit: {x} a year, after paying for Fivo.",
+      calcExpr:"{a} + {g} − {c} for Fivo", calcEq:"= {n}", calcEqNeg:"= ({n})", calcTail:"net profit a year",
+      calcNeg:"With this data the net result is {n}. Adjust the assumptions or tell us about your case.",
+      stickyProfit:"Estimated net profit: {x}/yr", netRow:"Estimated net profit",
       priceMsg:"Fivo costs less than {max} per person per month.",
       ctaTitleA:"Want to book a call so we can set it up in your company?", ctaBtnA:"Book my call", ctaSmallA:"We'll go through your numbers with you and tell you where to start.", ctaAlt:"or try free for 7 days",
-      ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min",
-      stickyProfit:"Estimated profit: {x}/yr", stickyNoProfit:"Want a call to set it up?", stickyBtnA:"Book a call", stickyBtnB:"Try free",
+      ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min", stickyNoProfit:"Want a call to set it up?", stickyBtnA:"Book a call", stickyBtnB:"Try free",
       toolsLabel:"Screen recording, transcription and meeting notes",
       toolsOwn:"{m} per month × 12 months, as you entered it",
       toolsEst:"Estimate: {pc} of your {a} per month on apps ({m} per month) × 12 months",
@@ -905,8 +910,7 @@
       costRow:"Fivo investment",
       costNote:"{us} × {price} × 12 months (Business plan, {mode} billing)",
       priceM:"{p} per month", priceA:"≈ {p} per month ({m} −{d})",
-      modeM:"monthly", modeA:"annual",
-      netRow:"Estimated annual net profit", netNote:"Total you recover − Fivo investment",
+      modeM:"monthly", modeA:"annual", netNote:"Total you recover − Fivo investment",
       chkOkHead:"<b>✓ Figures verified.</b> ",
       chkTools:"Tools ({t}) = 12 × the {m} per month you enter; ",
       chkTail:"{lines} in line items = {ben} recovered; {ben} − {cost} = {net}.",
@@ -992,20 +996,21 @@
     var time      = Math.round(lossToday * rec / 100);
     var extra     = i.revOn ? Math.round(calls * uplift / 100) : 0;
 
+    /* ÚNICA FUENTE de las cifras de dinero. La interfaz solo lee estos campos, nunca recalcula:
+       save = ahorro (A+B+C) · earn = ganancia (D) · gross = bruto (save+earn) · cost = coste de Fivo del plan elegido · net = neto (gross−cost) */
     var save     = tools + audit + time;      /* "Te ahorrarías" */
     var earn     = extra;                     /* "Ganarías más" */
-    var benefits = save + earn;
-    var price    = i.plan === "annual" ? CFG.priceAnnual : CFG.priceMonthly;
-    var cost     = Math.round(people * price * CFG.months);
-    var net      = benefits - cost;
+    var gross    = save + earn;
+    var costMonthly = Math.round(people * CFG.priceMonthly * CFG.months);
+    var costAnnual  = Math.round(people * CFG.priceAnnual  * CFG.months);
+    var cost     = i.plan === "annual" ? costAnnual : costMonthly;
+    var net      = gross - cost;
 
     return { reps:reps, rest:rest, people:people, team:team, calls:calls, appsM:appsM, appsRepIn:repIn, subM:subM, subst:subst, rec:rec, uplift:uplift,
       toolsFull:toolsFull, tools:tools, auditKind:auditKind, tierValue:tierValue, audit:audit,
-      lossToday:lossToday, time:time, extra:extra, save:save, earn:earn,
-      benefits:benefits, cost:cost, net:net,
-      perMonth: Math.round(net/12), perDay: Math.round(net/365),
-      ratio: cost>0 ? benefits/cost : 0,
-      payDays: benefits>0 ? Math.ceil(cost/(benefits/365)) : null,
+      lossToday:lossToday, time:time, extra:extra, value:time+extra, save:save, earn:earn,
+      gross:gross, cost:cost, net:net,
+      costMonthly:costMonthly, costAnnual:costAnnual, netIfAnnual:gross-costAnnual,   /* para la frase del ahorro con pago anual */
       ready: people>=1 && team>0 };
   }
 
@@ -1037,12 +1042,13 @@
   var ctaVisible = false; /* el botón principal de la tarjeta está a la vista (la barra fija se muestra cuando no lo está) */
 
   function renderSeg(){ document.querySelectorAll(".seg button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.plan===state.plan)); }); }
-  var counting = false;
+  var counting = false, countTok = 0;
   function countUp(){
-    var r = compute(state), s = $("saveBig"), g = $("earnBig");
+    var r = compute(state), s = $("saveBig"), g = $("earnBig"), tok = ++countTok;
     if(reduced || window.__fivoNoAnim){ s.textContent = eur(r.save); g.textContent = eur(r.earn); return; }
     var t0 = performance.now(), ms = 800; counting = true;
     (function f(t){
+      if(tok!==countTok) return;   /* algo cambió durante la animación: render() ya pintó los valores finales */
       var k = Math.min(1,(t-t0)/ms), e = 1-Math.pow(1-k,3);
       if(k<1){ s.textContent = eur(Math.round(r.save*e)); g.textContent = eur(Math.round(r.earn*e)); requestAnimationFrame(f); }
       else { counting = false; var c = compute(state); s.textContent = eur(c.save); g.textContent = eur(c.earn); }
@@ -1237,20 +1243,22 @@
 
     if(state.step!==LAST || !r.ready){ renderTable(r); return r; }
 
-    if(!counting){ $("saveBig").textContent = eur(r.save); $("earnBig").textContent = eur(r.earn); }
+    /* un cambio durante la animación de las cifras grandes: se cancela y se pintan ya los valores finales */
+    if(counting){ countTok++; counting = false; }
+    $("saveBig").textContent = eur(r.save); $("earnBig").textContent = eur(r.earn);
     $("earnBox").hidden = !state.revOn;
     $("dual").classList.toggle("one", !state.revOn);
-    var nl = $("netLine"); nl.hidden = !(r.net>0);
-    if(r.net>0) nl.textContent = tr("netLine",{x:eur(r.net)});
+    /* La cuenta de la tarjeta: ahorro + ganancia − coste = neto (todo sale de compute()) */
+    var nb = function(x){ return '<span class="nb">'+eur(x)+'</span>'; }, pos = r.net>0;
+    $("rcExpr").innerHTML = tr("calcExpr",{a:nb(r.save), g:nb(r.earn), c:nb(r.cost)});
+    $("rcEq").textContent = tr(pos ? "calcEq" : "calcEqNeg",{n:eur(r.net)});
+    $("rcTail").textContent = pos ? tr("calcTail") : "";
+    $("rcNeg").hidden = pos; if(!pos) $("rcNeg").textContent = tr("calcNeg",{n:eur(r.net)});
     $("priceMsg").textContent = tr("priceMsg",{max:eur(Math.floor(CFG.priceMonthly)+1)});   /* techo de CFG.priceMonthly */
-    var us = usersN(r.people);
-    var costM = Math.round(r.people * CFG.priceMonthly * CFG.months);
-    var costA = Math.round(r.people * CFG.priceAnnual  * CFG.months);
-    var saveYr = costM - costA;
-    $("billDetail").textContent = tr(state.plan==="annual" ? "billA" : "billM", {us:us, price:eur2(state.plan==="annual" ? CFG.priceAnnual : CFG.priceMonthly), cost:eur(r.cost)});
+    $("billDetail").textContent = tr(state.plan==="annual" ? "billA" : "billM", {us:usersN(r.people), price:eur2(state.plan==="annual" ? CFG.priceAnnual : CFG.priceMonthly), cost:eur(r.cost)});
     $("billNote").innerHTML = state.plan==="annual"
-      ? tr("noteA",{s:eur(saveYr)})
-      : tr("noteM",{s:eur(saveYr), n:eur(compute(Object.assign({}, state, {plan:"annual"})).net)});
+      ? tr("noteA",{s:eur(r.costMonthly - r.costAnnual)})
+      : tr("noteM",{s:eur(r.costMonthly - r.costAnnual), n:eur(r.netIfAnnual)});
     renderVideo(); renderCta(r);
     renderTable(r);
     return r;
@@ -1292,7 +1300,7 @@
       '<tr class="sub"><td>'+tr("saveRow",{parts:saveParts})+'</td><td class="amt">'+eur(r.save)+'</td></tr>';
     if(state.revOn) html += '<tr class="group"><td>'+tr("gD")+'</td><td></td></tr>'+ rowsD.map(row).join("")+
       '<tr class="sub"><td>'+tr("earnRow")+'</td><td class="amt">'+eur(r.earn)+'</td></tr>';
-    html += '<tr class="sub"><td>'+tr("totalRow",{parts:totalParts})+'</td><td class="amt">'+eur(r.benefits)+'</td></tr>'+
+    html += '<tr class="sub"><td>'+tr("totalRow",{parts:totalParts})+'</td><td class="amt">'+eur(r.gross)+'</td></tr>'+
       '<tr class="cost"><td>'+tr("costRow")+'<span class="note">'+tr("costNote",{us:usersN(r.people), price:priceTxt, mode:tr(state.plan==="annual"?"modeA":"modeM")})+'</span></td><td class="amt">'+eur(-r.cost)+'</td></tr>'+
       '<tr class="total'+(neg?' neg':'')+'"><td>'+tr("netRow")+'<span class="note">'+tr("netNote")+'</span></td><td class="amt">'+eur(r.net)+'</td></tr>';
     tbl.innerHTML = html;
@@ -1300,9 +1308,9 @@
     var all = rowsA.concat(rowsB, rowsC, rowsD);
     var sumRows = all.reduce(function(a,s){return a+s.amt;},0);
     var okTools = r.subst!==100 || r.tools===r.subM*12;
-    var ok = sumRows===r.benefits && r.save+r.earn===r.benefits && r.tools+r.audit+r.time===r.save && r.benefits-r.cost===r.net && okTools;
+    var ok = sumRows===r.gross && r.save+r.earn===r.gross && r.tools+r.audit+r.time===r.save && r.gross-r.cost===r.net && okTools;
     $("check").innerHTML = ok
-      ? tr("chkOkHead") + (r.subst===100 ? tr("chkTools",{t:eur(r.tools), m:eur(r.subM)}) : "") + tr("chkTail",{lines:eur(sumRows), ben:eur(r.benefits), cost:eur(r.cost), net:eur(r.net)})
+      ? tr("chkOkHead") + (r.subst===100 ? tr("chkTools",{t:eur(r.tools), m:eur(r.subM)}) : "") + tr("chkTail",{lines:eur(sumRows), ben:eur(r.gross), cost:eur(r.cost), net:eur(r.net)})
       : tr("chkBad");
   }
 
@@ -1495,7 +1503,7 @@
     var r = compute(state);
     if(!r.ready){ msg(tr("needData"), true); return; }
     var payload = { email:email, lang:LANG, hp:$("hp").value, source:"calculadora-ahorro", inputs:state, results:{
-      tools:r.tools, audit:r.audit, value:r.time+r.extra, benefits:r.benefits, cost:r.cost, net:r.net }, link:shareLink() };
+      tools:r.tools, audit:r.audit, value:r.value, benefits:r.gross, cost:r.cost, net:r.net }, link:shareLink() };
     if(CFG.leadEndpoint){
       fetch(CFG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
         .then(function(res){ if(!res.ok) throw 0; msg(tr("sent",{email:email})); })
