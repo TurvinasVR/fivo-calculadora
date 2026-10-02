@@ -237,28 +237,33 @@
   .rs-small{margin:10px 0 0;font-size:13.5px;opacity:.95}
   .rs-alt{margin:6px 0 0;font-size:12.5px;opacity:.9}
   .rs-alt a{color:#fff;text-underline-offset:3px}
-  /* panel plegado: desglose, plan, supuestos y compartir */
-  .rs-fold{margin:34px auto 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
-  .rs-fold summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 28px;font-family:var(--font-head);font-weight:600;font-size:16.5px}
-  .rs-fold summary::-webkit-details-marker{display:none}
-  .rs-fold summary::after{content:"+";font-size:26px;line-height:1;color:var(--b2);flex:none}
-  .rs-fold[open] summary::after{content:"–"}
-  .rs-fold[open] summary{border-bottom:1px solid var(--line)}
+  /* ventana "Cómo se calcula tu resultado": desglose, plan, supuestos y compartir */
+  .rs-link{background:none;border:0;padding:0;color:#fff;font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  .rs-link:hover{opacity:.85}
+  .modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.74)}
+  .modal-box{position:relative;width:min(760px,100%);max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:0 30px 80px rgba(0,0,0,.6);outline:none}
+  .md-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px 16px 28px;border-bottom:1px solid var(--line);flex:none}
+  .md-head h2{margin:0;font-family:var(--font-head);font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .md-x{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--field);background:transparent;color:#fff;font-size:26px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0 0 3px}
+  .md-x:hover{background:rgba(255,255,255,.1);border-color:#fff}
+  .md-body{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .md-intro{margin:0;padding:18px 28px 0;color:var(--muted);font-size:14px}
+  html.md-open{overflow:hidden}
   .rs-pad{padding:20px 28px}
-  .rs-fold .bill{margin:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-  .rs-fold .bill-note{color:var(--muted);font-size:13.5px;margin:12px 0 0;font-weight:500}
-  .rs-fold .bill-note b{color:#fff;font-weight:700}
+  .md-body .bill{margin:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .md-body .bill-note{color:var(--muted);font-size:13.5px;margin:12px 0 0;font-weight:500}
+  .md-body .bill-note b{color:#fff;font-weight:700}
   .bill-l .t{display:block;font-family:var(--font-head);font-weight:600;font-size:14.5px}
   .bill-l .d{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;font-variant-numeric:tabular-nums}
   .seg-sm button{padding:9px 15px;font-size:14px}
   .rs-assume h3{font-family:var(--font-head);font-size:16px;font-weight:600;margin:0 0 6px}
   .rs-assume .mini-sub{font-size:12.5px;color:var(--muted);margin:0 0 16px}
   .rs-btns{display:flex;gap:8px;flex-wrap:wrap}
-  #foldBox{scroll-margin-top:16px}
   .sticky-net{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;border-radius:999px;padding:8px 8px 8px 22px;border:1.5px solid transparent;background:linear-gradient(#000,#000) padding-box, linear-gradient(100deg,#0AC6FF,#5173FF) border-box;box-shadow:0 10px 40px rgba(0,0,0,.6)}
   .sticky-label{font-family:var(--font-head);font-size:15px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.2}
   .sticky-btn{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#000;font-family:var(--font-head);font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap}
-  @media (max-width:560px){ .rs-card{padding:20px 16px;min-height:calc(100vh - 130px);min-height:calc(100svh - 130px)} .dual{gap:10px} .btn-main{width:100%;padding:0 20px} .rs-pad{padding:18px} .rs-fold summary{padding:18px} .sticky-label{font-size:13px} .sticky-btn{padding:0 16px;font-size:13.5px} }
+  @media (max-width:560px){ .rs-card{padding:20px 16px;min-height:calc(100vh - 130px);min-height:calc(100svh - 130px)} .dual{gap:10px} .btn-main{width:100%;padding:0 20px} .rs-pad{padding:18px} .md-head{padding:14px 14px 14px 18px} .md-intro{padding:16px 18px 0} .modal{padding:12px} .sticky-label{font-size:13px} .sticky-btn{padding:0 16px;font-size:13.5px} }
   @media (prefers-reduced-motion: reduce){ .btn-main{transition:none} .btn-main:hover{transform:none} }
 
   /* ---------- Preguntas: opciones seleccionables, dos columnas, casilla ---------- */
@@ -408,9 +413,9 @@
     .stp span{display:none}.stp.on span{display:inline}
     .stp + .stp::before{width:20px}
     .tbl td{padding:13px 18px;font-size:14px}
-    .bd-head{padding:24px 18px 4px}.check{padding:14px 18px 20px}.empty-note{padding:20px 18px}
+    .check{padding:14px 18px 20px}.empty-note{padding:20px 18px}
     .tag{display:block;margin:5px 0 0;width:max-content}
-    .rs-fold .bill{flex-direction:column;align-items:stretch}
+    .md-body .bill{flex-direction:column;align-items:stretch}
     .seg{width:100%}.seg button{flex:1;justify-content:center;padding:10px 8px;font-size:14px;gap:6px}
     .seg .save{font-size:10.5px;padding:3px 6px}
     }
@@ -420,12 +425,14 @@
   @media print{
     :root{--bg:#fff;--card:#fff;--line:#d8dde6;--ink:#0C1A33;--muted:#4a5568;--label:#2d3748;--ph:#5b6b86}
     body{background:#fff;color:#0C1A33}
-    .bg-top,.logo-band,.nav,.hero-in,.sticky-net,footer,.seg,.rs-assume,.rs-share,.rs-back,.rs-cta,.steps,.tst,.ex,.vid-sec,.rs-price{display:none!important}
-    .wrap{padding:0}
-    .card,.rs-fold{background:#fff;border-color:#d8dde6}
-    .rs-card{min-height:0}
+    .page,.sticky-net,.modal-backdrop,.md-x,.rs-assume,.rs-share{display:none!important}
+    .modal{position:static!important;display:block!important;padding:0;background:none}
+    .modal-box{position:static;width:auto;max-height:none;display:block;box-shadow:none;border:0;background:#fff}
+    .md-body{overflow:visible}
+    .md-head{border-bottom:1px solid #d8dde6}
+    .card{background:#fff;border-color:#d8dde6}
     .sumstrip b{-webkit-text-fill-color:#296BDC;color:#296BDC;background:none}
-    .hero-net,.tbl tr.total td,.tbl tr.group td,.rs-fold{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hero-net,.tbl tr.total td,.tbl tr.group td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .tbl tr.group td{color:#12336E;background:#e9efff}.tbl tr.sub td{background:#f6f8fc}
     .tbl td,.tbl tr.sub td.amt{color:#0C1A33}
     .tbl tr.total td{color:#fff}
@@ -434,7 +441,7 @@
 </head>
 <body>
 <div aria-hidden="true" class="bg-top"><span class="dia d1"></span><span class="dia d2"></span></div>
-<div class="page">
+<div class="page" id="page">
 <header class="nav">
 <a aria-label="Fivo" class="brand" data-i18n-aria="s001" href="https://fivo.ai/">
 <img alt="" id="logoImg" onerror="this.onerror=null;this.src='data:image/png;base64,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';document.getElementById('wm').hidden=true" onload="if(this.naturalWidth/this.naturalHeight&gt;1.8)document.getElementById('wm').hidden=true" src="https://fivo.ai/fintum-logo.svg"/>
@@ -573,28 +580,6 @@
 <section aria-live="polite" hidden="" id="step4">
 <div class="rs">
 <p class="rs-back"><button class="link-btn" data-i18n="s070" id="editData" type="button">← Cambiar mis datos</button></p>
-<div class="hero-net rs-card" id="netCard">
-<div class="rs-main">
-<h2 class="rs-title" data-i18n="r001">Esto es lo que Fivo podría darte cada año</h2>
-<div class="dual" id="dual">
-<div><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
-<div id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
-</div>
-<p class="rs-est" data-i18n="r030">Estimación a partir de tus datos</p>
-<p class="rs-net" hidden="" id="netLine"></p>
-<p class="rs-price" id="priceMsg"></p>
-<div class="rs-cta" id="ctaBox">
-<h3 id="ctaTitle"></h3>
-<a class="btn-main" href="#" id="ctaBtn"><span id="ctaBtnText"></span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-<p class="rs-small" id="ctaSmall"></p>
-<p class="rs-alt" hidden="" id="ctaAlt"><a href="#" id="ctaAltLink"></a></p>
-</div>
-</div>
-</div>
-<div aria-labelledby="lbTitle" class="logo-band" hidden="" id="logoBand" role="region">
-<p class="lb-title" data-i18n="w001" id="lbTitle">Empresas que ya usan Fivo</p>
-<div class="lb-view"><div class="lb-track" id="lbTrack"></div></div>
-</div>
 <section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
 <h2 data-i18n="r020" id="t-vid">Por qué y cómo puedes ahorrar dinero con Fivo</h2>
 <div class="vid">
@@ -602,8 +587,12 @@
 <video controls="" hidden="" id="videoFile" playsinline="" preload="metadata"></video>
 <div class="vid-ph" data-i18n="r022" hidden="" id="videoPh">Aquí irá el vídeo</div>
 </div>
-<p class="vid-skip"><a data-i18n="r021" href="#foldBox" id="videoSkip">Ir a mi cálculo ↓</a></p>
+<p class="vid-skip"><a data-i18n="r021" href="#netCard" id="videoSkip">Ver mi resultado ↓</a></p>
 </section>
+<div aria-labelledby="lbTitle" class="logo-band" hidden="" id="logoBand" role="region">
+<p class="lb-title" data-i18n="w001" id="lbTitle">Empresas que ya usan Fivo</p>
+<div class="lb-view"><div class="lb-track" id="lbTrack"></div></div>
+</div>
 </div>
 <section aria-labelledby="t-ex" class="ex" hidden="" id="examples">
 <div class="ex-in">
@@ -628,12 +617,50 @@
 </div>
 </section>
 <div class="rs">
-<details class="rs-fold" id="foldBox">
-<summary data-i18n="r031">Ver cómo se calcula y ajustar supuestos</summary>
-<div class="bd-head">
-<h2 data-i18n="s071" id="t-bd">Cada euro, explicado</h2>
-<p data-i18n="s072">Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.</p>
+<div class="hero-net rs-card" id="netCard">
+<div class="rs-main">
+<h2 class="rs-title" data-i18n="r001">Esto es lo que Fivo podría darte cada año</h2>
+<div class="dual" id="dual">
+<div><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
+<div id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
 </div>
+<p class="rs-est"><span data-i18n="r030">Estimación a partir de tus datos</span> · <button class="rs-link" data-i18n="r031" id="openCalc" type="button">Ver cómo se calcula</button></p>
+<p class="rs-net" hidden="" id="netLine"></p>
+<p class="rs-price" id="priceMsg"></p>
+<div class="rs-cta" id="ctaBox">
+<h3 id="ctaTitle"></h3>
+<a class="btn-main" href="#" id="ctaBtn"><span id="ctaBtnText"></span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<p class="rs-small" id="ctaSmall"></p>
+<p class="rs-alt" hidden="" id="ctaAlt"><a href="#" id="ctaAltLink"></a></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="foot">
+<span data-i18n="s084">Copyright 2026 Fivo AI. Todos los derechos reservados</span>
+<nav aria-label="Legal" data-i18n-aria="s105">
+<a data-i18n="s085" href="https://fivo.ai/privacy-policy">Política de Privacidad</a>
+<a data-i18n="s086" href="https://fivo.ai/security-policy">Política de Seguridad</a>
+<a data-i18n="s087" href="https://fivo.ai/terms-of-service">Términos de Servicio</a>
+</nav>
+</div>
+</footer>
+</div>
+<div class="sticky-net" hidden="" id="stickyBar">
+<span class="sticky-label" id="stickyLabel"></span>
+<a class="sticky-btn" href="#" id="stickyBtn"></a>
+</div>
+
+<div class="modal" hidden="" id="calcModal">
+<div class="modal-backdrop" id="mdBackdrop"></div>
+<div aria-labelledby="mdTitle" aria-modal="true" class="modal-box" id="mdBox" role="dialog" tabindex="-1">
+<div class="md-head"><h2 data-i18n="m001" id="mdTitle">Cómo se calcula tu resultado</h2><button class="md-x" data-i18n-aria="m002" id="mdClose" type="button">×</button></div>
+<div class="md-body">
+<p class="md-intro" data-i18n="s072">Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.</p>
 <table class="tbl" id="tbl"></table>
 <p class="check" id="check"></p>
 <div class="rs-pad">
@@ -687,27 +714,9 @@
 <p class="legal" id="legalNote"><span data-i18n="n004">Al enviarlo aceptas la</span> <a data-i18n="s085" href="https://fivo.ai/privacy-policy" rel="noopener" target="_blank">Política de Privacidad</a>.</p><p id="msg" role="status" style="font-size:13px;margin:12px 0 0;min-height:1em"></p>
 </div>
 <p class="est-note rs-pad" data-i18n="e001">Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.</p>
-</details>
 </div>
-</section>
-</main>
-
-<footer>
-<div class="foot">
-<span data-i18n="s084">Copyright 2026 Fivo AI. Todos los derechos reservados</span>
-<nav aria-label="Legal" data-i18n-aria="s105">
-<a data-i18n="s085" href="https://fivo.ai/privacy-policy">Política de Privacidad</a>
-<a data-i18n="s086" href="https://fivo.ai/security-policy">Política de Seguridad</a>
-<a data-i18n="s087" href="https://fivo.ai/terms-of-service">Términos de Servicio</a>
-</nav>
 </div>
-</footer>
 </div>
-<div class="sticky-net" hidden="" id="stickyBar">
-<span class="sticky-label" id="stickyLabel"></span>
-<a class="sticky-btn" href="#" id="stickyBtn"></a>
-</div>
-
 <script>
 (function(){
   /* ============ CONFIGURACIÓN ============ */
@@ -743,6 +752,7 @@
     /* Testimonios REALES (los entrega el dueño del proyecto, con permiso por escrito). NUNCA se inventan nombres, cargos, empresas, puntuaciones ni cifras.
        Forma de cada uno: {name:"", role:"", company:"", text:{es:"", en:""}, rating:null, consent:false, sourceName:"", sourceUrl:""}
        Solo se muestran los que tengan consent === true. rating: número de 1 a 5 (si no, no se dibujan estrellas). Vacía = el carrusel no sale en la web publicada. */
+    showTestimonials: false,   // true = muestra el carrusel entre la banda de empresas y la tarjeta del resultado (los datos y el código siguen en el archivo)
     testimonials: [],
     /* Subtítulo opcional con reseñas de una tienda: solo se muestra si los tres campos están rellenos (count número, storeName y url https). */
     reviews: {count: null, storeName: "", url: ""},
@@ -773,7 +783,7 @@
   /* ============ TEXTOS ============
      STATIC: textos del HTML (clave → texto). Se aplican con data-i18n, data-i18n-ph y data-i18n-aria.
      D: textos que genera el cálculo. Usan {variables}. */
-  var STATIC = {"es":{"s001":"Fivo","s002":"SOLUCIONES","s003":"PRECIOS","s004":"CONTACTAR VENTAS","s005":"Iniciar sesión","s006":"Empieza gratis","s008":"¿Cuánto dinero se te escapa en las llamadas de venta y reuniones de tu empresa?","s009":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s015":"Empecemos por tu empresa","s016":"Con cuatro datos tienes tu primera cifra. Todo en euros al año.","s018":"personas","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas que cerráis por llamadas y reuniones. Solo cuenta si activas la mejora de ventas.","s023":"Continuar","s024":"Cuéntanos cómo vendéis","s025":"Tres preguntas rápidas para ajustar la estimación de ventas.","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s071":"Cada euro, explicado","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s090":"Principal","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se te escapa en tus llamadas de venta y reuniones? | Fivo.ai","metaDesc":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","w010":"Tus ventas","w011":"Sector","w012":"Elige tu sector","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales (venden o hablan con clientes por llamada)","w025":"Resto del equipo","w026":"Cuenta a todas las personas que usarían Fivo.","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa para vender más y ser más productivo con menos equipo?","w040":"Quizá","w041":"Ahora, tus herramientas","w042":"Lo que pagas hoy por las aplicaciones de tu empresa y por lo que Fivo reemplazaría.","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación de pantalla, transcripción o notas de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ir a mi cálculo ↓","r022":"Aquí irá el vídeo","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula y ajustar supuestos"},"en":{"s001":"Fivo","s002":"SOLUTIONS","s003":"PRICING","s004":"CONTACT SALES","s005":"Log in","s006":"Start for free","s008":"How much money is slipping away in your company's sales calls and meetings?","s009":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","s012":"Your company","s013":"Your tools","s014":"Your result","s015":"Let's start with your company","s016":"Four numbers are enough for a first figure. Everything in euros per year.","s018":"people","s019":"Annual cost","s020":"Salaries and payroll costs for the whole team.","s021":"Approx. annual revenue","s022":"What the sales you close through calls and meetings generate per year. Only counts if you turn on the sales improvement.","s023":"Continue","s024":"Tell us how you sell","s025":"Three quick questions to fine-tune the sales estimate.","s036":"Back","s037":"See my result","s042":"Billing · Business plan, the best seller","s043":"Monthly","s044":"Annual","s045":"SAVE 25%","s058":"Email me my report","s059":"Copy link to my calculation","s060":"Download PDF","s061":"Stress-test the assumptions","s062":"They start at reasonable values. Lower them or switch off the extras and see how much still holds.","s063":"Search time you recover","s064":"Include the sales improvement","s065":"It's an assumption: better call follow-up and fewer missed opportunities.","s066":"Improvement on your call revenue","s067":"Tools that Fivo replaces","s070":"← Edit my answers","s071":"Every euro, explained","s072":"Every line adds up to its subtotal and the total. Your data appears exactly as you enter it, and estimates are labeled as such.","s084":"Copyright 2026 Fivo AI. All rights reserved","s085":"Privacy Policy","s086":"Security Policy","s087":"Terms of Service","s090":"Main","s092":"Progress","s093":"Number of people","s094":"Annual cost","s095":"Annual revenue","s098":"Fivo billing","s099":"you@company.com","s100":"Email","s101":"Percentage of search time you recover","s102":"Improvement in call revenue","s103":"Percentage of tools replaced","s105":"Legal","n004":"By submitting, you agree to the","title":"How much money is slipping away in your sales calls and meetings? | Fivo.ai","metaDesc":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","w010":"Your sales","w011":"Industry","w012":"Choose your industry","w013":"Technology and software","w014":"Professional services and consulting","w015":"Agency or marketing","w016":"Real estate","w017":"Insurance and finance","w018":"Healthcare","w019":"Education and training","w020":"Industry and construction","w021":"Retail and e-commerce","w022":"Other","w023":"My team members","w024":"Sales reps (they sell or talk to customers by phone)","w025":"Rest of the team","w026":"Count everyone who would use Fivo.","w032":"Do you record and review your sales calls?","w033":"No","w034":"Sometimes","w035":"Yes, always","w036":"Do you have outside consultants or agencies that review your sales calls or processes?","w037":"Yes","w038":"How much do you spend on them per year?","w039":"Do you think someone should optimize every department in your company so you can sell more and be more productive with a smaller team?","w040":"Maybe","w041":"Now, your tools","w042":"What you pay today for your company's apps and for what Fivo would replace.","w043":"How much do you spend per month on apps for your company?","w044":"€ per month","w045":"How much of that is on screen recording, transcription or meeting notes (Loom, Otter, Fireflies…)?","w046":"I don't know","w047":"Monthly spend","w050":"Include the external analysis","w051":"What hiring consultants or an outside analysis would cost. Fivo does it continuously from your meetings. Turn it off if you wouldn't hire it.","r001":"Here's what Fivo could do for you every year","r002":"You'd save","r003":"You'd earn more","r004":"a year","r020":"Why and how you can save money with Fivo","w001":"Companies already using Fivo","r021":"Go to my numbers ↓","r022":"The video will go here","e001":"Estimate based on your data, McKinsey Global Institute (2012) and Fivo's public pricing. Actual results depend on each team.","t001":"TESTIMONIALS","t002":"What our users say","x001":"What the calculation looks like for companies like yours","x002":"Illustrative examples with sample data. These are not real customers.","r030":"Estimate from your data","r031":"See how it's calculated and adjust assumptions"}};
+  var STATIC = {"es":{"s001":"Fivo","s002":"SOLUCIONES","s003":"PRECIOS","s004":"CONTACTAR VENTAS","s005":"Iniciar sesión","s006":"Empieza gratis","s008":"¿Cuánto dinero se te escapa en las llamadas de venta y reuniones de tu empresa?","s009":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s015":"Empecemos por tu empresa","s016":"Con cuatro datos tienes tu primera cifra. Todo en euros al año.","s018":"personas","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas que cerráis por llamadas y reuniones. Solo cuenta si activas la mejora de ventas.","s023":"Continuar","s024":"Cuéntanos cómo vendéis","s025":"Tres preguntas rápidas para ajustar la estimación de ventas.","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s090":"Principal","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se te escapa en tus llamadas de venta y reuniones? | Fivo.ai","metaDesc":"Responde unas preguntas y calcula cuánto ahorrarías y cuánto más ganarías mejorando tus procesos de venta con Fivo. Después, si quieres, lo ponemos en marcha contigo.","w010":"Tus ventas","w011":"Sector","w012":"Elige tu sector","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales (venden o hablan con clientes por llamada)","w025":"Resto del equipo","w026":"Cuenta a todas las personas que usarían Fivo.","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa para vender más y ser más productivo con menos equipo?","w040":"Quizá","w041":"Ahora, tus herramientas","w042":"Lo que pagas hoy por las aplicaciones de tu empresa y por lo que Fivo reemplazaría.","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación de pantalla, transcripción o notas de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ver mi resultado ↓","r022":"Aquí irá el vídeo","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula","m001":"Cómo se calcula tu resultado","m002":"Cerrar"},"en":{"s001":"Fivo","s002":"SOLUTIONS","s003":"PRICING","s004":"CONTACT SALES","s005":"Log in","s006":"Start for free","s008":"How much money is slipping away in your company's sales calls and meetings?","s009":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","s012":"Your company","s013":"Your tools","s014":"Your result","s015":"Let's start with your company","s016":"Four numbers are enough for a first figure. Everything in euros per year.","s018":"people","s019":"Annual cost","s020":"Salaries and payroll costs for the whole team.","s021":"Approx. annual revenue","s022":"What the sales you close through calls and meetings generate per year. Only counts if you turn on the sales improvement.","s023":"Continue","s024":"Tell us how you sell","s025":"Three quick questions to fine-tune the sales estimate.","s036":"Back","s037":"See my result","s042":"Billing · Business plan, the best seller","s043":"Monthly","s044":"Annual","s045":"SAVE 25%","s058":"Email me my report","s059":"Copy link to my calculation","s060":"Download PDF","s061":"Stress-test the assumptions","s062":"They start at reasonable values. Lower them or switch off the extras and see how much still holds.","s063":"Search time you recover","s064":"Include the sales improvement","s065":"It's an assumption: better call follow-up and fewer missed opportunities.","s066":"Improvement on your call revenue","s067":"Tools that Fivo replaces","s070":"← Edit my answers","s072":"Every line adds up to its subtotal and the total. Your data appears exactly as you enter it, and estimates are labeled as such.","s084":"Copyright 2026 Fivo AI. All rights reserved","s085":"Privacy Policy","s086":"Security Policy","s087":"Terms of Service","s090":"Main","s092":"Progress","s093":"Number of people","s094":"Annual cost","s095":"Annual revenue","s098":"Fivo billing","s099":"you@company.com","s100":"Email","s101":"Percentage of search time you recover","s102":"Improvement in call revenue","s103":"Percentage of tools replaced","s105":"Legal","n004":"By submitting, you agree to the","title":"How much money is slipping away in your sales calls and meetings? | Fivo.ai","metaDesc":"Answer a few questions and see how much you'd save and how much more you'd earn by improving your sales processes with Fivo. Then, if you like, we'll set it up with you.","w010":"Your sales","w011":"Industry","w012":"Choose your industry","w013":"Technology and software","w014":"Professional services and consulting","w015":"Agency or marketing","w016":"Real estate","w017":"Insurance and finance","w018":"Healthcare","w019":"Education and training","w020":"Industry and construction","w021":"Retail and e-commerce","w022":"Other","w023":"My team members","w024":"Sales reps (they sell or talk to customers by phone)","w025":"Rest of the team","w026":"Count everyone who would use Fivo.","w032":"Do you record and review your sales calls?","w033":"No","w034":"Sometimes","w035":"Yes, always","w036":"Do you have outside consultants or agencies that review your sales calls or processes?","w037":"Yes","w038":"How much do you spend on them per year?","w039":"Do you think someone should optimize every department in your company so you can sell more and be more productive with a smaller team?","w040":"Maybe","w041":"Now, your tools","w042":"What you pay today for your company's apps and for what Fivo would replace.","w043":"How much do you spend per month on apps for your company?","w044":"€ per month","w045":"How much of that is on screen recording, transcription or meeting notes (Loom, Otter, Fireflies…)?","w046":"I don't know","w047":"Monthly spend","w050":"Include the external analysis","w051":"What hiring consultants or an outside analysis would cost. Fivo does it continuously from your meetings. Turn it off if you wouldn't hire it.","r001":"Here's what Fivo could do for you every year","r002":"You'd save","r003":"You'd earn more","r004":"a year","r020":"Why and how you can save money with Fivo","w001":"Companies already using Fivo","r021":"See my results ↓","r022":"The video will go here","e001":"Estimate based on your data, McKinsey Global Institute (2012) and Fivo's public pricing. Actual results depend on each team.","t001":"TESTIMONIALS","t002":"What our users say","x001":"What the calculation looks like for companies like yours","x002":"Illustrative examples with sample data. These are not real customers.","r030":"Estimate based on your data","r031":"See how it's calculated","m001":"How your result is calculated","m002":"Close"}};
 
   var D = {
     es:{
@@ -911,6 +921,30 @@
   /* ============ CÁLCULO: enteros, una sola fuente de verdad (no depende del idioma) ============ */
   function roundTo(x, step){ return Math.round(x / step) * step; }
   function posInt(v, max){ return Math.min(max || 1e12, Math.max(0, Math.round(+v || 0))); }
+
+  /* ============ VENTANA "CÓMO SE CALCULA TU RESULTADO" ============
+     Diálogo modal accesible: foco atrapado, Escape, X y clic fuera la cierran, devuelve el foco a quien la abrió y bloquea el scroll del fondo. */
+  var mdOpener = null;
+  function mdFocusables(){
+    return Array.prototype.filter.call($("mdBox").querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])'), function(x){ return x.offsetParent!==null; });
+  }
+  function openCalc(opener){
+    if(!$("calcModal").hidden) return;
+    mdOpener = opener || document.activeElement;
+    $("calcModal").hidden = false;
+    document.documentElement.classList.add("md-open");
+    $("page").inert = true; $("stickyBar").inert = true;
+    $("mdBox").focus();
+    track("calc_details_open");
+  }
+  function closeCalc(){
+    if($("calcModal").hidden) return;
+    $("calcModal").hidden = true;
+    document.documentElement.classList.remove("md-open");
+    $("page").inert = false; $("stickyBar").inert = false;
+    if(mdOpener && document.contains(mdOpener) && mdOpener.focus) mdOpener.focus();
+    mdOpener = null;
+  }
 
   /* Tramos de gasto en consultores: proporcionales a los ingresos si los límites redondeados son crecientes y el primero > 0; si no, fijos */
   function tierSet(calls){
@@ -1410,13 +1444,26 @@
       navigator.clipboard.writeText(url).then(function(){ msg(tr("copied")); }, function(){ window.prompt(tr("copyPrompt"), url); });
     } else window.prompt(tr("copyPrompt"), url);
   });
-  $("pdfBtn").addEventListener("click", function(){ var f = $("foldBox"), was = f.open; f.open = true; window.print(); f.open = was; });
+  /* ventana "Cómo se calcula tu resultado" */
+  $("openCalc").addEventListener("click", function(){ openCalc(this); });
+  $("mdClose").addEventListener("click", closeCalc);
+  $("mdBackdrop").addEventListener("click", closeCalc);
+  document.addEventListener("keydown", function(e){
+    if($("calcModal").hidden) return;
+    if(e.key==="Escape"){ e.preventDefault(); closeCalc(); return; }
+    if(e.key!=="Tab") return;
+    var f = mdFocusables(), box = $("mdBox"); if(!f.length) { e.preventDefault(); return; }
+    var first = f[0], last = f[f.length-1], a = document.activeElement;
+    if(e.shiftKey && (a===first || a===box || !box.contains(a))){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && (a===last || !box.contains(a))){ e.preventDefault(); first.focus(); }
+  });
+  $("pdfBtn").addEventListener("click", function(){ window.print(); });   /* con la ventana abierta, la impresión solo incluye el desglose */
   $("ctaBtn").addEventListener("click", function(){ track("calc_cta_click"); });
   $("ctaAltLink").addEventListener("click", function(){ track("calc_cta_click"); });
   /* "Ir a mi cálculo": baja suavemente hasta el resultado (sin ensuciar la barra de direcciones con un #) */
   $("videoSkip").addEventListener("click", function(e){
     e.preventDefault(); track("calc_video_skip");
-    $("foldBox").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
+    $("netCard").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
   });
   $("stickyBtn").addEventListener("click", function(){ track("calc_sticky_click"); });
 
@@ -1514,7 +1561,7 @@
   }
   function buildTestimonials(){
     var sec = $("testimonials"), stage = $("tstStage"), dots = $("tstDots"), car = $("tstCar");
-    var items = tstItems(); tst.list = items;
+    var items = CFG.showTestimonials ? tstItems() : []; tst.list = items;
     sec.hidden = !items.length;
     stage.textContent = ""; dots.textContent = "";
     if(!items.length){ tstStop(); return; }
