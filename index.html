@@ -401,7 +401,7 @@
   /* ---------- Textos de apoyo y consentimiento ---------- */
   .how{margin:10px 0 0;font-size:13.5px}
   .how a{color:#fff;text-decoration:underline;text-underline-offset:3px}
-  .is-result .page{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}   /* sitio para la barra fija: nunca tapa el pie ni los controles */
+  .is-result .page{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}   /* sitio para la barra fija (siempre visible): no tapa el pie ni las reseñas al llegar al final */
   #netCard{scroll-margin-top:16px}
   .legal{font-size:12px;color:var(--ph);margin:12px 0 0}
   .legal a{color:#9db4ff;text-underline-offset:2px}
@@ -1043,7 +1043,6 @@
 
   var LAST = 4;   /* número de pasos; el último es el resultado */
   var bandOK = false;   /* hay logos que mostrar */
-  var cardIn = false, zoneIn = {};   /* barra fija: cardIn = alguna parte de la tarjeta de resultado está en pantalla (con histéresis); zoneIn = controles del carrusel o pie dentro de la franja de la barra */
 
   function renderSeg(){ document.querySelectorAll(".seg button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.plan===state.plan)); }); }
   var counting = false, countTok = 0;
@@ -1159,11 +1158,8 @@
     document.body.classList.toggle("is-result", res);
     updateSticky();
   }
-  /* Barra fija con el CTA. REGLA: nunca tapa el resultado. Se oculta mientras CUALQUIER parte de la tarjeta de resultado esté en pantalla
-     y vuelve cuando la tarjeta sale por completo (con 80 px de histéresis para que no parpadee). Además se aparta mientras los controles del
-     carrusel o el pie estén en su franja, para no taparlos. Al abrir el resultado (el vídeo arriba) se ve desde el primer momento. */
-  function zoneBlocked(){ for(var k in zoneIn){ if(zoneIn[k]) return true; } return false; }
-  function updateSticky(){ $("stickyBar").hidden = !(state.step===LAST && !cardIn && !zoneBlocked()); }
+  /* Barra fija con el CTA: SIEMPRE visible en el paso "Tu resultado" (nada la oculta); la página lleva espacio inferior para que no tape el pie ni las reseñas. */
+  function updateSticky(){ $("stickyBar").hidden = state.step!==LAST; }
   var cardAnimated = false, cardObs = null;
   function armCardObserver(){
     if(cardObs) return;
@@ -1177,21 +1173,10 @@
     }, {threshold:0.3});
     cardObs.observe($("netCard"));
   }
-  var ctaViewedFor = "", ctaObs = null, stickyObs = null, zoneObs = null, zoneTimer = null;
-  var STICKY_ZONE = 78, STICKY_HYST = 80;   /* franja inferior de la barra (px) y margen de histéresis (px) */
-  function armZoneObserver(){
-    if(!("IntersectionObserver" in window)) return;
-    if(zoneObs) zoneObs.disconnect();
-    var H = window.innerHeight;
-    zoneObs = new IntersectionObserver(function(es){
-      es.forEach(function(en){ zoneIn[en.target.id || en.target.tagName] = en.isIntersecting; });
-      updateSticky();
-    }, {rootMargin:"-" + Math.max(0, H - STICKY_ZONE) + "px 0px 0px 0px", threshold:0});
-    [$("tstCtrl"), document.querySelector("footer")].forEach(function(el){ if(el) zoneObs.observe(el); });
-  }
+  var ctaViewedFor = "", ctaObs = null;
   function armCtaObserver(){
     if(ctaObs) return;
-    if(!("IntersectionObserver" in window)) return;   /* sin soporte: la barra no aparece y el botón principal sigue a la vista */
+    if(!("IntersectionObserver" in window)) return;
     /* calc_cta_view: la primera vez que el botón de la tarjeta se ve */
     ctaObs = new IntersectionObserver(function(es){
       es.forEach(function(en){
@@ -1200,20 +1185,12 @@
       });
     }, {threshold:0.6});
     ctaObs.observe($("ctaBtn"));
-    /* barra fija: A = alguna parte de la tarjeta en pantalla -> se oculta; B = la tarjeta a más de 80 px fuera -> se muestra */
-    var card = $("netCard");
-    new IntersectionObserver(function(es){ es.forEach(function(en){ if(state.step===LAST && en.isIntersecting){ cardIn = true; updateSticky(); } }); }, {threshold:0}).observe(card);
-    stickyObs = new IntersectionObserver(function(es){ es.forEach(function(en){ if(state.step===LAST && !en.isIntersecting){ cardIn = false; updateSticky(); } }); },
-      {rootMargin:STICKY_HYST + "px 0px " + STICKY_HYST + "px 0px", threshold:0});
-    stickyObs.observe(card);
-    armZoneObserver();
-    window.addEventListener("resize", function(){ clearTimeout(zoneTimer); zoneTimer = setTimeout(armZoneObserver, 150); });
   }
   function goto(n){
     state.step = n; renderSteps(); render();
     track("calc_step");
     if(n===LAST){
-      cardIn = false; zoneIn = {}; updateSticky();   /* la barra aparece al llegar; los observadores la ocultan si la tarjeta ya está en pantalla */
+      updateSticky();   /* la barra fija se ve desde que se llega al resultado */
       track("calc_result");
       window.scrollTo({top:0, behavior: reduced ? "auto" : "smooth"});
     } else {
