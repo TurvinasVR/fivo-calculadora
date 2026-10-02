@@ -834,7 +834,8 @@
     upliftDefault: 1,
     leadEndpoint: "",  // "" = sin formulario de email (GitHub Pages no ejecuta PHP). Con PHP: "lead.php" → reenvía al webhook de lead-config.php
     contactUrl: "https://fivo.ai/contact",
-    callUrl: "https://fivo.ai/contact",                       // "Reservar llamada" (variante A del cierre); se le añaden los números y los utm
+    callUrl: "https://calendly.com/joseba-fivo/llamada-con-fivo",   // "Reservar llamada" (variante A): se abre en pestaña nueva con los utm. Si está vacío o no empieza por https://, se usa el comportamiento anterior (enlace + #números)
+    callPrefill: true,   // true = añade a1=<resumen del cálculo> al enlace de Calendly (en el idioma activo; solo si el beneficio neto es mayor que 0)
     registerUrl: "https://app.fivo.ai/{lang}/auth/register",  // "Prueba 7 días gratis"
     /* ← AQUÍ las direcciones del vídeo, una por idioma. Vale YouTube, Vimeo, Loom (enlace de compartir o de insertar) o un archivo .mp4.
        Si el idioma activo está vacío se usa el otro. Sin ninguna dirección el apartado no se muestra (salvo en localhost o con ?preview=1, que enseña un marco de ejemplo). */
@@ -908,7 +909,7 @@
       stickyProfit:"Beneficio neto estimado: {x}/año", netRow:"Beneficio neto estimado",
       priceMsg:"Fivo cuesta menos de {max} al mes por persona.",
       ctaTitleA:"¿Quieres hacer una llamada para que lo implementemos en tu empresa?", ctaBtnA:"Reservar mi llamada", ctaSmallA:"Revisamos tus números contigo y te decimos por dónde empezar.",
-      ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min", stickyNoProfit:"¿Quieres una llamada para implementarlo?", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
+      ctaTitleB:"Empieza a usar Fivo hoy mismo", ctaBtnB:"Prueba 7 días gratis", ctaSmallB:"También tienes el plan Free.", ctaDuration:" · {n} min", callPrefill:"Calculadora Fivo: beneficio neto estimado {net}/año ({save} de ahorro + {gain} de ganancia − {cost} de Fivo). Equipo: {members} personas.", stickyNoProfit:"¿Quieres una llamada para implementarlo?", stickyBtnA:"Reservar llamada", stickyBtnB:"Probar gratis",
       toolsLabel:"Grabación, transcripción y notas de reuniones",
       toolsOwn:"{m} al mes × 12 meses, tal como lo indicas",
       toolsEst:"Estimación: el {pc} de tus {a} al mes en aplicaciones ({m} al mes) × 12 meses",
@@ -964,7 +965,7 @@
       stickyProfit:"Estimated net profit: {x}/yr", netRow:"Estimated net profit",
       priceMsg:"Fivo costs less than {max} per person per month.",
       ctaTitleA:"Want to book a call so we can set it up in your company?", ctaBtnA:"Book my call", ctaSmallA:"We'll go through your numbers with you and tell you where to start.",
-      ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min", stickyNoProfit:"Want a call to set it up?", stickyBtnA:"Book a call", stickyBtnB:"Try free",
+      ctaTitleB:"Start using Fivo today", ctaBtnB:"Try free for 7 days", ctaSmallB:"There's also a Free plan.", ctaDuration:" · {n} min", callPrefill:"Fivo calculator: estimated net profit {net}/yr ({save} savings + {gain} gain − {cost} for Fivo). Team: {members} people.", stickyNoProfit:"Want a call to set it up?", stickyBtnA:"Book a call", stickyBtnB:"Try free",
       toolsLabel:"Screen recording, transcription and meeting notes",
       toolsOwn:"{m} per month × 12 months, as you entered it",
       toolsEst:"Estimate: {pc} of your {a} per month on apps ({m} per month) × 12 months",
@@ -1159,12 +1160,30 @@
     $("ctaBtnText").textContent = tr(call ? "ctaBtnA" : "ctaBtnB") + dur;
     $("ctaSmall").textContent = tr(call ? "ctaSmallA" : "ctaSmallB");
     var reg = CFG.registerUrl.replace("{lang}", LANG);
-    var main = call ? CFG.callUrl + "#" + encode() : reg;
+    var cal = call ? callLink(r) : null;   /* {url, tab}: enlace de Calendly (con a1 si procede) o, sin enlace válido, el comportamiento anterior */
+    var main = call ? cal.url : reg;
     $("ctaBtn").setAttribute("href", withUtm(main, "cta-main-" + key));
+    setTab($("ctaBtn"), call && cal.tab);
     /* barra fija: beneficio estimado (o la invitación a la llamada si no es positivo) y el mismo botón */
     $("stickyLabel").textContent = r.net>0 ? tr("stickyProfit",{x:eur(r.net)}) : tr("stickyNoProfit");
     $("stickyBtn").textContent = tr(call ? "stickyBtnA" : "stickyBtnB");
     $("stickyBtn").setAttribute("href", withUtm(main, "cta-sticky-" + key));
+    setTab($("stickyBtn"), call && cal.tab);
+  }
+  /* Enlace de la llamada. Con CFG.callUrl válido (https://): sin #números; con CFG.callPrefill y beneficio neto > 0 se añade a1= con el resumen (texto del idioma activo, cifras de compute() con su formato). Se abre en pestaña nueva. */
+  function callLink(r){
+    var base = String(CFG.callUrl || "");
+    if(base.indexOf("https://")!==0) return {url: base + "#" + encode(), tab:false};
+    var url = base.split("#")[0];
+    if(CFG.callPrefill && r.net>0){
+      var txt = tr("callPrefill",{net:eur(r.net), save:eur(r.save), gain:eur(r.earn), cost:eur(r.cost), members:group(members())});
+      url += (url.indexOf("?")>=0 ? "&" : "?") + "a1=" + encodeURIComponent(txt);
+    }
+    return {url:url, tab:true};
+  }
+  function setTab(a, on){
+    if(on){ a.setAttribute("target","_blank"); a.setAttribute("rel","noopener"); }
+    else { a.removeAttribute("target"); a.removeAttribute("rel"); }
   }
   /* Vídeo: YouTube (se convierte a youtube-nocookie.com), Vimeo, Loom o un archivo .mp4. Devuelve {kind, src} o null. */
   function videoEmbed(u){
