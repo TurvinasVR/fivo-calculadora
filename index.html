@@ -167,7 +167,11 @@
   .card .sub{margin:0 0 20px;color:var(--muted);font-size:14px}
   /* El formulario reproduce el cristal oscuro del formulario de contacto */
   .glass{background:linear-gradient(180deg,rgba(30,38,45,.95) 0%,rgba(31,46,60,.95) 100%);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-card);padding:var(--card-pad);box-shadow:0 30px 80px rgba(0,0,0,.45)}
-  .wiz{max-width:var(--card-w);margin:0 auto;--px:var(--card-pad);--pb:var(--card-pad)}
+  .wiz{max-width:var(--card-w);margin:0 auto;--px:var(--card-pad);--pb:var(--card-pad);padding-top:0;display:flex;flex-direction:column}
+  /* El bloque título + campos se centra entre el borde superior de la tarjeta y la fila fija Atrás / Continuar: el espacio sobrante se reparte por igual arriba y abajo; si no cabe, no se centra y hay scroll normal. Su padding vertical (= --card-pad) hace de padding de la tarjeta. */
+  .wiz-body{margin-block:auto;padding-block:var(--card-pad)}
+  .wiz-body > :last-child{margin-bottom:0}
+  .hint:empty{display:none}   /* una ayuda vacía no ocupa sitio (descentraba el contenido del paso 3) */
   .wiz h2{font-family:var(--font-head);font-size:clamp(21px,2.4vw,26px);letter-spacing:-.015em;margin:0 0 13px;font-weight:600}
   .field{margin-bottom:13px}
   .field label{display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:400;color:var(--label);margin-bottom:6px}
@@ -469,11 +473,11 @@
     /* Tarjeta de preguntas: llega hasta el final de la pantalla (--wiz-top = posición superior de la tarjeta, medida en JS) y con un 20 % más de aire vertical */
     :root{--card-pad:20px}   /* mismo padding en las 4 tarjetas */
     .wrap{padding-left:16px;padding-right:16px}   /* mismos márgenes laterales (16 px) */
-    .wiz{display:flex;flex-direction:column;min-height:calc(100dvh - var(--wiz-top,200px) - 16px)}
+    .wiz{min-height:calc(100dvh - var(--wiz-top,200px) - 16px)}
     .wiz h2{margin-bottom:17px}
     .field{margin-bottom:17px}
     fieldset.q{margin-bottom:22px}
-    .wiz .nav-row{margin-top:auto}
+    .wiz .nav-row{margin-top:0}
     /* Resultado: enlace · tarjeta con el CTA · empresas · reseñas (solo con CSS; en ordenador no cambia) */
     #step4{display:flex;flex-direction:column}
     #step4 > .rs:first-child{display:contents}
@@ -490,8 +494,8 @@
   /* ---------- Ordenador (>= 700 px): tarjeta de resultado más grande (920 px de ancho; padding +15 %, cifras grandes +20 %, el resto en proporción). En móvil no cambia. ---------- */
   @media (min-width:700px){
     /* Pasos 1-3 más grandes; los tres con la misma altura mínima (no saltan al cambiar de paso); Atrás / Continuar fijos abajo */
-    .wiz{display:flex;flex-direction:column;min-height:min(600px,calc(100dvh - var(--wiz-top,200px) - 16px))}
-    .wiz > .nav-row{margin-top:auto}
+    .wiz{min-height:min(600px,calc(100dvh - var(--wiz-top,200px) - 16px))}
+    .wiz > .nav-row{margin-top:0}
     .wiz h2{font-size:30px;margin-bottom:15px}
     .field{margin-bottom:15px}
     .field label,.mini,.qt,fieldset.q legend,.chk{font-size:16px}
@@ -556,6 +560,7 @@
 </ol>
 <!-- PASO 1 -->
 <section aria-labelledby="h1s" class="glass wiz" id="step1">
+<div class="wiz-body">
 <h2 data-i18n="s015" id="h1s">Empecemos por tu empresa</h2>
 <div class="field">
 <label data-i18n="w011" for="sector">Sector</label>
@@ -598,6 +603,7 @@
 <p class="hint" data-i18n="s022">Lo que generan al año las ventas de tu empresa.</p>
 </div>
 </div>
+</div>
 <div class="nav-row">
 <span></span>
 <button class="btn btn-white" id="next1" type="button"><span data-i18n="s023">Continuar</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
@@ -605,6 +611,7 @@
 </section>
 <!-- PASO 2 -->
 <section aria-labelledby="h2s" class="glass wiz" hidden="" id="step2">
+<div class="wiz-body">
 <h2 data-i18n="s024" id="h2s">Cuéntanos cómo vendéis</h2>
 <fieldset class="q">
 <legend data-i18n="w032">¿Grabáis y revisáis las llamadas de venta?</legend>
@@ -633,6 +640,7 @@
 <label class="ch"><input name="optimize" type="radio" value="no"/><span data-i18n="w033">No</span></label>
 </div>
 </fieldset>
+</div>
 <div class="nav-row">
 <button class="btn btn-line" data-i18n="s036" id="back2" type="button">Atrás</button>
 <button class="btn btn-white" id="next2" type="button"><span data-i18n="s023">Continuar</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
@@ -640,6 +648,7 @@
 </section>
 <!-- PASO 3 -->
 <section aria-labelledby="h3s" class="glass wiz" hidden="" id="step3">
+<div class="wiz-body">
 <h2 data-i18n="w041" id="h3s">Ahora, tus herramientas</h2>
 <div class="field">
 <label data-i18n="w043" for="apps">¿Cuánto gastas al mes en aplicaciones para tu empresa?</label>
@@ -650,6 +659,7 @@
 <div class="input" id="appsRepBox"><input autocomplete="off" data-i18n-ph="w047" data-k="appsRep" id="appsRep" inputmode="numeric" placeholder="Gasto al mes" value="350"/><span class="unit" data-i18n="w044">€ al mes</span></div>
 <label class="chk"><input id="appsUnknown" type="checkbox"/><span data-i18n="w046">No lo sé</span></label>
 <p class="hint" id="appsHint"></p>
+</div>
 </div>
 <div class="nav-row">
 <button class="btn btn-line" data-i18n="s036" id="back3" type="button">Atrás</button>
