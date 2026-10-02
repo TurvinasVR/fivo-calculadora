@@ -751,6 +751,7 @@
     /* Testimonios REALES (los entrega el dueño del proyecto, con permiso por escrito). NUNCA se inventan nombres, cargos, empresas, puntuaciones ni cifras.
        Forma de cada uno: {name:"", role:"", company:"", text:{es:"", en:""}, rating:null, consent:false, sourceName:"", sourceUrl:""}
        Solo se muestran los que tengan consent === true. rating: número de 1 a 5 (si no, no se dibujan estrellas). Vacía = el carrusel no sale en la web publicada. */
+    abTest: false,   // false = 3 o más miembros siempre ven la versión LLAMADA y 1-2 miembros la de CONVERSIÓN. true = variante aleatoria 50/50 solo en memoria (sin localStorage ni cookies). ?ab=A o ?ab=B fuerzan cada versión.
     showTestimonials: false,   // true = muestra el carrusel entre la banda de empresas y la tarjeta del resultado (los datos y el código siguen en el archivo)
     testimonials: [],
     /* Subtítulo opcional con reseñas de una tienda: solo se muestra si los tres campos están rellenos (count número, storeName y url https). */
@@ -1046,7 +1047,7 @@
   /* ?public=1 simula la web publicada; en localhost o con ?preview=1 se ven los marcos de relleno (vídeo, testimonios) */
   var PREVIEW = !/[?&]public=1\b/.test(location.search) && (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) || /[?&]preview=1\b/.test(location.search));
   var abForced = (location.search.match(/[?&]ab=(A|B)\b/i)||[])[1];
-  var AB = abForced ? abForced.toUpperCase() : (Math.random()<0.5 ? "A" : "B");
+  var AB = abForced ? abForced.toUpperCase() : (CFG.abTest ? (Math.random()<0.5 ? "A" : "B") : "A");
   function members(){ return posInt(state.reps,1e5) + posInt(state.rest,1e5); }
   /* Con 1 o 2 miembros no hay test: siempre la versión de conversión */
   function variant(){ return members()>2 ? AB : "conversion"; }
