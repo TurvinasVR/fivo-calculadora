@@ -92,8 +92,10 @@
   .logo-band:hover .lb-track{animation-play-state:paused}
   @keyframes lb-move{from{transform:translateX(-50%)}to{transform:translateX(0)}}
   @media (prefers-reduced-motion: reduce){
-    .rv .stat,.rv .rv-ok,.sticky-cost b.sw{animation:none}
+    .rv .stat,.rv .rv-ok{animation:none}
     .opn.in .opn-card,.opn-q,.opn-dot::after{transition:none}
+    .live-num{animation:none;background:var(--grad)}
+    .live-rows dd:empty::before{animation:none}
     .vid-btn{transition:none}
     .vid-play:hover .vid-btn{transform:none}
     .lb-view{-webkit-mask-image:none;mask-image:none}
@@ -220,12 +222,6 @@
   .rs-btns{display:flex;gap:8px;flex-wrap:wrap}
   .sticky-net{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;border-radius:999px;padding:8px 8px 8px 22px;border:1.5px solid transparent;background:linear-gradient(#000,#000) padding-box, linear-gradient(100deg,#0AC6FF,#5173FF) border-box;box-shadow:0 10px 40px rgba(0,0,0,.6)}
   .sticky-label{font-family:var(--font-head);font-size:15px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.2}
-  .sticky-net [hidden]{display:none!important}
-  .sticky-net.nobtn{padding:12px 22px}
-  .sticky-cost{font-family:var(--font);font-size:14px;line-height:1.3;color:var(--label)}
-  .sticky-cost b{font-family:var(--font-head);font-size:16px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums;display:inline-block}
-  .sticky-cost b.sw{animation:scSwap .26s cubic-bezier(.16,1,.3,1)}
-  @keyframes scSwap{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:none}}
   .sticky-btn{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#000;font-family:var(--font-head);font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap}
 
 
@@ -329,7 +325,7 @@
 
   .how{margin:10px 0 0;font-size:13.5px}
   .how a{color:#fff;text-decoration:underline;text-underline-offset:3px}
-  footer{padding-bottom:calc(var(--bar-h,0px) + 12px + env(safe-area-inset-bottom,0px))}
+  .is-result footer{padding-bottom:calc(var(--bar-h,0px) + 12px + env(safe-area-inset-bottom,0px))}
   .legal{font-size:12px;color:var(--ph);margin:12px 0 0}
   .legal a{color:#9db4ff;text-underline-offset:2px}
 
@@ -390,7 +386,7 @@
 
   #netCard{scroll-margin-top:16px}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px 24px}
-  .shell{max-width:800px;margin:0 auto}
+  .shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start;max-width:1080px;margin:0 auto}
   .wiz{display:flex;flex-direction:column;min-height:620px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg)}
   .wiz-body{flex:1;padding:40px 40px 32px}
   .q-title{margin:0 0 24px;font-family:var(--font-head);font-size:28px;font-weight:600;line-height:1.2;letter-spacing:-.015em}
@@ -439,6 +435,18 @@
   .dd-ck{flex:none;width:18px;height:18px;fill:none;stroke:var(--brand);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
   .dd-list li[aria-selected="true"] .dd-ck{opacity:1}
   .dd-list li[aria-selected="true"] .dd-ic{stroke:var(--b2)}
+  .live{position:sticky;top:16px;padding:28px;background:#0A0A0A;border:1px solid #171717;border-radius:var(--r-lg)}
+  .live-k{margin:0;font-size:14px;font-weight:500;color:var(--label)}
+  .live-n{margin:8px 0 0;font-family:var(--font-head);font-size:52px;font-weight:600;line-height:1.05;letter-spacing:-.03em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+  .live-num{background:linear-gradient(100deg,#5173FF 0%,#0AC6FF 38%,#fff 50%,#0AC6FF 62%,#5173FF 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shim 2.4s linear infinite}
+  .live-per{display:block;margin-top:2px;font-family:var(--font);font-size:14px;font-weight:400;letter-spacing:0;color:var(--label)}
+  .live-status{margin:12px 0 0;font-size:14px;font-weight:500;color:#fff}
+  .live-rows{margin:18px 0 0;padding:0}
+  .live-rows div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #171717;font-size:14px;color:var(--label)}
+  .live-rows dt,.live-rows dd{margin:0}
+  .live-rows dd:empty::before{content:"";display:block;width:64px;height:10px;border-radius:6px;background:rgba(255,255,255,.22);filter:blur(3px);animation:phPulse 1.8s ease-in-out infinite}
+  @keyframes phPulse{0%,100%{opacity:.45}50%{opacity:1}}
+  .live-note{margin:12px 0 0;font-size:12.5px;line-height:1.45;color:var(--ph)}
   .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .fld{min-width:0}
   .fld > label,.fld > .lab{display:block;margin:0 0 8px;font-size:14px;font-weight:500;color:var(--label)}
@@ -460,7 +468,7 @@
   .sq:active{transform:scale(.94)}
   .sub-q{margin-top:12px;padding:16px;border:1px solid var(--line-2);border-radius:var(--r-md);background:rgba(255,255,255,.03)}
   .sub-q .q-sub{margin:0 0 12px;font-size:15px}
-  .nav-row{position:sticky;bottom:calc(var(--bar-h,0px) + 20px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 40px;background:var(--surface);border-top:1px solid var(--line-2);border-radius:0 0 var(--r-lg) var(--r-lg)}
+  .nav-row{position:sticky;bottom:0;z-index:6;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 40px;background:var(--surface);border-top:1px solid var(--line-2);border-radius:0 0 var(--r-lg) var(--r-lg)}
   .nav-row > .hint{flex:1 0 100%;margin:0}
   .nav-row .btn{min-height:52px;padding:0 28px;font-size:17px}
   @keyframes shim{from{background-position:120% 0}to{background-position:-120% 0}}
@@ -509,6 +517,9 @@
   .sticky-btn{background:var(--grad);color:#050B1F}
   .anim .wiz:not([hidden]) .wiz-body,.anim #step4:not([hidden]) .res{animation:stepIn .26s cubic-bezier(.16,1,.3,1) backwards}
   @media (max-width:959px){
+    .shell{grid-template-columns:minmax(0,1fr);gap:16px}
+    .live{position:static;padding:22px 20px}
+    .live-n{font-size:44px}
   }
   @media (max-width:699px){
     .wrap{padding-left:16px;padding-right:16px}
@@ -665,6 +676,17 @@
 <button class="btn btn-white" id="next3" type="button"><span data-i18n="s037">Ver mi resultado</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
 </div>
 </section>
+<aside aria-label="Resultado estimado" class="live" id="live">
+<p class="live-k">Beneficio neto estimado</p>
+<p class="live-n"><span class="live-num">— — — €</span><span class="live-per">al año</span></p>
+<p class="live-status" id="liveStatus">Analizando tu sector…</p>
+<dl class="live-rows">
+<div><dt>Te ahorrarías</dt><dd></dd></div>
+<div id="liveGainRow"><dt>Ganarías más</dt><dd></dd></div>
+<div><dt>Coste de Fivo</dt><dd></dd></div>
+</dl>
+<p class="live-note">Tu resultado se calcula con cada respuesta. Lo verás al final.</p>
+</aside>
 </div>
 <section hidden="" id="step4">
 <div class="rs">
@@ -679,7 +701,7 @@
 <div class="dual" id="dual">
 <div class="stat"><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
 <div class="stat" id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
-<div class="stat" id="costBox"><span class="dl">Coste de Fivo</span><p class="big" id="costBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
+<div class="stat" id="costBox"><span class="dl">Coste de Fivo al mes</span><p class="big" id="costBig">—</p><span class="dy" id="costYear"></span></div>
 </div>
 <p class="sr-only"><span id="rcExpr"></span></p>
 <p class="rs-price" id="priceMsg"></p>
@@ -733,7 +755,6 @@
 </footer>
 </div>
 <div class="sticky-net" hidden="" id="stickyBar">
-<span class="sticky-cost" id="stickyCostBox"><span id="stickyCostK"></span><b id="stickyCost"></b><span id="stickyCostU"></span></span>
 <span class="sticky-label" id="stickyLabel"></span>
 <a class="sticky-btn" href="#" id="stickyBtn"></a>
 </div>
@@ -826,7 +847,7 @@
     callPrefill: true,
     registerUrl: "https://app.fivo.ai/{lang}/auth/register",
     showVideo: true,
-    videoUrl: "",
+    videoUrl: "https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",
     videoPoster: "",
     abTest: false,
     showTestimonials: true,
@@ -1123,7 +1144,7 @@
     annTimer = setTimeout(function(){
       var el = $("srStatus");
       if(state.step===LAST) el.textContent = $("stickyLabel").textContent;
-      else el.textContent = costText();
+      else el.textContent = LIVE_STATUS[state.step];
     }, 800);
   }
   function revealResult(){
@@ -1133,7 +1154,7 @@
     var tok = ++countTok, pos = r.net>0, t0 = performance.now();
     var items = [
       ["rcEq", r.net, 0, 1100, function(v){ return tr(pos ? "calcEq" : "calcEqNeg", {n:eur(v)}); }],
-      ["saveBig", r.save, 200, 700, eur], ["earnBig", r.earn, 400, 700, eur], ["costBig", r.cost, 600, 700, eur]
+      ["saveBig", r.save, 200, 700, eur], ["earnBig", r.earn, 400, 700, eur], ["costBig", Math.round(monthlyCost(r)*100), 600, 700, function(v){ return eur2(v/100); }]
     ];
     counting = true; card.classList.remove("rv"); void card.offsetWidth; card.classList.add("rv"); document.documentElement.classList.add("rvw");
     (function f(t){
@@ -1262,26 +1283,10 @@
     $("hero").hidden = res;
     $("logoBand").hidden = !(res && bandOK);
     document.body.classList.toggle("is-result", res);
+    $("live").hidden = res;
     updateSticky();
   }
-  function updateSticky(){
-    var res = state.step===LAST;
-    $("stickyBar").hidden = false; $("stickyBar").classList.toggle("nobtn", !res);
-    $("stickyLabel").hidden = !res; $("stickyBtn").hidden = !res; $("stickyCostBox").hidden = res;
-    measureBar();
-  }
-  function renderBarCost(r){
-    var k, v, u, p = r.people>=1 ? r.people * (state.plan==="annual" ? CFG.priceAnnual : CFG.priceMonthly) : 0;
-    if(p>0){ k = "Coste de Fivo: "; v = eur2(p); u = "/mes"; } else { k = "Desde "; v = eur2(CFG.priceMonthly); u = " /persona al mes"; }
-    $("stickyCostK").textContent = k; $("stickyCostU").textContent = u;
-    var b = $("stickyCost");
-    if(b.textContent!==v){
-      var first = b.textContent==="";
-      b.textContent = v;
-      if(!first && !reduced && !window.__fivoNoAnim){ b.classList.remove("sw"); void b.offsetWidth; b.classList.add("sw"); }
-    }
-  }
-  function costText(){ return $("stickyCostK").textContent + $("stickyCost").textContent + $("stickyCostU").textContent; }
+  function updateSticky(){ $("stickyBar").hidden = state.step!==LAST; measureBar(); }
   function measureBar(){ document.documentElement.style.setProperty("--bar-h", $("stickyBar").hidden ? "0px" : Math.ceil($("stickyBar").getBoundingClientRect().height)+"px"); }
   if("ResizeObserver" in window) new ResizeObserver(measureBar).observe($("stickyBar"));
   var ctaViewedFor = "", ctaObs = null;
@@ -1328,6 +1333,8 @@
     document.querySelectorAll("input[type=range]").forEach(function(el){ var mn = +el.min||0, mx = +el.max||100; el.style.setProperty("--fill", (100*((+el.value)-mn)/(mx-mn))+"%"); });
 
     var ok1 = canNext1(r);
+    $("liveStatus").textContent = LIVE_STATUS[Math.min(state.step, 3)];
+    $("liveGainRow").hidden = !state.revOn;
     $("next1").disabled = !ok1;
     $("step1Msg").textContent = ok1 ? "" : tr("step1Need");
     ["reps","rest","team"].forEach(function(id){ $(id).setAttribute("aria-invalid", String(!ok1 && (id==="team" ? r.team<=0 : r.people<1))); });
@@ -1349,11 +1356,10 @@
 
     renderSeg();
 
-    if(state.step!==LAST) renderBarCost(r);
     if(state.step!==LAST || !r.ready){ renderTable(r); return r; }
 
     if(counting){ countTok++; counting = false; $("netCard").classList.remove("rv"); document.documentElement.classList.remove("rvw"); }
-    tweenText("saveBig", r.save, eur); tweenText("earnBig", r.earn, eur); $("costBig").textContent = eur(r.cost);
+    tweenText("saveBig", r.save, eur); tweenText("earnBig", r.earn, eur); $("costBig").textContent = eur2(monthlyCost(r)); $("costYear").textContent = eur(r.cost) + " al año";
     $("earnBox").hidden = !state.revOn;
     $("dual").classList.toggle("one", !state.revOn);
     var nb = function(x){ return '<span class="nb">'+eur(x)+'</span>'; }, pos = r.net>0;
@@ -1373,6 +1379,9 @@
   }
 
   var calcDone = false;
+  var LIVE_STATUS = ["", "Analizando tu sector…", "Estimando tus ventas…", "Valorando tus herramientas…"];
+
+  function monthlyCost(r){ return Math.round(r.people * (state.plan==="annual" ? CFG.priceAnnual : CFG.priceMonthly) * 100) / 100; }
 
   function renderTable(r){
     var neg = r.net < 0;
@@ -1838,6 +1847,7 @@
   window.__fivoTierSet = tierSet;
   window.__fivoState = state;
   window.__fivoRender = render;
+  window.__fivoMonthly = function(){ return monthlyCost(compute(state)); };
   var fromLink = decode();
   if(fromLink){ try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){} }
   LANG = "es"; state.lang = "es";
