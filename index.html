@@ -412,7 +412,21 @@
   .ch:has(input:focus-visible){outline:3px solid var(--b2);outline-offset:2px}
   .ch.feat{min-height:72px;font-size:17px;border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.055)}
   .ch.tog{display:inline-flex;margin-top:12px}
-  #sectorCards .ch:last-child{grid-column:1/-1;min-height:52px}
+  .secs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .sec{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:116px;padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:var(--r-md);background:rgba(255,255,255,.03);color:#fff;cursor:pointer;transition:border-color .15s,background-color .15s,transform .15s}
+  .sec input{position:absolute;opacity:0;pointer-events:none}
+  .sec svg{width:26px;height:26px;fill:none;stroke:var(--label);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
+  .sec span{font-family:var(--font-head);font-size:16px;font-weight:500;line-height:1.25;text-wrap:balance}
+  .sec:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.06)}
+  .sec:active{transform:scale(.98)}
+  .sec:has(input:focus-visible){outline:3px solid var(--b2);outline-offset:2px}
+  .sec:has(input:checked){border-color:var(--brand);background:linear-gradient(135deg,rgba(var(--b1-rgb),.18),rgba(10,198,255,.07))}
+  .sec:has(input:checked) svg{stroke:var(--b2)}
+  .sec::after{content:"";position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat,var(--grad);opacity:0;transform:scale(.5);transition:opacity .18s,transform .22s cubic-bezier(.16,1,.3,1)}
+  .sec:has(input:checked)::after{opacity:1;transform:scale(1)}
+  .sec.feat{min-height:140px;padding:20px;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.055)}
+  .sec.feat svg{width:30px;height:30px}
+  .sec.feat span{font-size:18px;font-weight:600}
   .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .fld{min-width:0}
   .fld > label,.fld > .lab{display:block;margin:0 0 8px;font-size:14px;font-weight:500;color:var(--label)}
@@ -495,7 +509,10 @@
     .q-sub{margin-top:28px}
     .cards.c4,.cards{--cols:2}
     .cards.c3{--cols:1}
-    #sectorCards{--cols:2}
+    .secs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .sec{min-height:88px;padding:14px}
+    .sec.feat{min-height:104px;padding:16px}
+    .sec.feat:first-child{grid-column:1/-1}
     #ctaMini{display:none}
     .cards.tiers{--cols:1}
     .fields{grid-template-columns:minmax(0,1fr)}
@@ -523,7 +540,7 @@
   @media (prefers-reduced-motion: reduce){
     .anim .wiz:not([hidden]) .wiz-body,.anim #step4:not([hidden]) .res{animation:stepFade .15s linear backwards}
     .anim .stp.on b{animation:none}
-    .btn:not([disabled]):active,.ch:active,.opt:active,.seg button:active,.sq:active,.btn-main:active,.btn-main:hover,input[type=range]:active::-webkit-slider-thumb,input[type=range]:active::-moz-range-thumb{transform:none}
+    .btn:not([disabled]):active,.ch:active,.sec:active,.opt:active,.seg button:active,.sq:active,.btn-main:active,.btn-main:hover,input[type=range]:active::-webkit-slider-thumb,input[type=range]:active::-moz-range-thumb{transform:none}
   }
   </style>
 </head>
@@ -550,17 +567,17 @@
 <section aria-labelledby="h1s" class="wiz" id="step1">
 <div class="wiz-body">
 <h2 class="q-title" id="h1s">¿A qué sector pertenece tu empresa?</h2>
-<div aria-labelledby="h1s" class="cards c3" id="sectorCards" role="radiogroup">
-<label class="ch"><input name="sector" type="radio" value="tech"/><span data-i18n="w013">Tecnología y software</span></label>
-<label class="ch"><input name="sector" type="radio" value="services"/><span data-i18n="w014">Servicios profesionales y consultoría</span></label>
-<label class="ch"><input name="sector" type="radio" value="agency"/><span data-i18n="w015">Agencia o marketing</span></label>
-<label class="ch"><input name="sector" type="radio" value="realestate"/><span data-i18n="w016">Inmobiliaria</span></label>
-<label class="ch"><input name="sector" type="radio" value="finance"/><span data-i18n="w017">Seguros y finanzas</span></label>
-<label class="ch"><input name="sector" type="radio" value="health"/><span data-i18n="w018">Salud</span></label>
-<label class="ch"><input name="sector" type="radio" value="education"/><span data-i18n="w019">Educación y formación</span></label>
-<label class="ch"><input name="sector" type="radio" value="industry"/><span data-i18n="w020">Industria y construcción</span></label>
-<label class="ch"><input name="sector" type="radio" value="retail"/><span data-i18n="w021">Comercio y e-commerce</span></label>
-<label class="ch"><input name="sector" type="radio" value="other"/><span data-i18n="w022">Otro</span></label>
+<div aria-labelledby="h1s" class="secs" id="sectorCards" role="radiogroup">
+<label class="sec"><input name="sector" type="radio" value="tech"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span data-i18n="w013">Tecnología</span></label>
+<label class="sec"><input name="sector" type="radio" value="services"/><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><span data-i18n="w014">Servicios profesionales</span></label>
+<label class="sec"><input name="sector" type="radio" value="agency"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 001 1h2l5 4V6L6 10H4a1 1 0 00-1 1zM15 9a4 4 0 010 6M18 7a7 7 0 010 10"/></svg><span data-i18n="w015">Agencia o marketing</span></label>
+<label class="sec"><input name="sector" type="radio" value="realestate"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg><span data-i18n="w016">Inmobiliaria</span></label>
+<label class="sec"><input name="sector" type="radio" value="finance"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6zM9 12l2 2 4-4"/></svg><span data-i18n="w017">Seguros y finanzas</span></label>
+<label class="sec"><input name="sector" type="radio" value="health"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/></svg><span data-i18n="w018">Salud</span></label>
+<label class="sec"><input name="sector" type="radio" value="education"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/></svg><span data-i18n="w019">Educación</span></label>
+<label class="sec"><input name="sector" type="radio" value="industry"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 21h18M5 21V11l5 3v-3l5 3V5h4v16"/></svg><span data-i18n="w020">Industria y construcción</span></label>
+<label class="sec"><input name="sector" type="radio" value="retail"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 016 0v2"/></svg><span data-i18n="w021">Comercio y e-commerce</span></label>
+<label class="sec"><input name="sector" type="radio" value="other"/><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></svg><span data-i18n="w022">Otro</span></label>
 </div>
 <p class="q-sub" data-i18n="w023" id="memTitle">Miembros de mi equipo</p>
 <div aria-labelledby="memTitle" class="fields" role="group">
@@ -844,7 +861,7 @@
     ]
   };
 
-  var STATIC = {"es":{"s001":"Fivo","s008":"¿Cuánto dinero se le escapa a tu empresa cada año?","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas de tu empresa.","s023":"Continuar","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se le escapa a tu empresa cada año? | Fivo.ai","metaDesc":"Calcula en 1 minuto cuánto ahorraría y ganaría tu empresa con Fivo: herramientas, tiempo recuperado y mejores procesos.","w010":"Tus ventas","w013":"Tecnología y software","w014":"Servicios profesionales y consultoría","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación y formación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales","w025":"Resto del equipo","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa?","w040":"Quizá","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación y transcripción de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ver mi resultado ↓","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula","m001":"Cómo se calcula tu resultado","m002":"Cerrar"}};
+  var STATIC = {"es":{"s001":"Fivo","s008":"¿Cuánto dinero se le escapa a tu empresa cada año?","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas de tu empresa.","s023":"Continuar","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se le escapa a tu empresa cada año? | Fivo.ai","metaDesc":"Calcula en 1 minuto cuánto ahorraría y ganaría tu empresa con Fivo: herramientas, tiempo recuperado y mejores procesos.","w010":"Tus ventas","w013":"Tecnología","w014":"Servicios profesionales","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación","w020":"Industria y construcción","w021":"Comercio y e-commerce","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales","w025":"Resto del equipo","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa?","w040":"Quizá","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación y transcripción de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ver mi resultado ↓","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula","m001":"Cómo se calcula tu resultado","m002":"Cerrar"}};
 
   var D = {
     es:{
