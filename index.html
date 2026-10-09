@@ -262,7 +262,7 @@
     .opn{margin-top:36px}
     .opn-card{flex-basis:84%;padding:20px}
   }
-  .vid-sec{margin:40px 0 0}
+  .vid-sec{margin:8px 0 32px}
   .vid-sec h2{font-family:var(--font-head);text-align:center;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.015em;margin:0 0 18px;font-weight:600}
   .vid{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;background:var(--surface);border:1px solid var(--line-2)}
   .vid iframe,.vid video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
@@ -691,6 +691,12 @@
 <section hidden="" id="step4">
 <div class="rs">
 <p class="rs-back"><button class="link-btn" data-i18n="s070" id="editData" type="button">← Cambiar mis datos</button></p>
+<section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
+<h2 data-i18n="r020" id="t-vid">Cómo funciona Fivo</h2>
+<div class="vid" id="videoBox">
+<button aria-label="Reproducir el vídeo" class="vid-play" id="videoPlay" type="button"><span aria-hidden="true" class="vid-btn"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>
+</div>
+</section>
 <div class="res" id="netCard">
 <div class="res-head">
 <h2 aria-level="1" class="rs-title" data-i18n="r001">Esto es lo que Fivo podría darte cada año</h2>
@@ -712,12 +718,6 @@
 <p class="rs-est"><span data-i18n="r030">Estimación a partir de tus datos</span> · <button class="rs-link" data-i18n="r031" id="openCalc" type="button">Ver cómo se calcula</button></p>
 </div>
 </div>
-<section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
-<h2 data-i18n="r020" id="t-vid">Cómo funciona Fivo</h2>
-<div class="vid" id="videoBox">
-<button aria-label="Reproducir el vídeo" class="vid-play" id="videoPlay" type="button"><span aria-hidden="true" class="vid-btn"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>
-</div>
-</section>
 <section aria-labelledby="t-opn" class="opn" hidden="" id="testimonials">
 <h2 id="t-opn">Opiniones sobre Fivo</h2>
 <div aria-label="Opiniones sobre Fivo" aria-roledescription="carrusel" class="opn-track" id="opnTrack" role="region" tabindex="0"></div>
