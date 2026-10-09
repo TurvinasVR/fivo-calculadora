@@ -412,22 +412,30 @@
   .ch:has(input:focus-visible){outline:3px solid var(--b2);outline-offset:2px}
   .ch.feat{min-height:72px;font-size:17px;border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.055)}
   .ch.tog{display:inline-flex;margin-top:12px}
-  .secs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   #h1s{margin-bottom:16px}
-  .sec{position:relative;display:flex;align-items:center;gap:8px;min-height:54px;padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:var(--r-md);background:rgba(255,255,255,.03);color:#fff;cursor:pointer;transition:border-color .15s,background-color .15s,transform .15s}
-  .sec input{position:absolute;opacity:0;pointer-events:none}
-  .sec svg{flex:none;width:20px;height:20px;fill:none;stroke:var(--label);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
-  .sec span{min-width:0;font-family:var(--font-head);font-size:14px;font-weight:500;line-height:1.2;text-wrap:balance}
-  .sec:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.06)}
-  .sec:active{transform:scale(.98)}
-  .sec:has(input:focus-visible){outline:3px solid var(--b2);outline-offset:2px}
-  .sec:has(input:checked){border-color:var(--brand);background:linear-gradient(135deg,rgba(var(--b1-rgb),.18),rgba(10,198,255,.07))}
-  .sec:has(input:checked) svg{stroke:var(--b2)}
-  .sec::after{content:"";position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat,var(--grad);box-shadow:0 0 0 2px var(--surface);opacity:0;transform:scale(.5);transition:opacity .18s,transform .22s cubic-bezier(.16,1,.3,1)}
-  .sec:has(input:checked)::after{opacity:1;transform:scale(1)}
-  .sec.feat{min-height:64px;padding:10px 16px;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.055)}
-  .sec.feat svg{width:22px;height:22px}
-  .sec.feat span{font-size:16px;font-weight:600}
+  .dd{position:relative}
+  .dd-btn{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:0 16px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-md);background:#111;color:var(--ph);font-family:var(--font);font-size:16px;text-align:left;cursor:pointer;transition:border-color .15s,background-color .15s,box-shadow .15s}
+  .dd-btn:hover{border-color:rgba(255,255,255,.4)}
+  .dd-btn:focus-visible{outline:3px solid var(--b2);outline-offset:2px}
+  .dd-btn.has{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(var(--b1-rgb),.16),rgba(10,198,255,.06)),#111}
+  .dd-icon{display:flex;flex:none}
+  .dd-icon:empty{display:none}
+  .dd-icon svg,.dd-ic{flex:none;width:20px;height:20px;fill:none;stroke:var(--label);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .dd-btn.has .dd-icon svg{stroke:var(--b2)}
+  .dd-val{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dd-chev{flex:none;width:20px;height:20px;fill:none;stroke:var(--label);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+  .dd-btn[aria-expanded="true"] .dd-chev{transform:rotate(180deg)}
+  .dd-list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:40;margin:0;padding:6px;list-style:none;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-md);box-shadow:0 18px 40px rgba(0,0,0,.5);visibility:hidden;opacity:0;transform:translateY(-6px);transition:opacity .16s ease,transform .16s ease,visibility 0s linear .16s}
+  .dd.up .dd-list{top:auto;bottom:calc(100% + 6px);transform:translateY(6px)}
+  .dd.open .dd-list{visibility:visible;opacity:1;transform:none;transition-delay:0s}
+  .dd-list li{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;color:#fff;font-size:15px;cursor:pointer}
+  .dd-list li[data-v="other"]{margin-top:7px;position:relative}
+  .dd-list li[data-v="other"]::before{content:"";position:absolute;left:8px;right:8px;top:-4px;height:1px;background:var(--line-2)}
+  .dd-list li.act,.dd-list li:hover{background:rgba(255,255,255,.07)}
+  .dd-list li span{flex:1;min-width:0}
+  .dd-ck{flex:none;width:18px;height:18px;fill:none;stroke:var(--brand);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+  .dd-list li[aria-selected="true"] .dd-ck{opacity:1}
+  .dd-list li[aria-selected="true"] .dd-ic{stroke:var(--b2)}
   .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .fld{min-width:0}
   .fld > label,.fld > .lab{display:block;margin:0 0 8px;font-size:14px;font-weight:500;color:var(--label)}
@@ -510,11 +518,6 @@
     .q-sub{margin-top:28px}
     .cards.c4,.cards{--cols:2}
     .cards.c3{--cols:1}
-    .secs{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .sec{min-height:56px;padding:8px 12px;gap:8px}
-    .sec span{font-size:14px}
-    .sec.feat{min-height:60px;padding:8px 12px}
-    .sec.feat:first-child{grid-column:1/-1}
     #ctaMini{display:none}
     .cards.tiers{--cols:1}
     .fields{grid-template-columns:minmax(0,1fr)}
@@ -542,7 +545,7 @@
   @media (prefers-reduced-motion: reduce){
     .anim .wiz:not([hidden]) .wiz-body,.anim #step4:not([hidden]) .res{animation:stepFade .15s linear backwards}
     .anim .stp.on b{animation:none}
-    .btn:not([disabled]):active,.ch:active,.sec:active,.opt:active,.seg button:active,.sq:active,.btn-main:active,.btn-main:hover,input[type=range]:active::-webkit-slider-thumb,input[type=range]:active::-moz-range-thumb{transform:none}
+    .btn:not([disabled]):active,.ch:active,.opt:active,.seg button:active,.sq:active,.btn-main:active,.btn-main:hover,input[type=range]:active::-webkit-slider-thumb,input[type=range]:active::-moz-range-thumb{transform:none}
   }
   </style>
 </head>
@@ -569,17 +572,20 @@
 <section aria-labelledby="h1s" class="wiz" id="step1">
 <div class="wiz-body">
 <h2 class="q-title" id="h1s">¿A qué sector pertenece tu empresa?</h2>
-<div aria-labelledby="h1s" class="secs" id="sectorCards" role="radiogroup">
-<label class="sec"><input name="sector" type="radio" value="tech"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span data-i18n="w013">Tecnología</span></label>
-<label class="sec"><input name="sector" type="radio" value="services"/><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><span data-i18n="w014">Servicios profesionales</span></label>
-<label class="sec"><input name="sector" type="radio" value="agency"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 001 1h2l5 4V6L6 10H4a1 1 0 00-1 1zM15 9a4 4 0 010 6M18 7a7 7 0 010 10"/></svg><span data-i18n="w015">Agencia o marketing</span></label>
-<label class="sec"><input name="sector" type="radio" value="realestate"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg><span data-i18n="w016">Inmobiliaria</span></label>
-<label class="sec"><input name="sector" type="radio" value="finance"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6zM9 12l2 2 4-4"/></svg><span data-i18n="w017">Seguros y finanzas</span></label>
-<label class="sec"><input name="sector" type="radio" value="health"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/></svg><span data-i18n="w018">Salud</span></label>
-<label class="sec"><input name="sector" type="radio" value="education"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/></svg><span data-i18n="w019">Educación</span></label>
-<label class="sec"><input name="sector" type="radio" value="industry"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 21h18M5 21V11l5 3v-3l5 3V5h4v16"/></svg><span data-i18n="w020">Industria</span></label>
-<label class="sec"><input name="sector" type="radio" value="retail"/><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 016 0v2"/></svg><span data-i18n="w021">Comercio</span></label>
-<label class="sec"><input name="sector" type="radio" value="other"/><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></svg><span data-i18n="w022">Otro</span></label>
+<div class="dd" id="secDd">
+<button aria-controls="secList" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="h1s secVal" class="dd-btn" id="secBtn" role="combobox" type="button"><span class="dd-icon" id="secIc"></span><span class="dd-val" id="secVal">Elige tu sector</span><svg aria-hidden="true" class="dd-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+<ul aria-labelledby="h1s" class="dd-list" id="secList" role="listbox" tabindex="-1">
+<li aria-selected="false" data-v="tech" id="sec-tech" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span data-i18n="w013">Tecnología</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="services" id="sec-services" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><span data-i18n="w014">Servicios profesionales</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="agency" id="sec-agency" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 001 1h2l5 4V6L6 10H4a1 1 0 00-1 1zM15 9a4 4 0 010 6M18 7a7 7 0 010 10"/></svg><span data-i18n="w015">Agencia o marketing</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="realestate" id="sec-realestate" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg><span data-i18n="w016">Inmobiliaria</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="finance" id="sec-finance" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6zM9 12l2 2 4-4"/></svg><span data-i18n="w017">Seguros y finanzas</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="health" id="sec-health" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/></svg><span data-i18n="w018">Salud</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="education" id="sec-education" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/></svg><span data-i18n="w019">Educación</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="industry" id="sec-industry" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M3 21h18M5 21V11l5 3v-3l5 3V5h4v16"/></svg><span data-i18n="w020">Industria</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="retail" id="sec-retail" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 016 0v2"/></svg><span data-i18n="w021">Comercio</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+<li aria-selected="false" data-v="other" id="sec-other" role="option"><svg aria-hidden="true" class="dd-ic" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></svg><span data-i18n="w022">Otro</span><svg aria-hidden="true" class="dd-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+</ul>
 </div>
 <p class="q-sub" data-i18n="w023" id="memTitle">Miembros de mi equipo</p>
 <div aria-labelledby="memTitle" class="fields" role="group">
@@ -1362,9 +1368,67 @@
       return true;
     }catch(e){ return false; }
   }
+  function paintSector(){
+    var o = state.sector ? $("sec-"+state.sector) : null, b = $("secBtn");
+    b.classList.toggle("has", !!o);
+    document.querySelectorAll("#secList [role=option]").forEach(function(x){ x.setAttribute("aria-selected", String(x.dataset.v===state.sector)); });
+    $("secVal").textContent = o ? o.querySelector("span").textContent : "Elige tu sector";
+    $("secIc").innerHTML = o ? o.querySelector("svg").outerHTML : "";
+  }
+  (function(){
+    var dd = $("secDd"), btn = $("secBtn"), list = $("secList"), opts = [].slice.call(list.children), act = -1;
+    function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+    function isOpen(){ return dd.classList.contains("open"); }
+    function setAct(i){
+      act = Math.max(0, Math.min(opts.length-1, i));
+      opts.forEach(function(o, k){ o.classList.toggle("act", k===act); });
+      btn.setAttribute("aria-activedescendant", opts[act].id);
+      var o = opts[act], top = o.offsetTop, bot = top + o.offsetHeight;
+      if(top < list.scrollTop) list.scrollTop = top - 6; else if(bot > list.scrollTop + list.clientHeight) list.scrollTop = bot - list.clientHeight + 6;
+    }
+    function place(){
+      list.style.maxHeight = "";
+      var r = btn.getBoundingClientRect(), need = list.scrollHeight + 14, below = window.innerHeight - r.bottom - 12, above = r.top - 12;
+      var up = need > below && above > below + 120;
+      dd.classList.toggle("up", up);
+      list.style.maxHeight = Math.max(160, up ? Math.min(need, above) : need) + "px";
+      if(!up && need>below) window.scrollBy({top:Math.min(need-below, 240), behavior: reduced ? "auto" : "smooth"});
+    }
+    function open(){
+      if(isOpen()) return;
+      place(); dd.classList.add("open"); btn.setAttribute("aria-expanded", "true");
+      var i = SECTORS.indexOf(state.sector) - 1; setAct(i<0 ? 0 : i);
+    }
+    function close(){
+      if(!isOpen()) return;
+      dd.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.removeAttribute("aria-activedescendant");
+    }
+    function choose(i){ state.sector = opts[i].dataset.v; paintSector(); close(); render(); }
+    btn.addEventListener("click", function(){ if(isOpen()) close(); else open(); });
+    btn.addEventListener("keydown", function(e){
+      var k = e.key;
+      if(k==="Tab"){ close(); return; }
+      if(k==="Escape"){ if(isOpen()){ e.preventDefault(); e.stopPropagation(); close(); } return; }
+      if(k==="ArrowDown" || k==="ArrowUp"){ e.preventDefault(); if(!isOpen()) open(); else setAct(act + (k==="ArrowDown" ? 1 : -1)); return; }
+      if(k==="Home" || k==="End"){ if(isOpen()){ e.preventDefault(); setAct(k==="Home" ? 0 : opts.length-1); } return; }
+      if(k==="Enter" || k===" "){ e.preventDefault(); if(isOpen()) choose(act); else open(); return; }
+      if(k.length===1 && !e.ctrlKey && !e.metaKey && !e.altKey){
+        if(!isOpen()) open();
+        var c = norm(k), n = opts.length;
+        for(var j=1; j<=n; j++){ var idx = (act + j) % n; if(norm(opts[idx].textContent.trim()).charAt(0)===c){ setAct(idx); break; } }
+      }
+    });
+    list.addEventListener("mousedown", function(e){ e.preventDefault(); });
+    list.addEventListener("click", function(e){ var li = e.target.closest("li"); if(li) choose(opts.indexOf(li)); });
+    list.addEventListener("mousemove", function(e){ var li = e.target.closest("li"); if(li){ var i = opts.indexOf(li); if(i!==act) setAct(i); } });
+    document.addEventListener("click", function(e){ if(!dd.contains(e.target)) close(); });
+    window.addEventListener("resize", close);
+  })();
+
   function syncControls(){
     ["reps","rest","team","calls","apps","appsRep"].forEach(function(k){ $(k).value = group(state[k]); });
-    ["sector","recCalls","hasConsult","optimize"].forEach(function(n){
+    paintSector();
+    ["recCalls","hasConsult","optimize"].forEach(function(n){
       document.querySelectorAll('input[name="'+n+'"]').forEach(function(x){ x.checked = x.value===state[n]; });
     });
     $("rec").value = state.rec; $("up").value = state.uplift; $("sub").value = state.subst;
