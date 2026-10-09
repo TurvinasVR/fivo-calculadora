@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/
+
+skills-ui/
+
+# Archivos internos: no se publican (siguen en el disco)
+CLAUDE.md
+README.md
+dev/
+lead.php
+lead-config.php
+.htaccess
