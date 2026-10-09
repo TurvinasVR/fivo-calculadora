@@ -92,6 +92,9 @@
   .logo-band:hover .lb-track{animation-play-state:paused}
   @keyframes lb-move{from{transform:translateX(-50%)}to{transform:translateX(0)}}
   @media (prefers-reduced-motion: reduce){
+    .rv .stat,.rv .rv-ok,.sticky-cost b.sw{animation:none}
+    .vid-btn{transition:none}
+    .vid-play:hover .vid-btn{transform:none}
     .lb-view{-webkit-mask-image:none;mask-image:none}
     .lb-track{animation:none;width:auto;justify-content:center;flex-wrap:wrap}
     .lb-half+.lb-half{display:none}
@@ -227,14 +230,17 @@
 
 
 
-  .vid-sec{margin:34px 0 0}
+  .vid-sec{margin:40px 0 0}
   .vid-sec h2{font-family:var(--font-head);text-align:center;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.015em;margin:0 0 18px;font-weight:600}
-  .vid{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r-card);overflow:hidden;background:var(--card);border:1px solid var(--line)}
+  .vid{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;background:var(--surface);border:1px solid var(--line-2)}
   .vid iframe,.vid video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
   .vid video{object-fit:contain}
-  .vid-skip{text-align:center;margin:14px 0 0}
-  .vid-skip a{font-family:var(--font-head);font-size:14.5px;font-weight:500;color:#9db4ff;text-decoration:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);display:inline-block}
-  .vid-skip a:hover{color:#fff;border-color:#2b3b78}
+  .vid-play{position:absolute;inset:0;display:grid;place-items:center;width:100%;height:100%;padding:0;border:0;cursor:pointer;background:radial-gradient(60% 80% at 50% 40%,rgba(var(--b1-rgb),.28),rgba(10,198,255,.06) 60%,transparent),#0A0A0A}
+  .vid-play[style*="url"]{background-size:cover;background-position:center}
+  .vid-btn{display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:var(--grad);box-shadow:0 10px 30px rgba(var(--b1-rgb),.45);transition:transform .2s cubic-bezier(.16,1,.3,1)}
+  .vid-btn svg{width:30px;height:30px;margin-left:4px;fill:#050B1F}
+  .vid-play:hover .vid-btn{transform:scale(1.07)}
+  .vid-play:focus-visible{outline:3px solid var(--b2);outline-offset:-3px}
   .section{max-width:1240px;margin:0 auto;padding:0 24px 30px}
   .bd-head{padding:30px 32px 6px}
   .bd-head h2{font-family:var(--font-head);margin:0 0 4px;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.015em;font-weight:600}
@@ -393,7 +399,7 @@
 
   #netCard{scroll-margin-top:16px}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px 24px}
-  .shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start;max-width:1080px;margin:0 auto}
+  .shell{max-width:800px;margin:0 auto}
   .wiz{display:flex;flex-direction:column;min-height:620px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg)}
   .wiz-body{flex:1;padding:40px 40px 32px}
   .q-title{margin:0 0 24px;font-family:var(--font-head);font-size:28px;font-weight:600;line-height:1.2;letter-spacing:-.015em}
@@ -466,30 +472,7 @@
   .nav-row{position:sticky;bottom:calc(var(--bar-h,0px) + 20px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 40px;background:var(--surface);border-top:1px solid var(--line-2);border-radius:0 0 var(--r-lg) var(--r-lg)}
   .nav-row > .hint{flex:1 0 100%;margin:0}
   .nav-row .btn{min-height:52px;padding:0 28px;font-size:17px}
-  .live{position:sticky;top:16px;padding:28px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg)}
-  .live-k{margin:0;font-size:14px;font-weight:500;color:var(--label)}
-  .live-n{margin:8px 0 0;font-family:var(--font-head);font-size:52px;font-weight:600;line-height:1.05;letter-spacing:-.03em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-  .live-num{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-  .live.neg .live-num{background:none;color:var(--warn);-webkit-text-fill-color:currentColor}
-  .live-per{display:block;margin-top:2px;font-family:var(--font);font-size:14px;font-weight:400;letter-spacing:0;color:var(--label)}
-  .live-rows{margin:20px 0 0;padding:0}
-  .live-rows div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-top:1px solid var(--line-2);font-size:14px;color:var(--label)}
-  .live-rows dt,.live-rows dd{margin:0}
-  .live-rows dd{font-family:var(--font-head);font-size:16px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
-  .live-calcm,.live-status,.live-prog{display:none}
-  .live.calc .live-status{display:block;margin:10px 0 0;font-size:14px;font-weight:500;color:#fff}
-  .live.calc .live-prog{display:block;margin-top:16px}
-  .live-pt{display:block;font-size:12.5px;font-weight:500;color:var(--label)}
-  .live-bar{display:block;height:4px;margin-top:8px;border-radius:2px;background:rgba(255,255,255,.1);overflow:hidden}
-  .live-bar i{display:block;height:100%;width:100%;border-radius:2px;background:var(--grad);transform-origin:left center;transform:scaleX(.25);transition:transform .45s cubic-bezier(.16,1,.3,1)}
-  .live.calc .live-num,.live-calcm{background:linear-gradient(100deg,#5173FF 0%,#0AC6FF 38%,#fff 50%,#0AC6FF 62%,#5173FF 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shim 2.4s linear infinite}
   @keyframes shim{from{background-position:120% 0}to{background-position:-120% 0}}
-  @keyframes phPulse{0%,100%{opacity:.45}50%{opacity:1}}
-  .live-rows dd{display:flex;align-items:center;justify-content:flex-end;min-height:22px;min-width:64px}
-  .live-rows dd:empty::before{content:"";width:64px;height:10px;border-radius:6px;background:rgba(255,255,255,.22);filter:blur(3px);animation:phPulse 1.8s ease-in-out infinite}
-  .live-rows .ok dd{flex-direction:row-reverse;justify-content:flex-start}
-  .live-rows .ok dd:empty::before{width:18px;height:18px;border-radius:50%;filter:none;animation:stpPop .32s cubic-bezier(.16,1,.3,1);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat,var(--grad)}
-  .live-rows .ok dd:empty::after{content:"Listo";margin-right:8px;font-family:var(--font);font-size:13px;font-weight:500;color:var(--label)}
   .net{position:relative}
   .rv-ok{display:none;position:absolute;top:0;right:0;width:28px;height:28px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/16px no-repeat,var(--grad)}
   .res.ok .rv-ok{display:block}
@@ -502,7 +485,6 @@
   .rvw .sticky-label{font-size:0;line-height:0}
   .rvw .sticky-label::before{content:"Calculando tu beneficio…";font-size:15px;line-height:1.2;background:linear-gradient(100deg,#5173FF 0%,#0AC6FF 38%,#fff 50%,#0AC6FF 62%,#5173FF 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shim 2.4s linear infinite}
   .rv .rv-ok{animation:rvPop .35s cubic-bezier(.16,1,.3,1) 1.1s both}
-  .live-note{margin:12px 0 0;font-size:12.5px;line-height:1.45;color:var(--ph)}
   .rs{max-width:960px;margin:0 auto}
   .res{padding:40px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg)}
   .res-head{display:flex;justify-content:space-between;align-items:center;gap:16px}
@@ -536,18 +518,6 @@
   .sticky-btn{background:var(--grad);color:#050B1F}
   .anim .wiz:not([hidden]) .wiz-body,.anim #step4:not([hidden]) .res{animation:stepIn .26s cubic-bezier(.16,1,.3,1) backwards}
   @media (max-width:959px){
-    .shell{grid-template-columns:minmax(0,1fr);gap:12px}
-    .live{order:-1;position:sticky;top:8px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-radius:var(--r-md);background:rgba(10,10,10,.96)}
-    .live-k{max-width:46%;font-size:13px;line-height:1.25}
-    .live-n{margin:0;font-size:26px;text-align:right}
-    .live-per,.live-rows,.live-note,.live-status{display:none!important}
-    .live.calc{padding-bottom:20px}
-    .live.calc .live-k{display:none}
-    .live.calc .live-prog{display:contents}
-    .live.calc .live-pt{order:-1;font-size:13px;white-space:nowrap}
-    .live.calc .live-bar{position:absolute;left:16px;right:16px;bottom:8px;height:3px;margin:0}
-    .live.calc .live-num{display:none}
-    .live.calc .live-calcm{display:block;font-family:var(--font-head);font-size:15px;font-weight:600;letter-spacing:-.01em;text-align:right}
   }
   @media (max-width:699px){
     .wrap{padding-left:16px;padding-right:16px}
@@ -582,9 +552,6 @@
   }
   .rs-calc,.sticky-label,.range-row .top,.tbl,.input input,.input .unit{font-variant-numeric:tabular-nums}
   @media (prefers-reduced-motion: reduce){
-    .live.calc .live-num,.live-calcm{animation:none;background:var(--grad);background-size:100% 100%;-webkit-background-clip:text;background-clip:text}
-    .live-rows dd:empty::before,.live-rows .ok dd:empty::before,.rv .stat,.rv .rv-ok,.sticky-cost b.sw{animation:none}
-    .live-bar i{transition:none}
     .anim .wiz:not([hidden]) .wiz-body,.anim #step4:not([hidden]) .res{animation:stepFade .15s linear backwards}
     .anim .stp.on b{animation:none}
     .btn:not([disabled]):active,.ch:active,.opt:active,.seg button:active,.sq:active,.btn-main:active,.btn-main:hover,input[type=range]:active::-webkit-slider-thumb,input[type=range]:active::-moz-range-thumb{transform:none}
@@ -707,30 +674,10 @@
 <button class="btn btn-white" id="next3" type="button"><span data-i18n="s037">Ver mi resultado</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
 </div>
 </section>
-<aside aria-label="Resultado estimado en vivo" class="live calc" id="live">
-<p class="live-k">Beneficio neto estimado</p>
-<p class="live-n"><span class="live-num" id="liveNet">— — — €</span><span class="live-calcm" id="liveCalcM">Calculando tu beneficio…</span><span class="live-per">al año</span></p>
-<p class="live-status" id="liveStatus">Analizando tu sector…</p>
-<dl class="live-rows">
-<div id="liveSaveRow"><dt>Te ahorrarías</dt><dd id="liveSave"></dd></div>
-<div id="liveGainRow"><dt>Ganarías más</dt><dd id="liveGain"></dd></div>
-<div id="liveCostRow"><dt>Coste de Fivo</dt><dd id="liveCost"></dd></div>
-</dl>
-<div class="live-prog"><span class="live-pt" id="liveProg">Cálculo 1/4</span><span class="live-bar"><i id="liveBarI"></i></span></div>
-<p class="live-note" id="liveNote">Tu resultado se calcula con cada respuesta. Lo verás al final.</p>
-</aside>
 </div>
 <section hidden="" id="step4">
 <div class="rs">
 <p class="rs-back"><button class="link-btn" data-i18n="s070" id="editData" type="button">← Cambiar mis datos</button></p>
-<section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
-<h2 data-i18n="r020" id="t-vid">Por qué y cómo puedes ahorrar dinero con Fivo</h2>
-<div class="vid">
-<iframe allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" hidden="" id="videoFrame" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Fivo"></iframe>
-<video controls="" hidden="" id="videoFile" playsinline="" preload="metadata"></video>
-</div>
-<p class="vid-skip"><a data-i18n="r021" href="#netCard" id="videoSkip">Ver mi resultado ↓</a></p>
-</section>
 <div class="res" id="netCard">
 <div class="res-head">
 <h2 aria-level="1" class="rs-title" data-i18n="r001">Esto es lo que Fivo podría darte cada año</h2>
@@ -752,6 +699,12 @@
 <p class="rs-est"><span data-i18n="r030">Estimación a partir de tus datos</span> · <button class="rs-link" data-i18n="r031" id="openCalc" type="button">Ver cómo se calcula</button></p>
 </div>
 </div>
+<section aria-labelledby="t-vid" class="vid-sec" hidden="" id="videoSec">
+<h2 data-i18n="r020" id="t-vid">Cómo funciona Fivo</h2>
+<div class="vid" id="videoBox">
+<button aria-label="Reproducir el vídeo" class="vid-play" id="videoPlay" type="button"><span aria-hidden="true" class="vid-btn"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>
+</div>
+</section>
 <div aria-labelledby="lbTitle" class="logo-band" hidden="" id="logoBand" role="region">
 <p class="lb-title" data-i18n="w001" id="lbTitle">Empresas que ya usan Fivo</p>
 <div class="lb-view"><div class="lb-track" id="lbTrack"></div></div>
@@ -887,8 +840,8 @@
     callUrl: "https://calendly.com/joseba-fivo/llamada-con-fivo",
     callPrefill: true,
     registerUrl: "https://app.fivo.ai/{lang}/auth/register",
-    showVideo: false,
-    videoUrl: {es: "", en: ""},
+    showVideo: true,
+    videoUrl: "",
     videoPoster: "",
     abTest: false,
     showTestimonials: true,
@@ -914,7 +867,7 @@
     ]
   };
 
-  var STATIC = {"es":{"s001":"Fivo","s008":"¿Cuánto dinero se le escapa a tu empresa cada año?","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas de tu empresa.","s023":"Continuar","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se le escapa a tu empresa cada año? | Fivo.ai","metaDesc":"Calcula en 1 minuto cuánto ahorraría y ganaría tu empresa con Fivo: herramientas, tiempo recuperado y mejores procesos.","w010":"Tus ventas","w013":"Tecnología","w014":"Servicios profesionales","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación","w020":"Industria","w021":"Comercio","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales","w025":"Resto del equipo","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa?","w040":"Quizá","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación y transcripción de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Por qué y cómo puedes ahorrar dinero con Fivo","w001":"Empresas que ya usan Fivo","r021":"Ver mi resultado ↓","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula","m001":"Cómo se calcula tu resultado","m002":"Cerrar"}};
+  var STATIC = {"es":{"s001":"Fivo","s008":"¿Cuánto dinero se le escapa a tu empresa cada año?","s012":"Tu empresa","s013":"Tus herramientas","s014":"Tu resultado","s019":"Gasto anual","s020":"Salarios y cargas de todo el equipo.","s021":"Ingresos anuales aprox.","s022":"Lo que generan al año las ventas de tu empresa.","s023":"Continuar","s036":"Atrás","s037":"Ver mi resultado","s042":"Facturación · Plan Business, el más vendido","s043":"Mensual","s044":"Anual","s045":"AHORRA 25%","s058":"Enviarme mi informe","s059":"Copiar enlace con mi cálculo","s060":"Descargar PDF","s061":"Pon a prueba los supuestos","s062":"Parten de valores razonables. Bájalos o desactiva los suplementos y comprueba cuánto sigue saliendo.","s063":"Tiempo de búsqueda que recuperas","s064":"Incluir la mejora de ventas","s065":"Es una hipótesis: mejor seguimiento de llamadas y menos oportunidades perdidas.","s066":"Mejora sobre tus ingresos por llamadas","s067":"Herramientas que Fivo sustituye","s070":"← Cambiar mis datos","s072":"Cada línea suma a su subtotal y al total. Tus datos aparecen tal cual los introduces y lo estimado va marcado como tal.","s084":"Copyright 2026 Fivo AI. Todos los derechos reservados","s085":"Política de Privacidad","s086":"Política de Seguridad","s087":"Términos de Servicio","s092":"Progreso","s093":"Número de personas","s094":"Gasto anual","s095":"Ingresos anuales","s098":"Facturación de Fivo","s099":"tu@empresa.com","s100":"Correo electrónico","s101":"Porcentaje del tiempo de búsqueda que recuperas","s102":"Mejora de ingresos por llamadas","s103":"Porcentaje de herramientas sustituidas","s105":"Legal","n004":"Al enviarlo aceptas la","title":"¿Cuánto dinero se le escapa a tu empresa cada año? | Fivo.ai","metaDesc":"Calcula en 1 minuto cuánto ahorraría y ganaría tu empresa con Fivo: herramientas, tiempo recuperado y mejores procesos.","w010":"Tus ventas","w013":"Tecnología","w014":"Servicios profesionales","w015":"Agencia o marketing","w016":"Inmobiliaria","w017":"Seguros y finanzas","w018":"Salud","w019":"Educación","w020":"Industria","w021":"Comercio","w022":"Otro","w023":"Miembros de mi equipo","w024":"Comerciales","w025":"Resto del equipo","w032":"¿Grabáis y revisáis las llamadas de venta?","w033":"No","w034":"A veces","w035":"Sí, siempre","w036":"¿Tenéis consultores o agencias externas que revisen las llamadas o los procesos de venta?","w037":"Sí","w038":"¿Cuánto gastáis al año en ellos?","w039":"¿Crees que sería necesario que alguien optimizase todos los departamentos de tu empresa?","w040":"Quizá","w043":"¿Cuánto gastas al mes en aplicaciones para tu empresa?","w044":"€ al mes","w045":"¿Cuánto de eso es en grabación y transcripción de reuniones (Loom, Otter, Fireflies…)?","w046":"No lo sé","w047":"Gasto al mes","w050":"Incluir el análisis externo","w051":"Lo que costaría contratar consultores o un análisis externo. Fivo lo hace de forma continua con tus reuniones. Desactívalo si no lo contratarías.","r001":"Esto es lo que Fivo podría darte cada año","r002":"Te ahorrarías","r003":"Ganarías más","r004":"al año","r020":"Cómo funciona Fivo","w001":"Empresas que ya usan Fivo","e001":"Estimación basada en tus datos, en McKinsey Global Institute (2012) y en los precios públicos de Fivo. Los resultados reales dependen de cada equipo.","t001":"TESTIMONIOS","t002":"Lo que dicen nuestros usuarios","x001":"Así sale el cálculo en empresas como la tuya","x002":"Ejemplos ilustrativos con datos de muestra. No son clientes reales.","r030":"Estimación a partir de tus datos","r031":"Ver cómo se calcula","m001":"Cómo se calcula tu resultado","m002":"Cerrar"}};
 
   var D = {
     es:{
@@ -1108,7 +1061,7 @@
     annTimer = setTimeout(function(){
       var el = $("srStatus");
       if(state.step===LAST) el.textContent = $("stickyLabel").textContent;
-      else el.textContent = (calcDone ? "" : "Cálculo " + state.step + " de 4. " + LIVE_STATUS[state.step] + " ") + costText();
+      else el.textContent = costText();
     }, 800);
   }
   function revealResult(){
@@ -1200,31 +1153,34 @@
     }catch(e){}
     return null;
   }
-  var vidReal = false;
-  var videoViewed = false, videoObs = null;
+  var vidSrc = null, vidViewed = false, vidObs = null;
   function renderVideo(){
-    var other = LANG==="es" ? "en" : "es", u = CFG.videoUrl[LANG] || CFG.videoUrl[other] || "";
-    var v = u ? videoEmbed(u) : null;
-    var sec = $("videoSec"), fr = $("videoFrame"), vf = $("videoFile");
-    vidReal = !!v;
-    sec.hidden = !(CFG.showVideo && v);
-    if(!CFG.showVideo){ vidReal = false; if(fr.getAttribute("src")) fr.removeAttribute("src"); return; }
-    fr.hidden = !(v && v.kind==="iframe"); vf.hidden = !(v && v.kind==="file");
-    if(v && v.kind==="iframe"){
-      fr.title = (STATIC[LANG] || STATIC.es).r020;
-      if(fr.getAttribute("src")!==v.src) fr.setAttribute("src", v.src);
-    } else if(fr.getAttribute("src")){ fr.removeAttribute("src"); }
-    if(vidReal && !videoObs && "IntersectionObserver" in window){
-      videoObs = new IntersectionObserver(function(es){
-        es.forEach(function(en){ if(en.isIntersecting && !videoViewed){ videoViewed = true; track("calc_video_view"); } });
+    var v = (CFG.showVideo && CFG.videoUrl) ? videoEmbed(CFG.videoUrl) : null, sec = $("videoSec");
+    vidSrc = v; sec.hidden = !v;
+    if(!v) return;
+    if(CFG.videoPoster && !$("videoPlay").style.backgroundImage) $("videoPlay").style.backgroundImage = 'url("' + CFG.videoPoster + '")';
+    if(!vidObs && "IntersectionObserver" in window){
+      vidObs = new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting && !vidViewed){ vidViewed = true; track("calc_video_view"); } });
       }, {threshold:0.5});
-      videoObs.observe(sec);
-    }
-    if(v && v.kind==="file"){
-      if(CFG.videoPoster) vf.setAttribute("poster", CFG.videoPoster);
-      if(vf.getAttribute("src")!==v.src) vf.setAttribute("src", v.src);
+      vidObs.observe(sec);
     }
   }
+  $("videoPlay").addEventListener("click", function(){
+    if(!vidSrc) return;
+    var box = $("videoBox"), el;
+    if(vidSrc.kind==="iframe"){
+      el = document.createElement("iframe");
+      el.setAttribute("allow", "accelerometer; clipboard-write; encrypted-media; picture-in-picture; fullscreen autoplay");
+      el.setAttribute("allowfullscreen", ""); el.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      el.title = $("t-vid").textContent;
+      el.src = vidSrc.src + (vidSrc.src.indexOf("?")<0 ? "?" : "&") + "autoplay=1";
+    } else {
+      el = document.createElement("video"); el.controls = true; el.autoplay = true; el.setAttribute("playsinline", ""); el.src = vidSrc.src;
+    }
+    box.appendChild(el); this.hidden = true;
+    track("calc_video_play");
+  });
 
   function canNext1(r){ return r.people>=1 && r.team>0; }
 
@@ -1244,7 +1200,6 @@
     $("hero").hidden = res;
     $("logoBand").hidden = !(res && bandOK);
     document.body.classList.toggle("is-result", res);
-    $("live").hidden = res;
     updateSticky();
   }
   function updateSticky(){
@@ -1314,7 +1269,6 @@
     $("next1").disabled = !ok1;
     $("step1Msg").textContent = ok1 ? "" : tr("step1Need");
     ["reps","rest","team"].forEach(function(id){ $(id).setAttribute("aria-invalid", String(!ok1 && (id==="team" ? r.team<=0 : r.people<1))); });
-    renderLive(r);
 
     renderTiers();
     $("consultBox").hidden = state.hasConsult!=="yes";
@@ -1357,28 +1311,6 @@
   }
 
   var calcDone = false;
-  var LIVE_STATUS = ["", "Analizando tu sector…", "Estimando tus ventas…", "Valorando tus herramientas…"];
-  function renderLive(r){
-    var lv = $("live"), s = Math.min(state.step, 3);
-    lv.classList.toggle("calc", !calcDone);
-    lv.classList.toggle("neg", calcDone && r.ready && r.net<=0);
-    $("liveGainRow").hidden = !state.revOn;
-    $("liveCostRow").hidden = !calcDone;
-    $("liveNote").textContent = calcDone ? "Se actualiza con cada respuesta. Es una estimación." : "Tu resultado se calcula con cada respuesta. Lo verás al final.";
-    if(calcDone){
-      if(r.ready){
-        tweenText("liveNet", r.net, eur, r.net>0 ? "p" : "n"); tweenText("liveSave", r.save, eur, 1); tweenText("liveGain", r.earn, eur, 1); tweenText("liveCost", r.cost, eur, 1);
-      } else { ["liveNet","liveSave","liveGain","liveCost"].forEach(function(id){ setNow(id, "—"); }); }
-      return;
-    }
-    var done = { liveGain: r.ready && maxStep>=3, liveSave: r.ready && s>=3 && (state.appsUnknown || state.apps>0) };
-    setNow("liveNet", "— — — €");
-    setNow("liveCost", "");
-    ["liveSave","liveGain"].forEach(function(id){ setNow(id, ""); $(id).parentNode.classList.toggle("ok", !!done[id]); });
-    $("liveStatus").textContent = LIVE_STATUS[s];
-    $("liveProg").textContent = "Cálculo " + s + "/4";
-    $("liveBarI").style.transform = "scaleX(" + (s/4) + ")";
-  }
 
   function renderTable(r){
     var neg = r.net < 0;
@@ -1626,10 +1558,6 @@
       var inp = $(b.dataset.for), v = Math.max(0, Math.min(99999, parse(inp.value) + parseInt(b.dataset.step, 10)));
       inp.value = group(v); state[inp.dataset.k] = v; render();
     });
-  });
-  $("videoSkip").addEventListener("click", function(e){
-    e.preventDefault(); track("calc_video_skip");
-    $("netCard").scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
   });
   $("stickyBtn").addEventListener("click", function(){ track("calc_sticky_click"); });
 
