@@ -846,7 +846,7 @@
     upliftDefault: 1,
     leadEndpoint: "",
     contactUrl: "https://fivo.ai/contact",
-    meetzUrl: "https://meetz.pro/fivo-calculadora",
+    meetzUrl: "https://meetz.pro/fivo-auditoria",
     hojaUrl: "https://script.google.com/macros/s/AKfycbzllKUnAnPfo0AwD9wQGB8DCpqio1Qkq6gdsl2pnLAZs67GpBb_rJqLWeAleILaifwsLA/exec",
     registerUrl: "https://app.fivo.ai/{lang}/auth/register",
     showVideo: true,
@@ -1207,15 +1207,7 @@
     $("stickyBtn").setAttribute("href", call ? main : withUtm(main, "cta-sticky-" + key));
     setTab($("stickyBtn"), call && cal.tab);
   }
-  function callLink(r){
-    var p = ["ref=calculadora." + visitor()], any = false, q = null;
-    try{ q = new URLSearchParams(location.search); }catch(e){}
-    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){
-      var v = q ? q.get(k) : null; if(v){ p.push(k + "=" + encodeURIComponent(v)); any = true; }
-    });
-    if(!any) p.push("utm_source=calculadora");
-    return {url: String(CFG.meetzUrl) + "?" + p.join("&"), tab:true};
-  }
+  function callLink(r){ return {url: String(CFG.meetzUrl), tab:true}; }
   function setTab(a, on){
     if(on){ a.setAttribute("target","_blank"); a.setAttribute("rel","noopener"); a.setAttribute("aria-label", a.textContent.trim() + tr("newTab")); }
     else { a.removeAttribute("target"); a.removeAttribute("rel"); a.removeAttribute("aria-label"); }
